@@ -2,7 +2,13 @@
 name = "unofficial_valorant_api"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+rust-version = "1.72"
+authors = ["Frederik Enste <frederik@fenste.de>"]
+publish = false
 
 [dependencies]
+serde = { version = "1.0.188", features = ["derive"] }
+unicase = "2.7.0"
+
+[dev-dependencies]
+serde_json = "1.0.107"
