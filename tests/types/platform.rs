@@ -1,4 +1,5 @@
 use std::str::FromStr;
+
 use unofficial_valorant_api::types::Platform;
 
 #[test]
