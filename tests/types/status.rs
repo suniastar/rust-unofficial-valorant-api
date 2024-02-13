@@ -1,4 +1,4 @@
-use chrono::{FixedOffset, SecondsFormat, TimeZone};
+use chrono::{FixedOffset, SecondsFormat, Timelike, TimeZone};
 use rand::Rng;
 
 use rust_unofficial_valorant_api::types::{Localized, Status, StatusUpdate};
@@ -11,16 +11,24 @@ fn serialize() {
     let created = FixedOffset::east_opt(1 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 9, 22, 3, 52, 41)
+        .unwrap()
+        .with_nanosecond(0)
         .unwrap();
-    let updated = Some(FixedOffset::east_opt(1 * 3600)
-        .unwrap()
-        .with_ymd_and_hms(2023, 9, 23, 3, 59, 59)
-        .unwrap()
+    let updated = Some(
+        FixedOffset::east_opt(1 * 3600)
+            .unwrap()
+            .with_ymd_and_hms(2023, 9, 23, 3, 59, 59)
+            .unwrap()
+            .with_nanosecond(0)
+            .unwrap()
     );
-    let archived = Some(FixedOffset::east_opt(1 * 3600)
-        .unwrap()
-        .with_ymd_and_hms(2023, 9, 23, 4, 0, 0)
-        .unwrap()
+    let archived = Some(
+        FixedOffset::east_opt(1 * 3600)
+            .unwrap()
+            .with_ymd_and_hms(2023, 9, 23, 4, 0, 0)
+            .unwrap()
+            .with_nanosecond(0)
+            .unwrap()
     );
     let incident_severity = Some("warning");
     let maintenance_status = "in_progress";
@@ -98,16 +106,24 @@ fn deserialize() {
     let created = FixedOffset::east_opt(1 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 9, 22, 3, 52, 41)
+        .unwrap()
+        .with_nanosecond(0)
         .unwrap();
-    let updated = Some(FixedOffset::east_opt(1 * 3600)
-        .unwrap()
-        .with_ymd_and_hms(2023, 9, 23, 3, 59, 59)
-        .unwrap()
+    let updated = Some(
+        FixedOffset::east_opt(1 * 3600)
+            .unwrap()
+            .with_ymd_and_hms(2023, 9, 23, 3, 59, 59)
+            .unwrap()
+            .with_nanosecond(0)
+            .unwrap()
     );
-    let archived = Some(FixedOffset::east_opt(1 * 3600)
-        .unwrap()
-        .with_ymd_and_hms(2023, 9, 23, 4, 0, 0)
-        .unwrap()
+    let archived = Some(
+        FixedOffset::east_opt(1 * 3600)
+            .unwrap()
+            .with_ymd_and_hms(2023, 9, 23, 4, 0, 0)
+            .unwrap()
+            .with_nanosecond(0)
+            .unwrap()
     );
     let incident_severity = Some("warning");
     let maintenance_status = "in_progress";

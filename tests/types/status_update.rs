@@ -1,4 +1,4 @@
-use chrono::{FixedOffset, SecondsFormat, TimeZone};
+use chrono::{FixedOffset, SecondsFormat, Timelike, TimeZone};
 use rand::Rng;
 
 use rust_unofficial_valorant_api::types::{Localized, StatusUpdate};
@@ -13,11 +13,16 @@ fn serialize() {
     let created = FixedOffset::east_opt(2 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 09, 22, 12, 0, 0)
+        .unwrap()
+        .with_nanosecond(0)
         .unwrap();
-    let updated = Some(FixedOffset::east_opt(0)
-        .unwrap()
-        .with_ymd_and_hms(2023, 09, 22, 18, 14, 53)
-        .unwrap()
+    let updated = Some(
+        FixedOffset::east_opt(0)
+            .unwrap()
+            .with_ymd_and_hms(2023, 09, 22, 18, 14, 53)
+            .unwrap()
+            .with_nanosecond(0)
+            .unwrap()
     );
     let publish_locations: Vec<&str> = vec![
         "client",
@@ -70,11 +75,17 @@ fn deserialize() {
     let created = FixedOffset::east_opt(2 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 09, 22, 12, 0, 0)
-        .unwrap();
-    let updated = Some(FixedOffset::east_opt(0)
         .unwrap()
-        .with_ymd_and_hms(2023, 09, 22, 18, 14, 53)
-        .unwrap());
+        .with_nanosecond(0)
+        .unwrap();
+    let updated = Some(
+        FixedOffset::east_opt(0)
+            .unwrap()
+            .with_ymd_and_hms(2023, 09, 22, 18, 14, 53)
+            .unwrap()
+            .with_nanosecond(0)
+            .unwrap()
+    );
     let publish_locations: Vec<&str> = vec![
         "client",
         "website",
@@ -126,6 +137,8 @@ fn serialize_null() {
     let created = FixedOffset::east_opt(2 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 09, 22, 12, 0, 0)
+        .unwrap()
+        .with_nanosecond(0)
         .unwrap();
     let updated = None;
     let publish_locations: Vec<&str> = vec![
@@ -179,6 +192,8 @@ fn deserialize_null() {
     let created = FixedOffset::east_opt(2 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 09, 22, 12, 0, 0)
+        .unwrap()
+        .with_nanosecond(0)
         .unwrap();
     let updated = None;
     let publish_locations: Vec<&str> = vec![
