@@ -1,5 +1,5 @@
 [package]
-name = "unofficial_valorant_api"
+name = "rust-unofficial-valorant-api"
 version = "0.1.0"
 authors = ["Frederik Enste <frederik@fenste.de>"]
 edition = "2021"
@@ -7,13 +7,13 @@ rust-version = "1.72"
 publish = false
 
 [dependencies]
-chrono = { version = "0.4.31", features = ["serde"] }
-reqwest = { version = "0.11.20", features = ["json", "gzip", "brotli", "deflate"] }
-serde = { version = "1.0.188", features = ["derive"] }
-serde_json = "1.0.107"
+chrono = { version = "0.4.34", features = ["serde"] }
+reqwest = { version = "0.11.24", features = ["json", "gzip", "brotli", "deflate"] }
+serde = { version = "1.0.196", features = ["derive"] }
+serde_json = "1.0.113"
 unicase = "2.7.0"
 
 [dev-dependencies]
-env_logger = "0.10.0"
+env_logger = "0.11.1"
 rand = { version = "0.8.5", features = ["std", "std_rng"] }
-tokio = { version = "1.32.0", features = ["rt-multi-thread", "macros"] }
+tokio = { version = "1.36.0", features = ["rt-multi-thread", "macros"] }

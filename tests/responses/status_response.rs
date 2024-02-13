@@ -1,6 +1,6 @@
 use chrono::{FixedOffset, Timelike, TimeZone};
 
-use unofficial_valorant_api::types::{Localized, Status, StatusData, StatusUpdate, ValorantApiResponse};
+use rust_unofficial_valorant_api::types::{Localized, Status, StatusData, StatusUpdate, ValorantApiResponse};
 
 use crate::util::read_resource;
 

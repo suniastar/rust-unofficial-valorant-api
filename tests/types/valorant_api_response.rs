@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use unofficial_valorant_api::types::{ValorantApiError, ValorantApiResponse};
+use rust_unofficial_valorant_api::types::{ValorantApiError, ValorantApiResponse};
 
 #[test]
 fn serialize_ok_u32() {

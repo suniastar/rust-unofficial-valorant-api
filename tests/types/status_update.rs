@@ -1,7 +1,7 @@
 use chrono::{FixedOffset, SecondsFormat, TimeZone};
 use rand::Rng;
 
-use unofficial_valorant_api::types::{Localized, StatusUpdate};
+use rust_unofficial_valorant_api::types::{Localized, StatusUpdate};
 
 #[test]
 fn serialize() {

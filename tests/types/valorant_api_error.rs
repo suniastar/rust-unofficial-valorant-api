@@ -1,4 +1,4 @@
-use unofficial_valorant_api::types::ValorantApiError;
+use rust_unofficial_valorant_api::types::ValorantApiError;
 
 #[test]
 fn serialize() {

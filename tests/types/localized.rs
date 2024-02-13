@@ -1,4 +1,4 @@
-use unofficial_valorant_api::types::Localized;
+use rust_unofficial_valorant_api::types::Localized;
 
 #[test]
 fn serialize_str() {

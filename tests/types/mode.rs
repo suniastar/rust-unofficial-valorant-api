@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-use unofficial_valorant_api::types::Mode;
+use rust_unofficial_valorant_api::types::Mode;
 
 #[test]
 fn to_str() {

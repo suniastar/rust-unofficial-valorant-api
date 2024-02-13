@@ -1,5 +1,5 @@
-use unofficial_valorant_api::client::ValorantApiClient;
-use unofficial_valorant_api::types::Affinity;
+use rust_unofficial_valorant_api::client::ValorantApiClient;
+use rust_unofficial_valorant_api::types::Affinity;
 
 #[tokio::test]
 async fn test() {
