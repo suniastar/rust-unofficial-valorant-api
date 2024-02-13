@@ -1,5 +1,9 @@
 #[test]
-fn serialize() {}
+fn serialize() {
+
+}
 
 #[test]
-fn deserialize() {}
+fn deserialize() {
+
+}

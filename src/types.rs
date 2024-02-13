@@ -143,8 +143,8 @@ pub struct ValorantApiResponse<'l, T> {
     #[serde(rename = "status")]
     pub status: u16,
 
-    #[serde(rename = "error", borrow)]
-    pub error: Option<ValorantApiError<'l>>,
+    #[serde(rename = "errors", borrow)]
+    pub errors: Option<Vec<ValorantApiError<'l>>>,
 
     #[serde(rename = "data")]
     pub data: Option<T>,

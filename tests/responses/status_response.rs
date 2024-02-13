@@ -1,16 +1,61 @@
 use chrono::{FixedOffset, Timelike, TimeZone};
 
-use rust_unofficial_valorant_api::types::{Localized, Status, StatusData, StatusUpdate, ValorantApiResponse};
+use rust_unofficial_valorant_api::types::{Localized, Status, StatusData, StatusUpdate, ValorantApiError, ValorantApiResponse};
 
 use crate::util::read_resource;
 
 #[test]
-fn deserialize_ok() {
-    let json = read_resource("status_response_ok.json");
+fn deserialize_bad_request() {
+    let json = read_resource("v1-status/bad_request.json");
+
+    let expected: ValorantApiResponse<StatusData> = ValorantApiResponse {
+        status: 400,
+        errors: Some(
+            vec![
+                ValorantApiError {
+                    code: 0,
+                    message: "string",
+                    details: "string",
+                }
+            ]
+        ),
+        data: None,
+    };
+
+    let actual = serde_json::from_str(&json).unwrap();
+
+    println!("{:?}", actual);
+    assert_eq!(expected, actual);
+}
+
+#[test]
+fn deserialize_ok_empty() {
+    let json = read_resource("v1-status/ok_empty.json");
 
     let expected = ValorantApiResponse {
         status: 200,
-        error: None,
+        errors: None,
+        data: Some(
+            StatusData {
+                maintenances: vec![],
+                incidents: vec![],
+            }
+        ),
+    };
+
+    let actual = serde_json::from_str(&json).unwrap();
+
+    println!("{:?}", actual);
+    assert_eq!(expected, actual);
+}
+
+#[test]
+fn deserialize_ok_example() {
+    let json = read_resource("v1-status/ok_example.json");
+
+    let expected = ValorantApiResponse {
+        status: 200,
+        errors: None,
         data: Some(StatusData {
             maintenances: vec![
                 Status {
