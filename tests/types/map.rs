@@ -3,7 +3,7 @@ use std::str::FromStr;
 use unofficial_valorant_api::types::Map;
 
 #[test]
-fn test_to_str() {
+fn to_str() {
     assert_eq!("Ascent", Map::Ascent.to_str());
     assert_eq!("Bind", Map::Bind.to_str());
     assert_eq!("Breeze", Map::Breeze.to_str());
@@ -19,7 +19,7 @@ fn test_to_str() {
 }
 
 #[test]
-fn test_from_str() {
+fn from_str() {
     assert_eq!(Map::Ascent, Map::from_str("Ascent").unwrap());
     assert_eq!(Map::Bind, Map::from_str("Bind").unwrap());
     assert_eq!(Map::Breeze, Map::from_str("Breeze").unwrap());
@@ -52,7 +52,7 @@ fn test_from_str() {
 }
 
 #[test]
-fn test_serialize() {
+fn serialize() {
     assert_eq!("\"Ascent\"", serde_json::to_string(&Map::Ascent).unwrap());
     assert_eq!("\"Bind\"", serde_json::to_string(&Map::Bind).unwrap());
     assert_eq!("\"Breeze\"", serde_json::to_string(&Map::Breeze).unwrap());
@@ -68,7 +68,7 @@ fn test_serialize() {
 }
 
 #[test]
-fn test_deserialize() {
+fn deserialize() {
     assert_eq!(Map::Ascent, serde_json::from_str("\"Ascent\"").unwrap());
     assert_eq!(Map::Bind, serde_json::from_str("\"Bind\"").unwrap());
     assert_eq!(Map::Breeze, serde_json::from_str("\"Breeze\"").unwrap());

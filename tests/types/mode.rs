@@ -3,7 +3,7 @@ use std::str::FromStr;
 use unofficial_valorant_api::types::Mode;
 
 #[test]
-fn test_to_str() {
+fn to_str() {
     assert_eq!("Competitive", Mode::Competitive.to_str());
     assert_eq!("Unrated", Mode::Unrated.to_str());
     assert_eq!("Deathmatch", Mode::Deathmatch.to_str());
@@ -16,7 +16,7 @@ fn test_to_str() {
 }
 
 #[test]
-fn test_api() {
+fn api() {
     assert_eq!("competitive", Mode::Competitive.api());
     assert_eq!("unrated", Mode::Unrated.api());
     assert_eq!("deathmatch", Mode::Deathmatch.api());
@@ -29,7 +29,7 @@ fn test_api() {
 }
 
 #[test]
-fn test_id() {
+fn id() {
     assert_eq!("competitive", Mode::Competitive.id());
     assert_eq!("unrated", Mode::Unrated.id());
     assert_eq!("deathmatch", Mode::Deathmatch.id());
@@ -42,7 +42,7 @@ fn test_id() {
 }
 
 #[test]
-fn test_from_str() {
+fn from_str() {
     assert_eq!(Mode::Competitive, Mode::from_str("Competitive").unwrap());
     assert_eq!(Mode::Unrated, Mode::from_str("Unrated").unwrap());
     assert_eq!(Mode::Deathmatch, Mode::from_str("Deathmatch").unwrap());
@@ -89,7 +89,7 @@ fn test_from_str() {
 }
 
 #[test]
-fn test_serialize() {
+fn serialize() {
     assert_eq!("\"competitive\"", serde_json::to_string(&Mode::Competitive).unwrap());
     assert_eq!("\"unrated\"", serde_json::to_string(&Mode::Unrated).unwrap());
     assert_eq!("\"deathmatch\"", serde_json::to_string(&Mode::Deathmatch).unwrap());
@@ -102,17 +102,7 @@ fn test_serialize() {
 }
 
 #[test]
-fn test_deserialize() {
-    assert_eq!(Mode::Competitive, serde_json::from_str("\"competitive\"").unwrap());
-    assert_eq!(Mode::Unrated, serde_json::from_str("\"unrated\"").unwrap());
-    assert_eq!(Mode::Deathmatch, serde_json::from_str("\"deathmatch\"").unwrap());
-    assert_eq!(Mode::TeamDeathmatch, serde_json::from_str("\"hurm\"").unwrap());
-    assert_eq!(Mode::Swiftplay, serde_json::from_str("\"swiftplay\"").unwrap());
-    assert_eq!(Mode::SpikeRush, serde_json::from_str("\"spikerush\"").unwrap());
-    assert_eq!(Mode::NewMap, serde_json::from_str("\"newmap\"").unwrap());
-    assert_eq!(Mode::SnowballFight, serde_json::from_str("\"snowball\"").unwrap());
-    assert_eq!(Mode::CustomGame, serde_json::from_str("\"custom\"").unwrap());
-
+fn deserialize() {
     assert_eq!(Mode::Competitive, serde_json::from_str("\"Competitive\"").unwrap());
     assert_eq!(Mode::Unrated, serde_json::from_str("\"Unrated\"").unwrap());
     assert_eq!(Mode::Deathmatch, serde_json::from_str("\"Deathmatch\"").unwrap());
@@ -122,6 +112,26 @@ fn test_deserialize() {
     assert_eq!(Mode::NewMap, serde_json::from_str("\"New Map\"").unwrap());
     assert_eq!(Mode::SnowballFight, serde_json::from_str("\"Snowball Fight\"").unwrap());
     assert_eq!(Mode::CustomGame, serde_json::from_str("\"Custom Game\"").unwrap());
+
+    assert_eq!(Mode::Competitive, serde_json::from_str("\"competitive\"").unwrap());
+    assert_eq!(Mode::Unrated, serde_json::from_str("\"unrated\"").unwrap());
+    assert_eq!(Mode::Deathmatch, serde_json::from_str("\"deathmatch\"").unwrap());
+    assert_eq!(Mode::TeamDeathmatch, serde_json::from_str("\"teamdeathmatch\"").unwrap());
+    assert_eq!(Mode::Swiftplay, serde_json::from_str("\"swiftplay\"").unwrap());
+    assert_eq!(Mode::SpikeRush, serde_json::from_str("\"spikerush\"").unwrap());
+    assert_eq!(Mode::NewMap, serde_json::from_str("\"newmap\"").unwrap());
+    assert_eq!(Mode::SnowballFight, serde_json::from_str("\"snowballfight\"").unwrap());
+    assert_eq!(Mode::CustomGame, serde_json::from_str("\"custom\"").unwrap());
+
+    assert_eq!(Mode::Competitive, serde_json::from_str("\"competitive\"").unwrap());
+    assert_eq!(Mode::Unrated, serde_json::from_str("\"unrated\"").unwrap());
+    assert_eq!(Mode::Deathmatch, serde_json::from_str("\"deathmatch\"").unwrap());
+    assert_eq!(Mode::TeamDeathmatch, serde_json::from_str("\"hurm\"").unwrap());
+    assert_eq!(Mode::Swiftplay, serde_json::from_str("\"swiftplay\"").unwrap());
+    assert_eq!(Mode::SpikeRush, serde_json::from_str("\"spikerush\"").unwrap());
+    assert_eq!(Mode::NewMap, serde_json::from_str("\"newmap\"").unwrap());
+    assert_eq!(Mode::SnowballFight, serde_json::from_str("\"snowball\"").unwrap());
+    assert_eq!(Mode::CustomGame, serde_json::from_str("\"custom\"").unwrap());
 
     assert_eq!(Mode::Competitive, serde_json::from_str("\"COMPETITIVE\"").unwrap());
     assert_eq!(Mode::Unrated, serde_json::from_str("\"UNRATED\"").unwrap());

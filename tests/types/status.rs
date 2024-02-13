@@ -57,7 +57,7 @@ fn serialize() {
     \"id\":{id},\
     \"created_at\":\"{0}\",\
     \"updated_at\":\"{1}\",\
-    \"archived_at\":\"{2}\",\
+    \"archive_at\":\"{2}\",\
     \"incident_severity\":\"{3}\",\
     \"maintenance_status\":\"{maintenance_status}\",\
     \"titles\":{4},\
@@ -144,7 +144,7 @@ fn deserialize() {
     \"id\":{id},\
     \"created_at\":\"{0}\",\
     \"updated_at\":\"{1}\",\
-    \"archived_at\":\"{2}\",\
+    \"archive_at\":\"{2}\",\
     \"incident_severity\":\"{3}\",\
     \"maintenance_status\":\"{maintenance_status}\",\
     \"titles\":{4},\
@@ -223,7 +223,7 @@ fn serialize_null() {
     \"id\":{id},\
     \"created_at\":\"{0}\",\
     \"updated_at\":{1},\
-    \"archived_at\":{2},\
+    \"archive_at\":{2},\
     \"incident_severity\":{3},\
     \"maintenance_status\":\"{maintenance_status}\",\
     \"titles\":{4},\
@@ -302,7 +302,7 @@ fn deserialize_null() {
     \"id\":{id},\
     \"created_at\":\"{0}\",\
     \"updated_at\":{1},\
-    \"archived_at\":{2},\
+    \"archive_at\":{2},\
     \"incident_severity\":{3},\
     \"maintenance_status\":\"{maintenance_status}\",\
     \"titles\":{4},\

@@ -74,7 +74,7 @@ pub struct Status<'l> {
     #[serde(rename = "updated_at")]
     pub updated: Option<DateTime<FixedOffset>>,
 
-    #[serde(rename = "archived_at")]
+    #[serde(rename = "archive_at")]
     pub archived: Option<DateTime<FixedOffset>>,
 
     #[serde(rename = "incident_severity")]
@@ -91,6 +91,15 @@ pub struct Status<'l> {
 
     #[serde(rename = "updates")]
     pub updates: Vec<StatusUpdate<'l>>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct StatusData<'l> {
+    #[serde(rename = "maintenances", borrow)]
+    pub maintenances: Vec<Status<'l>>,
+
+    #[serde(rename = "incidents", borrow)]
+    pub incidents: Vec<Status<'l>>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -115,4 +124,28 @@ pub struct StatusUpdate<'l> {
 
     #[serde(rename = "translations")]
     pub translations: Vec<Localized<'l, &'l str>>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct ValorantApiError<'l> {
+    #[serde(rename = "code")]
+    pub code: u32,
+
+    #[serde(rename = "message")]
+    pub message: &'l str,
+
+    #[serde(rename = "details")]
+    pub details: &'l str,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct ValorantApiResponse<'l, T> {
+    #[serde(rename = "status")]
+    pub status: u16,
+
+    #[serde(rename = "error", borrow)]
+    pub error: Option<ValorantApiError<'l>>,
+
+    #[serde(rename = "data")]
+    pub data: Option<T>,
 }

@@ -3,7 +3,7 @@ use std::str::FromStr;
 use unofficial_valorant_api::types::Affinity;
 
 #[test]
-fn test_to_str() {
+fn to_str() {
     assert_eq!("eu", Affinity::Europe.to_str());
     assert_eq!("na", Affinity::NorthAmerica.to_str());
     assert_eq!("latam", Affinity::LatinAmerica.to_str());
@@ -13,7 +13,7 @@ fn test_to_str() {
 }
 
 #[test]
-fn test_from_str() {
+fn from_str() {
     assert_eq!(Affinity::Europe, Affinity::from_str("eu").unwrap());
     assert_eq!(Affinity::NorthAmerica, Affinity::from_str("na").unwrap());
     assert_eq!(Affinity::LatinAmerica, Affinity::from_str("latam").unwrap());
@@ -34,7 +34,7 @@ fn test_from_str() {
 }
 
 #[test]
-fn test_serialize() {
+fn serialize() {
     assert_eq!("\"eu\"", serde_json::to_string(&Affinity::Europe).unwrap());
     assert_eq!("\"na\"", serde_json::to_string(&Affinity::NorthAmerica).unwrap());
     assert_eq!("\"latam\"", serde_json::to_string(&Affinity::LatinAmerica).unwrap());
@@ -44,7 +44,7 @@ fn test_serialize() {
 }
 
 #[test]
-fn test_deserialize() {
+fn deserialize() {
     assert_eq!(Affinity::Europe, serde_json::from_str("\"eu\"").unwrap());
     assert_eq!(Affinity::NorthAmerica, serde_json::from_str("\"na\"").unwrap());
     assert_eq!(Affinity::LatinAmerica, serde_json::from_str("\"latam\"").unwrap());
