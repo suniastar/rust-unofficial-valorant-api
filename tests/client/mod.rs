@@ -1,3 +1,3 @@
-mod get_status;
-mod get_version;
-mod get_website;
+mod get_v1_status;
+mod get_v1_version;
+mod get_v1_website;
