@@ -26,6 +26,7 @@ pub enum Map {
     Pearl,
     Piazza,
     Split,
+    Sunset,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]

@@ -16,6 +16,7 @@ fn to_str() {
     assert_eq!("Pearl", Map::Pearl.to_str());
     assert_eq!("Piazza", Map::Piazza.to_str());
     assert_eq!("Split", Map::Split.to_str());
+    assert_eq!("Sunset", Map::Sunset.to_str());
 }
 
 #[test]
@@ -32,6 +33,7 @@ fn from_str() {
     assert_eq!(Map::Pearl, Map::from_str("Pearl").unwrap());
     assert_eq!(Map::Piazza, Map::from_str("Piazza").unwrap());
     assert_eq!(Map::Split, Map::from_str("Split").unwrap());
+    assert_eq!(Map::Sunset, Map::from_str("Sunset").unwrap());
 
     assert_eq!(Map::Ascent, Map::from_str("ASCENT").unwrap());
     assert_eq!(Map::Bind, Map::from_str("BIND").unwrap());
@@ -45,6 +47,7 @@ fn from_str() {
     assert_eq!(Map::Pearl, Map::from_str("PEARL").unwrap());
     assert_eq!(Map::Piazza, Map::from_str("piazza").unwrap());
     assert_eq!(Map::Split, Map::from_str("split").unwrap());
+    assert_eq!(Map::Sunset, Map::from_str("SUNSET").unwrap());
 
     assert!(Map::from_str("not exist").is_err());
     assert!(Map::from_str("").is_err());
@@ -65,6 +68,7 @@ fn serialize() {
     assert_eq!("\"Pearl\"", serde_json::to_string(&Map::Pearl).unwrap());
     assert_eq!("\"Piazza\"", serde_json::to_string(&Map::Piazza).unwrap());
     assert_eq!("\"Split\"", serde_json::to_string(&Map::Split).unwrap());
+    assert_eq!("\"Sunset\"", serde_json::to_string(&Map::Sunset).unwrap());
 }
 
 #[test]
@@ -81,6 +85,7 @@ fn deserialize() {
     assert_eq!(Map::Pearl, serde_json::from_str("\"Pearl\"").unwrap());
     assert_eq!(Map::Piazza, serde_json::from_str("\"Piazza\"").unwrap());
     assert_eq!(Map::Split, serde_json::from_str("\"Split\"").unwrap());
+    assert_eq!(Map::Sunset, serde_json::from_str("\"Sunset\"").unwrap());
 
     assert_eq!(Map::Ascent, serde_json::from_str("\"ASCENT\"").unwrap());
     assert_eq!(Map::Bind, serde_json::from_str("\"BIND\"").unwrap());
@@ -94,6 +99,7 @@ fn deserialize() {
     assert_eq!(Map::Pearl, serde_json::from_str("\"PEARL\"").unwrap());
     assert_eq!(Map::Piazza, serde_json::from_str("\"piazza\"").unwrap());
     assert_eq!(Map::Split, serde_json::from_str("\"split\"").unwrap());
+    assert_eq!(Map::Sunset, serde_json::from_str("\"SUNSET\"").unwrap());
 
     assert!(serde_json::from_str::<Map>("\"not exist\"").is_err());
     assert!(serde_json::from_str::<Map>("\"\"").is_err());

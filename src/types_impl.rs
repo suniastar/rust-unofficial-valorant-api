@@ -59,6 +59,7 @@ const MAP_LOTUS: UniCase<&str> = UniCase::unicode("Lotus");
 const MAP_PEARL: UniCase<&str> = UniCase::unicode("Pearl");
 const MAP_PIAZZA: UniCase<&str> = UniCase::unicode("Piazza");
 const MAP_SPLIT: UniCase<&str> = UniCase::unicode("Split");
+const MAP_SUNSET: UniCase<&str> = UniCase::unicode("Sunset");
 
 impl Map {
     pub fn to_str(&self) -> &'static str {
@@ -75,6 +76,7 @@ impl Map {
             Map::Pearl => MAP_PEARL.as_ref(),
             Map::Piazza => MAP_PIAZZA.as_ref(),
             Map::Split => MAP_SPLIT.as_ref(),
+            Map::Sunset => MAP_SUNSET.as_ref(),
         }
     }
 }
@@ -108,6 +110,8 @@ impl FromStr for Map {
             Ok(Map::Piazza)
         } else if m == MAP_SPLIT {
             Ok(Map::Split)
+        } else if m == MAP_SUNSET {
+            Ok(Map::Sunset)
         } else {
             Err(format!("not a map: {s}"))
         }
