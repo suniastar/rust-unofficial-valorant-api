@@ -127,6 +127,29 @@ pub struct StatusUpdate<'l> {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct Website<'l> {
+    #[serde(rename = "banner_url")]
+    pub banner_url: &'l str,
+
+    #[serde(rename = "category")]
+    pub category: &'l str,
+
+    #[serde(rename = "date")]
+    pub date: DateTime<FixedOffset>,
+
+    #[serde(rename = "external_link")]
+    pub external_link: Option<&'l str>,
+
+    #[serde(rename = "title")]
+    pub title: &'l str,
+
+    #[serde(rename = "url")]
+    pub url: &'l str,
+}
+
+pub type WebsiteData<'l> = Vec<Website<'l>>;
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ValorantApiError<'l> {
     #[serde(rename = "code")]
     pub code: u32,

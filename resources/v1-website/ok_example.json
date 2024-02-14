@@ -1,0 +1,13 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "banner_url": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blta99717d4afdf4126/61ddd1a0997c0e224de0a718/01132022-VANILLE-BTS_Article-banner.jpg",
+      "category": "community",
+      "date": "2022-01-13T11:00:00.000Z",
+      "external_link": "https://www.youtube.com/watch?v=YRFwQy-dZ4o",
+      "title": "Die Stimme von Neon // VALORANT",
+      "url": "https://playvalorant.com/de-de/news/community/meet-the-voice-of-neon-valorant/"
+    }
+  ]
+}

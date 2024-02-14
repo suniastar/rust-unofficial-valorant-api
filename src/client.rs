@@ -46,4 +46,16 @@ impl ValorantApiClient {
             .await;
         Ok(json?)
     }
+
+    pub async fn get_website(&self, country_code: &str) -> Result<HashMap<String, Value>, reqwest::Error> {
+        let response = self.client
+            .get(format!("{BASE_URI}/valorant/v1/website/{country_code}"))
+            .send()
+            .await;
+        println!("{:?}", response);
+        let json = response?
+            .json::<HashMap<String, Value>>()
+            .await;
+        Ok(json?)
+    }
 }

@@ -3,7 +3,7 @@ use rust_unofficial_valorant_api::types::Affinity;
 
 #[tokio::test]
 async fn test() {
-    env_logger::builder().is_test(true).init();
+    let _ = env_logger::builder().is_test(true).try_init();
     let client = ValorantApiClient::new();
     let t = client.get_status(&Affinity::Europe)
         .await;

@@ -22,7 +22,7 @@ fn serialize_str() {
 
 #[test]
 fn serialize_string() {
-    let content = format!("Maintenance");
+    let content = "Maintenance".to_string();
     let locale = "en_US";
 
     let expected = format!("{{\
@@ -82,7 +82,7 @@ fn deserialize_str() {
 
 #[test]
 fn deserialize_string() {
-    let content = format!("Maintenance");
+    let content = "Maintenance".to_string();
     let locale = "en_US";
 
     let json = format!("{{\
