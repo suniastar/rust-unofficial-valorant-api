@@ -14,8 +14,8 @@ fn deserialize_bad_request() {
             vec![
                 ValorantApiError {
                     code: 0,
-                    message: "string",
-                    details: "string",
+                    message: String::from("string"),
+                    details: String::from("string"),
                 }
             ]
         ),
@@ -83,22 +83,22 @@ fn deserialize_ok_example() {
                                 .with_nanosecond(0)
                                 .unwrap()
                         ),
-                        incident_severity: Some("warning"),
-                        maintenance_status: "in_progress",
+                        incident_severity: Some(String::from("warning")),
+                        maintenance_status: String::from("in_progress"),
                         titles: vec![
                             Localized {
-                                content: "Emergency Maintenance In Progress",
-                                locale: "en_US",
+                                content: String::from("Emergency Maintenance In Progress"),
+                                locale: String::from("en_US"),
                             }
                         ],
                         platforms: vec![
-                            "windows",
+                            String::from("windows"),
                         ],
                         updates: vec![
                             StatusUpdate {
                                 id: 6658,
                                 publish: true,
-                                author: "Riot Games",
+                                author: String::from("Riot Games"),
                                 created: FixedOffset::east_opt(0)
                                     .unwrap()
                                     .with_ymd_and_hms(2022, 1, 12, 22, 11, 7)
@@ -114,12 +114,12 @@ fn deserialize_ok_example() {
                                         .unwrap()
                                 ),
                                 publish_locations: vec![
-                                    "riotclient",
+                                    String::from("riotclient"),
                                 ],
                                 translations: vec![
                                     Localized {
-                                        content: "The platform is currently unavailable while we perform emergency maintenance.",
-                                        locale: "en_US",
+                                        content: String::from("The platform is currently unavailable while we perform emergency maintenance."),
+                                        locale: String::from("en_US"),
                                     }
                                 ],
                             }
@@ -151,22 +151,22 @@ fn deserialize_ok_example() {
                                 .with_nanosecond(0)
                                 .unwrap()
                         ),
-                        incident_severity: Some("warning"),
-                        maintenance_status: "in_progress",
+                        incident_severity: Some(String::from("warning")),
+                        maintenance_status: String::from("in_progress"),
                         titles: vec![
                             Localized {
-                                content: "Emergency Maintenance In Progress",
-                                locale: "en_US",
+                                content: String::from("Emergency Maintenance In Progress"),
+                                locale: String::from("en_US"),
                             }
                         ],
                         platforms: vec![
-                            "windows",
+                            String::from("windows"),
                         ],
                         updates: vec![
                             StatusUpdate {
                                 id: 6658,
                                 publish: true,
-                                author: "Riot Games",
+                                author: String::from("Riot Games"),
                                 created: FixedOffset::east_opt(0)
                                     .unwrap()
                                     .with_ymd_and_hms(2022, 1, 12, 22, 11, 7)
@@ -182,12 +182,12 @@ fn deserialize_ok_example() {
                                         .unwrap()
                                 ),
                                 publish_locations: vec![
-                                    "riotclient",
+                                    String::from("riotclient"),
                                 ],
                                 translations: vec![
                                     Localized {
-                                        content: "The platform is currently unavailable while we perform emergency maintenance.",
-                                        locale: "en_US",
+                                        content: String::from("The platform is currently unavailable while we perform emergency maintenance."),
+                                        locale: String::from("en_US"),
                                     }
                                 ],
                             }

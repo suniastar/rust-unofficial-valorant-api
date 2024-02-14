@@ -1,20 +1,20 @@
-use chrono::{FixedOffset, Timelike, TimeZone};
+use chrono::{FixedOffset, SecondsFormat, Timelike, TimeZone};
 
 use rust_unofficial_valorant_api::types::Website;
 
 #[test]
 fn serialize() {
-    let banner_url = "https://google.com/search?q=banner";
-    let category = "vct";
+    let banner_url = String::from("https://google.com/search?q=banner");
+    let category = String::from("vct");
     let date = FixedOffset::east_opt(1 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 2, 23, 12, 0, 6)
         .unwrap()
         .with_nanosecond(342_262_234)
         .unwrap();
-    let external_link = Some("https://google.com/search?q=external");
-    let title = "Sample Title";
-    let url = "https://google.com/search?q=ducks";
+    let external_link = Some(String::from("https://google.com/search?q=external"));
+    let title = String::from("Sample Title");
+    let url = String::from("https://google.com/search?q=ducks");
 
     let expected = format!("{{\
     \"banner_url\":\"{banner_url}\",\
@@ -24,7 +24,7 @@ fn serialize() {
     \"title\":\"{title}\",\
     \"url\":\"{url}\"\
     }}",
-                           date.to_rfc3339(),
+                           date.to_rfc3339_opts(SecondsFormat::AutoSi, true),
                            serde_json::to_string(&external_link).unwrap(),
     );
 
@@ -44,8 +44,8 @@ fn serialize() {
 
 #[test]
 fn serialize_null() {
-    let banner_url = "https://google.com/search?q=banner";
-    let category = "vct";
+    let banner_url = String::from("https://google.com/search?q=banner");
+    let category = String::from("vct");
     let date = FixedOffset::east_opt(1 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 2, 23, 12, 0, 6)
@@ -53,8 +53,8 @@ fn serialize_null() {
         .with_nanosecond(342_262_234)
         .unwrap();
     let external_link = None;
-    let title = "Sample Title";
-    let url = "https://google.com/search?q=ducks";
+    let title = String::from("Sample Title");
+    let url = String::from("https://google.com/search?q=ducks");
 
     let expected = format!("{{\
     \"banner_url\":\"{banner_url}\",\
@@ -64,7 +64,7 @@ fn serialize_null() {
     \"title\":\"{title}\",\
     \"url\":\"{url}\"\
     }}",
-                           date.to_rfc3339(),
+                           date.to_rfc3339_opts(SecondsFormat::AutoSi, true),
                            serde_json::to_string(&external_link).unwrap(),
     );
 
@@ -84,17 +84,17 @@ fn serialize_null() {
 
 #[test]
 fn deserialize() {
-    let banner_url = "https://google.com/search?q=banner";
-    let category = "vct";
+    let banner_url = String::from("https://google.com/search?q=banner");
+    let category = String::from("vct");
     let date = FixedOffset::east_opt(1 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 2, 23, 12, 0, 6)
         .unwrap()
         .with_nanosecond(342_262_234)
         .unwrap();
-    let external_link = Some("https://google.com/search?q=external");
-    let title = "Sample Title";
-    let url = "https://google.com/search?q=ducks";
+    let external_link = Some(String::from("https://google.com/search?q=external"));
+    let title = String::from("Sample Title");
+    let url = String::from("https://google.com/search?q=ducks");
 
     let json = format!("{{\
     \"banner_url\":\"{banner_url}\",\
@@ -104,7 +104,7 @@ fn deserialize() {
     \"title\":\"{title}\",\
     \"url\":\"{url}\"\
     }}",
-                       date.to_rfc3339(),
+                       date.to_rfc3339_opts(SecondsFormat::AutoSi, true),
                        serde_json::to_string(&external_link).unwrap(),
     );
 

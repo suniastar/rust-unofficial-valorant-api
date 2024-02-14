@@ -3,7 +3,7 @@ use rust_unofficial_valorant_api::types::Localized;
 #[test]
 fn serialize_str() {
     let content = "Maintenance";
-    let locale = "en_US";
+    let locale = String::from("en_US");
 
     let expected = format!("{{\
     \"content\":\"{content}\",\
@@ -22,8 +22,8 @@ fn serialize_str() {
 
 #[test]
 fn serialize_string() {
-    let content = "Maintenance".to_string();
-    let locale = "en_US";
+    let content = String::from("Maintenance");
+    let locale = String::from("en_US");
 
     let expected = format!("{{\
     \"content\":\"{content}\",\
@@ -43,7 +43,7 @@ fn serialize_string() {
 #[test]
 fn serialize_u128() {
     let content = (1u128 << 127) + 1u128;
-    let locale = "en_US";
+    let locale = String::from("en_US");
 
     let expected = format!("{{\
     \"content\":{content},\
@@ -63,7 +63,7 @@ fn serialize_u128() {
 #[test]
 fn deserialize_str() {
     let content = "Maintenance";
-    let locale = "en_US";
+    let locale = String::from("en_US");
 
     let json = format!("{{\
     \"content\":\"{content}\",\
@@ -82,8 +82,8 @@ fn deserialize_str() {
 
 #[test]
 fn deserialize_string() {
-    let content = "Maintenance".to_string();
-    let locale = "en_US";
+    let content = String::from("Maintenance");
+    let locale = String::from("en_US");
 
     let json = format!("{{\
     \"content\":\"{content}\",\
@@ -103,7 +103,7 @@ fn deserialize_string() {
 #[test]
 fn deserialize_u128() {
     let content = (1u128 << 127) + 1u128;
-    let locale = "en_US";
+    let locale = String::from("en_US");
 
     let json = format!("{{\
     \"content\":{content},\

@@ -9,7 +9,7 @@ fn serialize() {
 
     let id: u32 = rng.gen();
     let publish: bool = rng.gen();
-    let author = "Frederik Enste";
+    let author = String::from("Frederik Enste");
     let created = FixedOffset::east_opt(2 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 09, 22, 12, 0, 0)
@@ -24,14 +24,14 @@ fn serialize() {
             .with_nanosecond(0)
             .unwrap()
     );
-    let publish_locations: Vec<&str> = vec![
-        "client",
-        "website",
+    let publish_locations = vec![
+        String::from("client"),
+        String::from("website"),
     ];
-    let translations: Vec<Localized<&str>> = vec![
+    let translations = vec![
         Localized {
-            content: "Emergency Maintenance In Progress",
-            locale: "en_US",
+            content: String::from("Emergency Maintenance In Progress"),
+            locale: String::from("en_US"),
         },
     ];
 
@@ -71,7 +71,7 @@ fn deserialize() {
 
     let id: u32 = rng.gen();
     let publish: bool = rng.gen();
-    let author = "Frederik Enste";
+    let author = String::from("Frederik Enste");
     let created = FixedOffset::east_opt(2 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 09, 22, 12, 0, 0)
@@ -86,14 +86,14 @@ fn deserialize() {
             .with_nanosecond(0)
             .unwrap()
     );
-    let publish_locations: Vec<&str> = vec![
-        "client",
-        "website",
+    let publish_locations = vec![
+        String::from("client"),
+        String::from("website"),
     ];
-    let translations: Vec<Localized<&str>> = vec![
+    let translations = vec![
         Localized {
-            content: "Emergency Maintenance In Progress",
-            locale: "en_US",
+            content: String::from("Emergency Maintenance In Progress"),
+            locale: String::from("en_US"),
         },
     ];
 
@@ -106,8 +106,8 @@ fn deserialize() {
     \"publish_locations\":{2},\
     \"translations\":{3}\
     }}",
-                       created.to_rfc3339(),
-                       updated.unwrap().to_rfc3339(),
+                       created.to_rfc3339_opts(SecondsFormat::AutoSi, true),
+                       updated.unwrap().to_rfc3339_opts(SecondsFormat::AutoSi, true),
                        serde_json::to_string(&publish_locations).unwrap(),
                        serde_json::to_string(&translations).unwrap(),
     );
@@ -133,7 +133,7 @@ fn serialize_null() {
 
     let id: u32 = rng.gen();
     let publish: bool = rng.gen();
-    let author = "Frederik Enste";
+    let author = String::from("Frederik Enste");
     let created = FixedOffset::east_opt(2 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 09, 22, 12, 0, 0)
@@ -141,14 +141,14 @@ fn serialize_null() {
         .with_nanosecond(0)
         .unwrap();
     let updated = None;
-    let publish_locations: Vec<&str> = vec![
-        "client",
-        "website",
+    let publish_locations = vec![
+        String::from("client"),
+        String::from("website"),
     ];
-    let translations: Vec<Localized<&str>> = vec![
+    let translations = vec![
         Localized {
-            content: "Emergency Maintenance In Progress",
-            locale: "en_US",
+            content: String::from("Emergency Maintenance In Progress"),
+            locale: String::from("en_US"),
         },
     ];
 
@@ -161,8 +161,8 @@ fn serialize_null() {
     \"publish_locations\":{2},\
     \"translations\":{3}\
     }}",
-                           created.to_rfc3339(),
-                           "null",
+                           created.to_rfc3339_opts(SecondsFormat::AutoSi, true),
+                           serde_json::to_string(&updated).unwrap(),
                            serde_json::to_string(&publish_locations).unwrap(),
                            serde_json::to_string(&translations).unwrap(),
     );
@@ -188,7 +188,7 @@ fn deserialize_null() {
 
     let id: u32 = rng.gen();
     let publish: bool = rng.gen();
-    let author = "Frederik Enste";
+    let author = String::from("Frederik Enste");
     let created = FixedOffset::east_opt(2 * 3600)
         .unwrap()
         .with_ymd_and_hms(2023, 09, 22, 12, 0, 0)
@@ -196,14 +196,14 @@ fn deserialize_null() {
         .with_nanosecond(0)
         .unwrap();
     let updated = None;
-    let publish_locations: Vec<&str> = vec![
-        "client",
-        "website",
+    let publish_locations = vec![
+        String::from("client"),
+        String::from("website"),
     ];
-    let translations: Vec<Localized<&str>> = vec![
+    let translations = vec![
         Localized {
-            content: "Emergency Maintenance In Progress",
-            locale: "en_US",
+            content: String::from("Emergency Maintenance In Progress"),
+            locale: String::from("en_US"),
         },
     ];
 
@@ -216,8 +216,8 @@ fn deserialize_null() {
     \"publish_locations\":{2},\
     \"translations\":{3}\
     }}",
-                       created.to_rfc3339(),
-                       "null",
+                       created.to_rfc3339_opts(SecondsFormat::AutoSi, true),
+                       serde_json::to_string(&updated).unwrap(),
                        serde_json::to_string(&publish_locations).unwrap(),
                        serde_json::to_string(&translations).unwrap(),
     );

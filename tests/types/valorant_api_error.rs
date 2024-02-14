@@ -3,8 +3,8 @@ use rust_unofficial_valorant_api::types::ValorantApiError;
 #[test]
 fn serialize() {
     let code = 104;
-    let message = "Invalid region";
-    let details = "details";
+    let message = String::from("Invalid region");
+    let details = String::from("details");
 
     let expected = format!("{{\
     \"code\":{code},\
@@ -26,8 +26,8 @@ fn serialize() {
 #[test]
 fn deserialize() {
     let code = 104;
-    let message = "Invalid region";
-    let details = "details";
+    let message = String::from("Invalid region");
+    let details = String::from("details");
 
     let json = format!("{{\
     \"code\":{code},\

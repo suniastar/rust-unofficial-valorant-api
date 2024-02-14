@@ -55,16 +55,16 @@ pub enum Region {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct Localized<'l, T> {
+pub struct Localized<T> {
     #[serde(rename = "content")]
     pub content: T,
 
     #[serde(rename = "locale")]
-    pub locale: &'l str,
+    pub locale: String,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct Status<'l> {
+pub struct Status {
     #[serde(rename = "id")]
     pub id: u32,
 
@@ -78,32 +78,32 @@ pub struct Status<'l> {
     pub archived: Option<DateTime<FixedOffset>>,
 
     #[serde(rename = "incident_severity")]
-    pub incident_severity: Option<&'l str>,
+    pub incident_severity: Option<String>,
 
     #[serde(rename = "maintenance_status")]
-    pub maintenance_status: &'l str,
+    pub maintenance_status: String,
 
     #[serde(rename = "titles")]
-    pub titles: Vec<Localized<'l, &'l str>>,
+    pub titles: Vec<Localized<String>>,
 
     #[serde(rename = "platforms")]
-    pub platforms: Vec<&'l str>,
+    pub platforms: Vec<String>,
 
     #[serde(rename = "updates")]
-    pub updates: Vec<StatusUpdate<'l>>,
+    pub updates: Vec<StatusUpdate>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct StatusData<'l> {
-    #[serde(rename = "maintenances", borrow)]
-    pub maintenances: Vec<Status<'l>>,
+pub struct StatusData {
+    #[serde(rename = "maintenances")]
+    pub maintenances: Vec<Status>,
 
-    #[serde(rename = "incidents", borrow)]
-    pub incidents: Vec<Status<'l>>,
+    #[serde(rename = "incidents")]
+    pub incidents: Vec<Status>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct StatusUpdate<'l> {
+pub struct StatusUpdate {
     #[serde(rename = "id")]
     pub id: u32,
 
@@ -111,7 +111,7 @@ pub struct StatusUpdate<'l> {
     pub publish: bool,
 
     #[serde(rename = "author")]
-    pub author: &'l str,
+    pub author: String,
 
     #[serde(rename = "created_at")]
     pub created: DateTime<FixedOffset>,
@@ -120,54 +120,54 @@ pub struct StatusUpdate<'l> {
     pub updated: Option<DateTime<FixedOffset>>,
 
     #[serde(rename = "publish_locations")]
-    pub publish_locations: Vec<&'l str>,
+    pub publish_locations: Vec<String>,
 
     #[serde(rename = "translations")]
-    pub translations: Vec<Localized<'l, &'l str>>,
+    pub translations: Vec<Localized<String>>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct Website<'l> {
+pub struct Website {
     #[serde(rename = "banner_url")]
-    pub banner_url: &'l str,
+    pub banner_url: String,
 
     #[serde(rename = "category")]
-    pub category: &'l str,
+    pub category: String,
 
     #[serde(rename = "date")]
     pub date: DateTime<FixedOffset>,
 
     #[serde(rename = "external_link")]
-    pub external_link: Option<&'l str>,
+    pub external_link: Option<String>,
 
     #[serde(rename = "title")]
-    pub title: &'l str,
+    pub title: String,
 
     #[serde(rename = "url")]
-    pub url: &'l str,
+    pub url: String,
 }
 
-pub type WebsiteData<'l> = Vec<Website<'l>>;
+pub type WebsiteData = Vec<Website>;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct ValorantApiError<'l> {
+pub struct ValorantApiError {
     #[serde(rename = "code")]
     pub code: u32,
 
     #[serde(rename = "message")]
-    pub message: &'l str,
+    pub message: String,
 
     #[serde(rename = "details")]
-    pub details: &'l str,
+    pub details: String,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct ValorantApiResponse<'l, T> {
+pub struct ValorantApiResponse<T> {
     #[serde(rename = "status")]
     pub status: u16,
 
-    #[serde(rename = "errors", borrow)]
-    pub errors: Option<Vec<ValorantApiError<'l>>>,
+    #[serde(rename = "errors")]
+    pub errors: Option<Vec<ValorantApiError>>,
 
     #[serde(rename = "data")]
     pub data: Option<T>,

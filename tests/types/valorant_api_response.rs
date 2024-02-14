@@ -26,7 +26,7 @@ fn serialize_ok_u32() {
 }
 
 #[test]
-fn serialize_ok_str() {
+fn serialize_ok_string() {
     let status = 200;
     let errors = None;
     let data = Some("test");
@@ -78,8 +78,8 @@ fn serialize_ok_error() {
         vec![
             ValorantApiError {
                 code: 104,
-                message: "Invalid region",
-                details: "details",
+                message: String::from("Invalid region"),
+                details: String::from("details"),
             },
         ]
     );
@@ -178,8 +178,8 @@ fn deserialize_ok_error() {
         vec![
             ValorantApiError {
                 code: 104,
-                message: "Invalid region",
-                details: "details",
+                message: String::from("Invalid region"),
+                details: String::from("details"),
             },
         ]
     );

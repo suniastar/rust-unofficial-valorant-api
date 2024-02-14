@@ -30,32 +30,32 @@ fn serialize() {
             .with_nanosecond(0)
             .unwrap()
     );
-    let incident_severity = Some("warning");
-    let maintenance_status = "in_progress";
-    let titles: Vec<Localized<&str>> = vec![
+    let incident_severity = Some(String::from("warning"));
+    let maintenance_status = String::from("in_progress");
+    let titles = vec![
         Localized {
-            content: "Emergency Maintenance In Progress",
-            locale: "en_US",
+            content: String::from("Emergency Maintenance In Progress"),
+            locale: String::from("en_US"),
         },
     ];
-    let platforms: Vec<&str> = vec![
-        "windows",
+    let platforms = vec![
+        String::from("windows"),
     ];
-    let updates: Vec<StatusUpdate> = vec![
+    let updates = vec![
         StatusUpdate {
             id: rng.gen(),
             publish: rng.gen(),
-            author: "Frederik Enste",
+            author: String::from("Frederik Enste"),
             created,
             updated: None,
             publish_locations: vec![
-                "client",
-                "website",
+                String::from("client"),
+                String::from("website"),
             ],
             translations: vec![
                 Localized {
-                    content: "Maintenance begin",
-                    locale: "en_US",
+                    content: String::from("Maintenance begin"),
+                    locale: String::from("en_US"),
                 },
             ],
         },
@@ -75,7 +75,7 @@ fn serialize() {
                            created.to_rfc3339_opts(SecondsFormat::AutoSi, true),
                            updated.unwrap().to_rfc3339_opts(SecondsFormat::AutoSi, true),
                            archived.unwrap().to_rfc3339_opts(SecondsFormat::AutoSi, true),
-                           incident_severity.unwrap(),
+                           incident_severity.clone().unwrap(),
                            serde_json::to_string(&titles).unwrap(),
                            serde_json::to_string(&platforms).unwrap(),
                            serde_json::to_string(&updates).unwrap(),
@@ -125,32 +125,32 @@ fn deserialize() {
             .with_nanosecond(0)
             .unwrap()
     );
-    let incident_severity = Some("warning");
-    let maintenance_status = "in_progress";
-    let titles: Vec<Localized<&str>> = vec![
+    let incident_severity = Some(String::from("warning"));
+    let maintenance_status = String::from("in_progress");
+    let titles = vec![
         Localized {
-            content: "Emergency Maintenance In Progress",
-            locale: "en_US",
+            content: String::from("Emergency Maintenance In Progress"),
+            locale: String::from("en_US"),
         },
     ];
-    let platforms: Vec<&str> = vec![
-        "windows",
+    let platforms = vec![
+        String::from("windows"),
     ];
-    let updates: Vec<StatusUpdate> = vec![
+    let updates = vec![
         StatusUpdate {
             id: rng.gen(),
             publish: rng.gen(),
-            author: "Frederik Enste",
+            author: String::from("Frederik Enste"),
             created,
             updated: None,
             publish_locations: vec![
-                "client",
-                "website",
+                String::from("client"),
+                String::from("website"),
             ],
             translations: vec![
                 Localized {
-                    content: "Maintenance begin",
-                    locale: "en_US",
+                    content: String::from("Maintenance begin"),
+                    locale: String::from("en_US"),
                 },
             ],
         },
@@ -170,7 +170,7 @@ fn deserialize() {
                        created.to_rfc3339_opts(SecondsFormat::AutoSi, true),
                        updated.unwrap().to_rfc3339_opts(SecondsFormat::AutoSi, true),
                        archived.unwrap().to_rfc3339_opts(SecondsFormat::AutoSi, true),
-                       incident_severity.unwrap(),
+                       incident_severity.clone().unwrap(),
                        serde_json::to_string(&titles).unwrap(),
                        serde_json::to_string(&platforms).unwrap(),
                        serde_json::to_string(&updates).unwrap(),
@@ -205,31 +205,31 @@ fn serialize_null() {
     let updated = None;
     let archived = None;
     let incident_severity = None;
-    let maintenance_status = "in_progress";
-    let titles: Vec<Localized<&str>> = vec![
+    let maintenance_status = String::from("in_progress");
+    let titles = vec![
         Localized {
-            content: "Emergency Maintenance In Progress",
-            locale: "en_US",
+            content: String::from("Emergency Maintenance In Progress"),
+            locale: String::from("en_US"),
         },
     ];
-    let platforms: Vec<&str> = vec![
-        "windows",
+    let platforms = vec![
+        String::from("windows"),
     ];
     let updates: Vec<StatusUpdate> = vec![
         StatusUpdate {
             id: rng.gen(),
             publish: rng.gen(),
-            author: "Frederik Enste",
+            author: String::from("Frederik Enste"),
             created,
             updated: None,
             publish_locations: vec![
-                "client",
-                "website",
+                String::from("client"),
+                String::from("website"),
             ],
             translations: vec![
                 Localized {
-                    content: "Maintenance begin",
-                    locale: "en_US",
+                    content: String::from("Maintenance begin"),
+                    locale: String::from("en_US"),
                 },
             ],
         },
@@ -284,31 +284,31 @@ fn deserialize_null() {
     let updated = None;
     let archived = None;
     let incident_severity = None;
-    let maintenance_status = "in_progress";
-    let titles: Vec<Localized<&str>> = vec![
+    let maintenance_status = String::from("in_progress");
+    let titles = vec![
         Localized {
-            content: "Emergency Maintenance In Progress",
-            locale: "en_US",
+            content: String::from("Emergency Maintenance In Progress"),
+            locale: String::from("en_US"),
         },
     ];
-    let platforms: Vec<&str> = vec![
-        "windows",
+    let platforms = vec![
+        String::from("windows"),
     ];
-    let updates: Vec<StatusUpdate> = vec![
+    let updates = vec![
         StatusUpdate {
             id: rng.gen(),
             publish: rng.gen(),
-            author: "Frederik Enste",
+            author: String::from("Frederik Enste"),
             created,
             updated: None,
             publish_locations: vec![
-                "client",
-                "website",
+                String::from("client"),
+                String::from("website"),
             ],
             translations: vec![
                 Localized {
-                    content: "Maintenance begin",
-                    locale: "en_US",
+                    content: String::from("Maintenance begin"),
+                    locale: String::from("en_US"),
                 },
             ],
         },

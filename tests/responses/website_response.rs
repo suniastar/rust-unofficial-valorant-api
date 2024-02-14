@@ -14,8 +14,8 @@ fn deserialize_bad_request() {
             vec![
                 ValorantApiError {
                     code: 0,
-                    message: "string",
-                    details: "string",
+                    message: String::from("string"),
+                    details: String::from("string"),
                 }
             ]
         ),
@@ -38,17 +38,17 @@ fn deserialize_ok_example() {
         data: Some(
             vec![
                 Website {
-                    banner_url: "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blta99717d4afdf4126/61ddd1a0997c0e224de0a718/01132022-VANILLE-BTS_Article-banner.jpg",
-                    category: "community",
+                    banner_url: String::from("https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blta99717d4afdf4126/61ddd1a0997c0e224de0a718/01132022-VANILLE-BTS_Article-banner.jpg"),
+                    category: String::from("community"),
                     date: FixedOffset::east_opt(0)
                         .unwrap()
                         .with_ymd_and_hms(2022, 1, 13, 11, 0, 0)
                         .unwrap()
                         .with_nanosecond(0)
                         .unwrap(),
-                    external_link: Some("https://www.youtube.com/watch?v=YRFwQy-dZ4o"),
-                    title: "Die Stimme von Neon // VALORANT",
-                    url: "https://playvalorant.com/de-de/news/community/meet-the-voice-of-neon-valorant/",
+                    external_link: Some(String::from("https://www.youtube.com/watch?v=YRFwQy-dZ4o")),
+                    title: String::from("Die Stimme von Neon // VALORANT"),
+                    url: String::from("https://playvalorant.com/de-de/news/community/meet-the-voice-of-neon-valorant/"),
                 },
             ]
         ),

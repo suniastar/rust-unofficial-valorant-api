@@ -25,22 +25,22 @@ fn serialize() {
                     .unwrap()
             ),
             archived: None,
-            incident_severity: Some("warning"),
-            maintenance_status: "in_progress",
+            incident_severity: Some(String::from("warning")),
+            maintenance_status: String::from("in_progress"),
             titles: vec![
                 Localized {
-                    content: "Emergency Maintenance In Progress",
-                    locale: "en_US",
+                    content: String::from("Emergency Maintenance In Progress"),
+                    locale: String::from("en_US"),
                 },
             ],
             platforms: vec![
-                "windows",
+                String::from("windows"),
             ],
             updates: vec![
                 StatusUpdate {
                     id: rng.gen(),
                     publish: false,
-                    author: "Riot Games",
+                    author: String::from("Riot Games"),
                     created: FixedOffset::east_opt(1 * 3600)
                         .unwrap()
                         .with_ymd_and_hms(2023, 12, 24, 22, 13, 45)
@@ -49,13 +49,13 @@ fn serialize() {
                         .unwrap(),
                     updated: None,
                     publish_locations: vec![
-                        "client",
-                        "website",
+                        String::from("client"),
+                        String::from("website"),
                     ],
                     translations: vec![
                         Localized {
-                            content: "Maintenance begin",
-                            locale: "en_US",
+                            content: String::from("Maintenance begin"),
+                            locale: String::from("en_US"),
                         },
                     ],
                 }
@@ -80,22 +80,22 @@ fn serialize() {
                     .unwrap()
             ),
             archived: None,
-            incident_severity: Some("warning"),
-            maintenance_status: "in_progress",
+            incident_severity: Some(String::from("warning")),
+            maintenance_status: String::from("in_progress"),
             titles: vec![
                 Localized {
-                    content: "Emergency Maintenance In Progress",
-                    locale: "en_US",
+                    content: String::from("Emergency Maintenance In Progress"),
+                    locale: String::from("en_US"),
                 },
             ],
             platforms: vec![
-                "windows",
+                String::from("windows"),
             ],
             updates: vec![
                 StatusUpdate {
                     id: rng.gen(),
                     publish: false,
-                    author: "Riot Games",
+                    author: String::from("Riot Games"),
                     created: FixedOffset::east_opt(1 * 3600)
                         .unwrap()
                         .with_ymd_and_hms(2023, 12, 24, 22, 15, 45)
@@ -104,12 +104,12 @@ fn serialize() {
                         .unwrap(),
                     updated: None,
                     publish_locations: vec![
-                        "client",
+                        String::from("client"),
                     ],
                     translations: vec![
                         Localized {
-                            content: "Maintenance begin",
-                            locale: "en_US",
+                            content: String::from("Maintenance begin"),
+                            locale: String::from("en_US"),
                         },
                     ],
                 }
@@ -156,22 +156,22 @@ fn deserialize() {
                     .unwrap()
             ),
             archived: None,
-            incident_severity: Some("warning"),
-            maintenance_status: "in_progress",
+            incident_severity: Some(String::from("warning")),
+            maintenance_status: String::from("in_progress"),
             titles: vec![
                 Localized {
-                    content: "Emergency Maintenance In Progress",
-                    locale: "en_US",
+                    content: String::from("Emergency Maintenance In Progress"),
+                    locale: String::from("en_US"),
                 },
             ],
             platforms: vec![
-                "windows",
+                String::from("windows"),
             ],
             updates: vec![
                 StatusUpdate {
                     id: rng.gen(),
                     publish: false,
-                    author: "Riot Games",
+                    author: String::from("Riot Games"),
                     created: FixedOffset::east_opt(1 * 3600)
                         .unwrap()
                         .with_ymd_and_hms(2023, 12, 24, 22, 13, 45)
@@ -180,13 +180,13 @@ fn deserialize() {
                         .unwrap(),
                     updated: None,
                     publish_locations: vec![
-                        "client",
-                        "website",
+                        String::from("client"),
+                        String::from("website"),
                     ],
                     translations: vec![
                         Localized {
-                            content: "Maintenance begin",
-                            locale: "en_US",
+                            content: String::from("Maintenance begin"),
+                            locale: String::from("en_US"),
                         },
                     ],
                 }
@@ -211,22 +211,22 @@ fn deserialize() {
                     .unwrap()
             ),
             archived: None,
-            incident_severity: Some("warning"),
-            maintenance_status: "in_progress",
+            incident_severity: Some(String::from("warning")),
+            maintenance_status: String::from("in_progress"),
             titles: vec![
                 Localized {
-                    content: "Emergency Maintenance In Progress",
-                    locale: "en_US",
+                    content: String::from("Emergency Maintenance In Progress"),
+                    locale: String::from("en_US"),
                 },
             ],
             platforms: vec![
-                "windows",
+                String::from("windows"),
             ],
             updates: vec![
                 StatusUpdate {
                     id: rng.gen(),
                     publish: false,
-                    author: "Riot Games",
+                    author: String::from("Riot Games"),
                     created: FixedOffset::east_opt(1 * 3600)
                         .unwrap()
                         .with_ymd_and_hms(2023, 12, 24, 22, 15, 45)
@@ -235,12 +235,12 @@ fn deserialize() {
                         .unwrap(),
                     updated: None,
                     publish_locations: vec![
-                        "client",
+                        String::from("client"),
                     ],
                     translations: vec![
                         Localized {
-                            content: "Maintenance begin",
-                            locale: "en_US",
+                            content: String::from("Maintenance begin"),
+                            locale: String::from("en_US"),
                         },
                     ],
                 }

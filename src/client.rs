@@ -1,7 +1,4 @@
-use std::collections::HashMap;
 use std::time::Duration;
-
-use serde_json::Value;
 
 use crate::types::*;
 
@@ -34,7 +31,7 @@ impl ValorantApiClient {
         }
     }
 
-    pub async fn get_status(&self, affinity: &Affinity) -> Result<HashMap<String, Value>, reqwest::Error> {
+    pub async fn get_status(&self, affinity: &Affinity) -> Result<ValorantApiResponse<StatusData>, reqwest::Error> {
         let aff = affinity.to_str();
         let response = self.client
             .get(format!("{BASE_URI}/valorant/v1/status/{aff}"))
@@ -42,19 +39,19 @@ impl ValorantApiClient {
             .await;
         println!("{:?}", response);
         let json = response?
-            .json::<HashMap<String, Value>>()
+            .json::<ValorantApiResponse<StatusData>>()
             .await;
         Ok(json?)
     }
 
-    pub async fn get_website(&self, country_code: &str) -> Result<HashMap<String, Value>, reqwest::Error> {
+    pub async fn get_website(&self, country_code: &str) -> Result<ValorantApiResponse<WebsiteData>, reqwest::Error> {
         let response = self.client
             .get(format!("{BASE_URI}/valorant/v1/website/{country_code}"))
             .send()
             .await;
         println!("{:?}", response);
         let json = response?
-            .json::<HashMap<String, Value>>()
+            .json::<ValorantApiResponse<WebsiteData>>()
             .await;
         Ok(json?)
     }
