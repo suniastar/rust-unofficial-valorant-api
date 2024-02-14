@@ -9,4 +9,5 @@ mod status_data;
 mod status_update;
 mod valorant_api_error;
 mod valorant_api_response;
+mod version_data;
 mod website;

@@ -44,6 +44,19 @@ impl ValorantApiClient {
         Ok(json?)
     }
 
+    pub async fn get_version(&self, affinity: &Affinity) -> Result<ValorantApiResponse<VersionData>, reqwest::Error> {
+        let aff = affinity.to_str();
+        let response = self.client
+            .get(format!("{BASE_URI}/valorant/v1/version/{aff}"))
+            .send()
+            .await;
+        println!("{:?}", response);
+        let json = response?
+            .json::<ValorantApiResponse<VersionData>>()
+            .await;
+        Ok(json?)
+    }
+
     pub async fn get_website(&self, country_code: &str) -> Result<ValorantApiResponse<WebsiteData>, reqwest::Error> {
         let response = self.client
             .get(format!("{BASE_URI}/valorant/v1/website/{country_code}"))

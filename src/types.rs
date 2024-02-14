@@ -1,4 +1,4 @@
-use chrono::{DateTime, FixedOffset};
+use chrono::{DateTime, FixedOffset, NaiveDate};
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
@@ -124,6 +124,30 @@ pub struct StatusUpdate {
 
     #[serde(rename = "translations")]
     pub translations: Vec<Localized<String>>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct VersionData {
+    #[serde(rename = "region")]
+    pub region: Region,
+
+    #[serde(rename = "branch")]
+    pub branch: String,
+
+    #[serde(rename = "build_date", serialize_with = "crate::types_serde::serialize_naive_date", deserialize_with = "crate::types_serde::deserialize_naive_date")]
+    pub build_date: NaiveDate,
+
+    #[serde(rename = "build_ver")]
+    pub build_version: String,
+
+    #[serde(rename = "last_checked")]
+    pub last_checked: DateTime<FixedOffset>,
+
+    #[serde(rename = "version")]
+    pub version: u32,
+
+    #[serde(rename = "version_for_api")]
+    pub version_for_api: String,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]

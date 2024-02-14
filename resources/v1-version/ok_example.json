@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "data": {
+    "region": "eu",
+    "branch": "release-08.00",
+    "build_date": "Jan  3 2024",
+    "build_ver": "08.00.00.2191955",
+    "last_checked": "2024-01-21T07:12:09.043Z",
+    "version": 14,
+    "version_for_api": "release-08.00-shipping-14-2191955"
+  }
+}

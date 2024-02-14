@@ -1,6 +1,7 @@
 use std::fmt::Formatter;
 use std::str::FromStr;
 
+use chrono::NaiveDate;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde::de::{Error, Visitor};
 
@@ -134,4 +135,26 @@ impl<'de> Deserialize<'de> for Region {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
         deserializer.deserialize_str(RegionVisitor)
     }
+}
+
+pub fn serialize_naive_date<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+    serializer.serialize_str(date.format("%b %e %Y").to_string().as_str())
+}
+
+struct NaiveDateVisitor;
+
+impl<'de> Visitor<'de> for NaiveDateVisitor {
+    type Value = NaiveDate;
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        formatter.write_str("a valid date like this: Jan  1 2024")
+    }
+
+    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
+        NaiveDate::parse_from_str(v, "%b %e %Y").map_err(|msg| E::custom(msg))
+    }
+}
+
+pub fn deserialize_naive_date<'de, D>(deserializer: D) -> Result<NaiveDate, D::Error> where D: Deserializer<'de> {
+    deserializer.deserialize_str(NaiveDateVisitor)
 }
