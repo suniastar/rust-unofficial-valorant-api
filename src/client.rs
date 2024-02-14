@@ -37,7 +37,7 @@ impl ValorantApiClient {
     pub async fn get_status(&self, affinity: &Affinity) -> Result<HashMap<String, Value>, reqwest::Error> {
         let aff = affinity.to_str();
         let response = self.client
-            .get(format!("{BASE_URI}/valorant/v1/status/{aff}1"))
+            .get(format!("{BASE_URI}/valorant/v1/status/{aff}"))
             .send()
             .await;
         println!("{:?}", response);
