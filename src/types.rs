@@ -1,6 +1,7 @@
 use chrono::{DateTime, FixedOffset, NaiveDate};
 use reqwest::Url;
 use serde::{Deserialize, Serialize};
+use uuid::Uuid;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub enum Affinity {
@@ -43,6 +44,16 @@ pub enum Mode {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub enum OfferType {
+    Buddy,
+    PlayerCard,
+    PlayerTitle,
+    SkinChroma,
+    SkinLevel,
+    Spray,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub enum Platform {
     PC,
     Console,
@@ -54,6 +65,18 @@ pub enum Region {
     NorthAmerica,
     AsiaPacific,
     Korea,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct OfferTier {
+    #[serde(rename = "name")]
+    pub name: String,
+
+    #[serde(rename = "dev_name")]
+    pub dev_name: String,
+
+    #[serde(rename = "icon")]
+    pub icon_url: Url,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -126,6 +149,36 @@ pub struct StatusUpdate {
 
     #[serde(rename = "translations")]
     pub translations: Vec<Localized<String>>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct V2StoreOffer {
+    #[serde(rename = "offer_id")]
+    pub offer_id: Uuid,
+
+    #[serde(rename = "cost")]
+    pub cost: u32,
+
+    #[serde(rename = "name")]
+    pub name: String,
+
+    #[serde(rename = "icon")]
+    pub icon_url: Option<Url>,
+
+    #[serde(rename = "type")]
+    pub type_: OfferType,
+
+    #[serde(rename = "skin_id")]
+    pub skin_id: Option<Uuid>,
+
+    #[serde(rename = "content_tier")]
+    pub offer_tier: Option<OfferTier>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct V2StoreOffersData {
+    #[serde(rename = "offers")]
+    pub offers: Vec<V2StoreOffer>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]

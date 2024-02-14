@@ -1,0 +1,20 @@
+{
+  "status": 200,
+  "data": {
+    "offers": [
+      {
+        "offer_id": "a3dba920-44ee-d7c5-5227-99a80aee3bd9",
+        "cost": 2175,
+        "name": "Araxys Vandal",
+        "icon": "https://media.valorant-api.com/weaponskinlevels/a3dba920-44ee-d7c5-5227-99a80aee3bd9/displayicon.png",
+        "type": "skin_level",
+        "skin_id": "4c926aa9-4f26-bc80-c486-9b888333373f",
+        "content_tier": {
+          "name": "Deluxe Edition",
+          "dev_name": "Exclusive",
+          "icon": "https://media.valorant-api.com/contenttiers/e046854e-406c-37f4-6607-19a9ba8426fc/displayicon.png"
+        }
+      }
+    ]
+  }
+}

@@ -44,6 +44,18 @@ impl ValorantApiClient {
         Ok(json?)
     }
 
+    pub async fn get_v2_store_offers(&self) -> Result<ValorantApiResponse<V2StoreOffersData>, reqwest::Error> {
+        let response = self.client
+            .get(format!("{BASE_URI}/valorant/v2/store-offers"))
+            .send()
+            .await;
+        println!("{:?}", response);
+        let json = response?
+            .json::<ValorantApiResponse<V2StoreOffersData>>()
+            .await;
+        Ok(json?)
+    }
+
     pub async fn get_v1_version(&self, affinity: &Affinity) -> Result<ValorantApiResponse<VersionData>, reqwest::Error> {
         let aff = affinity.to_str();
         let response = self.client

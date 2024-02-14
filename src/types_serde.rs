@@ -85,6 +85,32 @@ impl<'de> Deserialize<'de> for Mode {
     }
 }
 
+struct OfferTypeVisitor;
+
+impl<'de> Visitor<'de> for OfferTypeVisitor {
+    type Value = OfferType;
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        formatter.write_str("a valid offer type")
+    }
+
+    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
+        OfferType::from_str(v).map_err(|msg| E::custom(msg))
+    }
+}
+
+impl Serialize for OfferType {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+        serializer.serialize_str(self.to_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for OfferType {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
+        deserializer.deserialize_str(OfferTypeVisitor)
+    }
+}
+
 struct PlatformVisitor;
 
 impl<'de> Visitor<'de> for PlatformVisitor {

@@ -255,6 +255,49 @@ impl FromStr for Mode {
     }
 }
 
+const OFFER_TYPE_BUDDY: UniCase<&str> = UniCase::unicode("buddy");
+const OFFER_TYPE_PLAYER_CARD: UniCase<&str> = UniCase::unicode("player_card");
+const OFFER_TYPE_PLAYER_TITLE: UniCase<&str> = UniCase::unicode("player_title");
+const OFFER_TYPE_SKIN_CHROMA: UniCase<&str> = UniCase::unicode("skin_chroma");
+const OFFER_TYPE_SKIN_LEVEL: UniCase<&str> = UniCase::unicode("skin_level");
+const OFFER_TYPE_SPRAY: UniCase<&str> = UniCase::unicode("spray");
+
+impl OfferType {
+    pub fn to_str(&self) -> &'static str {
+        match *self {
+            OfferType::Buddy => OFFER_TYPE_BUDDY.as_ref(),
+            OfferType::PlayerCard => OFFER_TYPE_PLAYER_CARD.as_ref(),
+            OfferType::PlayerTitle => OFFER_TYPE_PLAYER_TITLE.as_ref(),
+            OfferType::SkinChroma => OFFER_TYPE_SKIN_CHROMA.as_ref(),
+            OfferType::SkinLevel => OFFER_TYPE_SKIN_LEVEL.as_ref(),
+            OfferType::Spray => OFFER_TYPE_SPRAY.as_ref(),
+        }
+    }
+}
+
+impl FromStr for OfferType {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let o = UniCase::unicode(s);
+        if o == OFFER_TYPE_BUDDY {
+            Ok(OfferType::Buddy)
+        } else if o == OFFER_TYPE_PLAYER_CARD {
+            Ok(OfferType::PlayerCard)
+        } else if o == OFFER_TYPE_PLAYER_TITLE {
+            Ok(OfferType::PlayerTitle)
+        } else if o == OFFER_TYPE_SKIN_CHROMA {
+            Ok(OfferType::SkinChroma)
+        } else if o == OFFER_TYPE_SKIN_LEVEL {
+            Ok(OfferType::SkinLevel)
+        } else if o == OFFER_TYPE_SPRAY {
+            Ok(OfferType::Spray)
+        } else {
+            Err(format!("not a offer type: {s}"))
+        }
+    }
+}
+
 const PLATFORM_PC: UniCase<&str> = UniCase::unicode("PC");
 const PLATFORM_CONSOLE: UniCase<&str> = UniCase::unicode("Console");
 
