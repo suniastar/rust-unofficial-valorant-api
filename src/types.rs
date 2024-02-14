@@ -1,4 +1,5 @@
 use chrono::{DateTime, FixedOffset, NaiveDate};
+use reqwest::Url;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
@@ -153,7 +154,7 @@ pub struct VersionData {
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Website {
     #[serde(rename = "banner_url")]
-    pub banner_url: String,
+    pub banner_url: Url,
 
     #[serde(rename = "category")]
     pub category: String,
@@ -162,13 +163,13 @@ pub struct Website {
     pub date: DateTime<FixedOffset>,
 
     #[serde(rename = "external_link")]
-    pub external_link: Option<String>,
+    pub external_link: Option<Url>,
 
     #[serde(rename = "title")]
     pub title: String,
 
     #[serde(rename = "url")]
-    pub url: String,
+    pub url: Url,
 }
 
 pub type WebsiteData = Vec<Website>;

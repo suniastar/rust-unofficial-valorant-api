@@ -1,10 +1,11 @@
 use chrono::{FixedOffset, SecondsFormat, Timelike, TimeZone};
+use url::Url;
 
 use rust_unofficial_valorant_api::types::Website;
 
 #[test]
 fn serialize() {
-    let banner_url = String::from("https://google.com/search?q=banner");
+    let banner_url = Url::parse("https://google.com/search?q=banner").unwrap();
     let category = String::from("vct");
     let date = FixedOffset::east_opt(1 * 3600)
         .unwrap()
@@ -12,9 +13,9 @@ fn serialize() {
         .unwrap()
         .with_nanosecond(342_262_234)
         .unwrap();
-    let external_link = Some(String::from("https://google.com/search?q=external"));
+    let external_link = Some(Url::parse("https://google.com/search?q=external").unwrap());
     let title = String::from("Sample Title");
-    let url = String::from("https://google.com/search?q=ducks");
+    let url = Url::parse("https://google.com/search?q=ducks").unwrap();
 
     let expected = format!("{{\
     \"banner_url\":\"{banner_url}\",\
@@ -44,7 +45,7 @@ fn serialize() {
 
 #[test]
 fn serialize_null() {
-    let banner_url = String::from("https://google.com/search?q=banner");
+    let banner_url = Url::parse("https://google.com/search?q=banner").unwrap();
     let category = String::from("vct");
     let date = FixedOffset::east_opt(1 * 3600)
         .unwrap()
@@ -54,7 +55,7 @@ fn serialize_null() {
         .unwrap();
     let external_link = None;
     let title = String::from("Sample Title");
-    let url = String::from("https://google.com/search?q=ducks");
+    let url = Url::parse("https://google.com/search?q=ducks").unwrap();
 
     let expected = format!("{{\
     \"banner_url\":\"{banner_url}\",\
@@ -84,7 +85,7 @@ fn serialize_null() {
 
 #[test]
 fn deserialize() {
-    let banner_url = String::from("https://google.com/search?q=banner");
+    let banner_url = Url::parse("https://google.com/search?q=banner").unwrap();
     let category = String::from("vct");
     let date = FixedOffset::east_opt(1 * 3600)
         .unwrap()
@@ -92,9 +93,9 @@ fn deserialize() {
         .unwrap()
         .with_nanosecond(342_262_234)
         .unwrap();
-    let external_link = Some(String::from("https://google.com/search?q=external"));
+    let external_link = Some(Url::parse("https://google.com/search?q=external").unwrap());
     let title = String::from("Sample Title");
-    let url = String::from("https://google.com/search?q=ducks");
+    let url = Url::parse("https://google.com/search?q=ducks").unwrap();
 
     let json = format!("{{\
     \"banner_url\":\"{banner_url}\",\
