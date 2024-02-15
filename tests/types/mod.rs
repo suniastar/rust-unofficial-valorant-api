@@ -1,4 +1,5 @@
 mod affinity;
+mod card;
 mod localized;
 mod map;
 mod mode;
@@ -9,6 +10,7 @@ mod region;
 mod status;
 mod status_data;
 mod status_update;
+mod v1_account_data;
 mod v2_store_offer;
 mod v2_store_offers;
 mod valorant_api_error;

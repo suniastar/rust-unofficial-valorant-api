@@ -1,0 +1,10 @@
+{
+  "status": 400,
+  "errors": [
+    {
+      "message": "string",
+      "code": 0,
+      "details": "string"
+    }
+  ]
+}

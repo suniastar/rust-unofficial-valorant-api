@@ -1,0 +1,18 @@
+{
+  "status": 200,
+  "data": {
+    "puuid": "f314b09f-7694-5ac0-ba34-5fc27e4d185c",
+    "region": "eu",
+    "account_level": 205,
+    "name": "t00manysecrets",
+    "tag": "EUW",
+    "card": {
+      "small": "https://media.valorant-api.com/playercards/a2bc068a-44ed-9be6-cd77-c3a193e62e68/smallart.png",
+      "large": "https://media.valorant-api.com/playercards/a2bc068a-44ed-9be6-cd77-c3a193e62e68/largeart.png",
+      "wide": "https://media.valorant-api.com/playercards/a2bc068a-44ed-9be6-cd77-c3a193e62e68/wideart.png",
+      "id": "a2bc068a-44ed-9be6-cd77-c3a193e62e68"
+    },
+    "last_update": "Now",
+    "last_update_raw": 1708017187
+  }
+}

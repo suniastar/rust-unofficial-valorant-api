@@ -1,4 +1,4 @@
-use chrono::{DateTime, FixedOffset, NaiveDate};
+use chrono::{DateTime, FixedOffset, NaiveDate, Utc};
 use reqwest::Url;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -65,6 +65,21 @@ pub enum Region {
     NorthAmerica,
     AsiaPacific,
     Korea,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct Card {
+    #[serde(rename = "id")]
+    pub id: Uuid,
+
+    #[serde(rename = "small")]
+    pub small_url: Url,
+
+    #[serde(rename = "large")]
+    pub large_url: Url,
+
+    #[serde(rename = "wide")]
+    pub wide_url: Url,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -173,6 +188,33 @@ pub struct V2StoreOffer {
 
     #[serde(rename = "content_tier")]
     pub offer_tier: Option<OfferTier>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct V1AccountData {
+    #[serde(rename = "puuid")]
+    pub id: Uuid,
+
+    #[serde(rename = "region")]
+    pub region: Region,
+
+    #[serde(rename = "account_level")]
+    pub account_level: u32,
+
+    #[serde(rename = "name")]
+    pub name: Option<String>,
+
+    #[serde(rename = "tag")]
+    pub tag: Option<String>,
+
+    #[serde(rename = "card")]
+    pub card: Card,
+
+    #[serde(rename = "last_update_raw", serialize_with = "crate::types_serde::serialize_date_time_utc", deserialize_with = "crate::types_serde::deserialize_date_time_utc")]
+    pub last_update: DateTime<Utc>,
+
+    #[serde(rename = "last_update")]
+    pub last_update_text: String,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]

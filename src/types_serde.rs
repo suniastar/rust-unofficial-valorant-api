@@ -1,7 +1,7 @@
 use std::fmt::Formatter;
 use std::str::FromStr;
 
-use chrono::NaiveDate;
+use chrono::{DateTime, NaiveDate, NaiveDateTime, TimeZone, Utc};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde::de::{Error, Visitor};
 
@@ -163,10 +163,6 @@ impl<'de> Deserialize<'de> for Region {
     }
 }
 
-pub fn serialize_naive_date<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
-    serializer.serialize_str(date.format("%b %e %Y").to_string().as_str())
-}
-
 struct NaiveDateVisitor;
 
 impl<'de> Visitor<'de> for NaiveDateVisitor {
@@ -181,6 +177,39 @@ impl<'de> Visitor<'de> for NaiveDateVisitor {
     }
 }
 
+pub fn serialize_naive_date<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+    serializer.serialize_str(date.format("%b %e %Y").to_string().as_str())
+}
+
 pub fn deserialize_naive_date<'de, D>(deserializer: D) -> Result<NaiveDate, D::Error> where D: Deserializer<'de> {
     deserializer.deserialize_str(NaiveDateVisitor)
+}
+
+struct DateTimeUtcVisitor;
+
+impl<'de> Visitor<'de> for DateTimeUtcVisitor {
+    type Value = DateTime<Utc>;
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        formatter.write_str("a valid unix timestamp")
+    }
+
+    fn visit_i64<E>(self, v: i64) -> Result<Self::Value, E> where E: Error {
+        match NaiveDateTime::from_timestamp_opt(v, 0) {
+            None => Err(E::custom("not a valid unix timestamp")),
+            Some(naive) => Ok(Utc.from_utc_datetime(&naive)),
+        }
+    }
+
+    fn visit_u64<E>(self, v: u64) -> Result<Self::Value, E> where E: Error {
+        self.visit_i64(v as i64)
+    }
+}
+
+pub fn serialize_date_time_utc<S>(dt: &DateTime<Utc>, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+    serializer.serialize_i64(dt.timestamp())
+}
+
+pub fn deserialize_date_time_utc<'de, D>(deserializer: D) -> Result<DateTime<Utc>, D::Error> where D: Deserializer<'de> {
+    deserializer.deserialize_i64(DateTimeUtcVisitor)
 }
