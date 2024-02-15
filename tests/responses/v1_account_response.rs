@@ -2,7 +2,7 @@ use chrono::{TimeZone, Utc};
 use url::Url;
 use uuid::uuid;
 
-use rust_unofficial_valorant_api::types::{Card, Region, StatusData, V1AccountData, ValorantApiError, ValorantApiResponse};
+use rust_unofficial_valorant_api::types::{Card, Region, V1AccountData, V1StatusData, ValorantApiError, ValorantApiResponse};
 
 use crate::util::read_resource;
 
@@ -10,7 +10,7 @@ use crate::util::read_resource;
 fn deserialize_bad_request() {
     let json = read_resource("v1-account/bad_request.json");
 
-    let expected: ValorantApiResponse<StatusData> = ValorantApiResponse {
+    let expected: ValorantApiResponse<V1StatusData> = ValorantApiResponse {
         status: 400,
         errors: Some(
             vec![

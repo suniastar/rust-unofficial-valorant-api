@@ -1,6 +1,6 @@
 use chrono::{FixedOffset, Timelike, TimeZone};
 
-use rust_unofficial_valorant_api::types::{Localized, Status, StatusData, StatusUpdate, ValorantApiError, ValorantApiResponse};
+use rust_unofficial_valorant_api::types::{Localized, Status, StatusUpdate, V1StatusData, ValorantApiError, ValorantApiResponse};
 
 use crate::util::read_resource;
 
@@ -8,7 +8,7 @@ use crate::util::read_resource;
 fn deserialize_bad_request() {
     let json = read_resource("v1-status/bad_request.json");
 
-    let expected: ValorantApiResponse<StatusData> = ValorantApiResponse {
+    let expected: ValorantApiResponse<V1StatusData> = ValorantApiResponse {
         status: 400,
         errors: Some(
             vec![
@@ -36,7 +36,7 @@ fn deserialize_ok_empty() {
         status: 200,
         errors: None,
         data: Some(
-            StatusData {
+            V1StatusData {
                 maintenances: vec![],
                 incidents: vec![],
             }
@@ -57,7 +57,7 @@ fn deserialize_ok_example() {
         status: 200,
         errors: None,
         data: Some(
-            StatusData {
+            V1StatusData {
                 maintenances: vec![
                     Status {
                         id: 4175,

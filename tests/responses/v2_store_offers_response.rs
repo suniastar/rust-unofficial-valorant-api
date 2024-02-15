@@ -1,7 +1,7 @@
 use url::Url;
 use uuid::uuid;
 
-use rust_unofficial_valorant_api::types::{OfferTier, OfferType, StatusData, V2StoreOffer, V2StoreOffersData, ValorantApiError, ValorantApiResponse};
+use rust_unofficial_valorant_api::types::{OfferTier, OfferType, V1StatusData, V2StoreOffer, V2StoreOffersData, ValorantApiError, ValorantApiResponse};
 
 use crate::util::read_resource;
 
@@ -9,7 +9,7 @@ use crate::util::read_resource;
 fn deserialize_bad_request() {
     let json = read_resource("v2-store-offers/bad_request.json");
 
-    let expected: ValorantApiResponse<StatusData> = ValorantApiResponse {
+    let expected: ValorantApiResponse<V1StatusData> = ValorantApiResponse {
         status: 400,
         errors: Some(
             vec![

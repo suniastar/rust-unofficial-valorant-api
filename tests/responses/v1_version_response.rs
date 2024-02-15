@@ -1,6 +1,6 @@
 use chrono::{FixedOffset, NaiveDate, Timelike, TimeZone};
 
-use rust_unofficial_valorant_api::types::{Region, StatusData, ValorantApiError, ValorantApiResponse, VersionData};
+use rust_unofficial_valorant_api::types::{Region, V1StatusData, V1VersionData, ValorantApiError, ValorantApiResponse};
 
 use crate::util::read_resource;
 
@@ -8,7 +8,7 @@ use crate::util::read_resource;
 fn deserialize_bad_request() {
     let json = read_resource("v1-version/bad_request.json");
 
-    let expected: ValorantApiResponse<StatusData> = ValorantApiResponse {
+    let expected: ValorantApiResponse<V1StatusData> = ValorantApiResponse {
         status: 400,
         errors: Some(
             vec![
@@ -32,11 +32,11 @@ fn deserialize_bad_request() {
 fn deserialize_ok_example() {
     let json = read_resource("v1-version/ok_example.json");
 
-    let expected: ValorantApiResponse<VersionData> = ValorantApiResponse {
+    let expected: ValorantApiResponse<V1VersionData> = ValorantApiResponse {
         status: 200,
         errors: None,
         data: Some(
-            VersionData {
+            V1VersionData {
                 region: Region::Europe,
                 branch: String::from("release-08.00"),
                 build_date: NaiveDate::from_ymd_opt(2024, 1, 3).unwrap(),

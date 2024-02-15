@@ -1,7 +1,7 @@
 use chrono::{FixedOffset, Timelike, TimeZone};
 use url::Url;
 
-use rust_unofficial_valorant_api::types::{StatusData, ValorantApiError, ValorantApiResponse, Website, WebsiteData};
+use rust_unofficial_valorant_api::types::{V1StatusData, V1WebsiteData, ValorantApiError, ValorantApiResponse, Website};
 
 use crate::util::read_resource;
 
@@ -9,7 +9,7 @@ use crate::util::read_resource;
 fn deserialize_bad_request() {
     let json = read_resource("v1-website/bad_request.json");
 
-    let expected: ValorantApiResponse<StatusData> = ValorantApiResponse {
+    let expected: ValorantApiResponse<V1StatusData> = ValorantApiResponse {
         status: 400,
         errors: Some(
             vec![
@@ -33,7 +33,7 @@ fn deserialize_bad_request() {
 fn deserialize_ok_example() {
     let json = read_resource("v1-website/ok_example.json");
 
-    let expected: ValorantApiResponse<WebsiteData> = ValorantApiResponse {
+    let expected: ValorantApiResponse<V1WebsiteData> = ValorantApiResponse {
         status: 200,
         errors: None,
         data: Some(

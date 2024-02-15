@@ -1,6 +1,6 @@
 use chrono::{FixedOffset, NaiveDate, SecondsFormat, Timelike, TimeZone};
 
-use rust_unofficial_valorant_api::types::{Region, VersionData};
+use rust_unofficial_valorant_api::types::{Region, V1VersionData};
 
 #[test]
 fn serialize() {
@@ -31,7 +31,7 @@ fn serialize() {
                            last_checked.to_rfc3339_opts(SecondsFormat::AutoSi, true),
     );
 
-    let version_data = VersionData {
+    let version_data = V1VersionData {
         region,
         branch,
         build_date,
@@ -75,7 +75,7 @@ fn deserialize() {
                        last_checked.to_rfc3339_opts(SecondsFormat::AutoSi, true),
     );
 
-    let expected = VersionData {
+    let expected = V1VersionData {
         region,
         branch,
         build_date,

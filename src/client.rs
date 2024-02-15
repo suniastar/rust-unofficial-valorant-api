@@ -31,7 +31,7 @@ impl ValorantApiClient {
         }
     }
 
-    pub async fn get_v1_status(&self, affinity: &Affinity) -> Result<ValorantApiResponse<StatusData>, reqwest::Error> {
+    pub async fn get_v1_status(&self, affinity: &Affinity) -> Result<ValorantApiResponse<V1StatusData>, reqwest::Error> {
         let aff = affinity.to_str();
         let response = self.client
             .get(format!("{BASE_URI}/valorant/v1/status/{aff}"))
@@ -39,7 +39,7 @@ impl ValorantApiClient {
             .await;
         println!("{:?}", response);
         let json = response?
-            .json::<ValorantApiResponse<StatusData>>()
+            .json::<ValorantApiResponse<V1StatusData>>()
             .await;
         Ok(json?)
     }
@@ -56,7 +56,7 @@ impl ValorantApiClient {
         Ok(json?)
     }
 
-    pub async fn get_v1_version(&self, affinity: &Affinity) -> Result<ValorantApiResponse<VersionData>, reqwest::Error> {
+    pub async fn get_v1_version(&self, affinity: &Affinity) -> Result<ValorantApiResponse<V1VersionData>, reqwest::Error> {
         let aff = affinity.to_str();
         let response = self.client
             .get(format!("{BASE_URI}/valorant/v1/version/{aff}"))
@@ -64,19 +64,19 @@ impl ValorantApiClient {
             .await;
         println!("{:?}", response);
         let json = response?
-            .json::<ValorantApiResponse<VersionData>>()
+            .json::<ValorantApiResponse<V1VersionData>>()
             .await;
         Ok(json?)
     }
 
-    pub async fn get_v1_website(&self, country_code: &str) -> Result<ValorantApiResponse<WebsiteData>, reqwest::Error> {
+    pub async fn get_v1_website(&self, country_code: &str) -> Result<ValorantApiResponse<V1WebsiteData>, reqwest::Error> {
         let response = self.client
             .get(format!("{BASE_URI}/valorant/v1/website/{country_code}"))
             .send()
             .await;
         println!("{:?}", response);
         let json = response?
-            .json::<ValorantApiResponse<WebsiteData>>()
+            .json::<ValorantApiResponse<V1WebsiteData>>()
             .await;
         Ok(json?)
     }

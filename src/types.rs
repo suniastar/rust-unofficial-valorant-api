@@ -134,7 +134,7 @@ pub struct Status {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct StatusData {
+pub struct V1StatusData {
     #[serde(rename = "maintenances")]
     pub maintenances: Vec<Status>,
 
@@ -224,7 +224,7 @@ pub struct V2StoreOffersData {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct VersionData {
+pub struct V1VersionData {
     #[serde(rename = "region")]
     pub region: Region,
 
@@ -268,7 +268,7 @@ pub struct Website {
     pub url: Url,
 }
 
-pub type WebsiteData = Vec<Website>;
+pub type V1WebsiteData = Vec<Website>;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ValorantApiError {
