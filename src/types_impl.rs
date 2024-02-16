@@ -1,10 +1,15 @@
 use std::fmt;
 use std::fmt::Formatter;
+use std::hash::{Hash, Hasher};
 use std::str::FromStr;
 
 use unicase::UniCase;
 
 use crate::types::*;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// ENUMS
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const AFFINITY_EUROPE: UniCase<&str> = UniCase::unicode("eu");
 const AFFINITY_NORTH_AMERICA: UniCase<&str> = UniCase::unicode("na");
@@ -28,7 +33,7 @@ impl Affinity {
 
 impl fmt::Display for Affinity {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.to_str())
+        f.write_str(self.to_str())
     }
 }
 
@@ -91,7 +96,7 @@ impl Map {
 
 impl fmt::Display for Map {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.to_str())
+        f.write_str(self.to_str())
     }
 }
 
@@ -206,7 +211,7 @@ impl Mode {
 
 impl fmt::Display for Mode {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.to_str())
+        f.write_str(self.to_str())
     }
 }
 
@@ -297,7 +302,7 @@ impl OfferType {
 
 impl fmt::Display for OfferType {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.to_str())
+        f.write_str(self.to_str())
     }
 }
 
@@ -338,7 +343,7 @@ impl Platform {
 
 impl fmt::Display for Platform {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.to_str())
+        f.write_str(self.to_str())
     }
 }
 
@@ -353,6 +358,39 @@ impl FromStr for Platform {
             Ok(Platform::Console)
         } else {
             Err(format!("not a platform: {s}"))
+        }
+    }
+}
+
+const PLAYER_TEAM_RED: UniCase<&str> = UniCase::unicode("Red");
+const PLAYER_TEAM_BLUE: UniCase<&str> = UniCase::unicode("Blue");
+
+impl PlayerTeam {
+    pub fn to_str(&self) -> &'static str {
+        match *self {
+            PlayerTeam::Red => PLAYER_TEAM_RED.as_ref(),
+            PlayerTeam::Blue => PLAYER_TEAM_BLUE.as_ref(),
+        }
+    }
+}
+
+impl fmt::Display for PlayerTeam {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        f.write_str(self.to_str())
+    }
+}
+
+impl FromStr for PlayerTeam {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let p = UniCase::unicode(s);
+        if p == PLAYER_TEAM_RED {
+            Ok(PlayerTeam::Red)
+        } else if p == PLAYER_TEAM_BLUE {
+            Ok(PlayerTeam::Blue)
+        } else {
+            Err(format!("not a player team: {s}"))
         }
     }
 }
@@ -375,7 +413,7 @@ impl Region {
 
 impl fmt::Display for Region {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.to_str())
+        f.write_str(self.to_str())
     }
 }
 
@@ -394,6 +432,44 @@ impl FromStr for Region {
             Ok(Region::Korea)
         } else {
             Err(format!("not a region: {s}"))
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// MODEL STRUCTS
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+impl PartialEq for MapLocation {
+    fn eq(&self, other: &Self) -> bool {
+        let double_equal = if !self.view_radians.is_nan() && !other.view_radians.is_nan() {
+            self.view_radians == other.view_radians
+        } else if self.view_radians.is_nan() && other.view_radians.is_nan() {
+            true
+        } else {
+            false
+        };
+
+        self.id == other.id &&
+            self.display_name == other.display_name &&
+            self.team == other.team &&
+            self.coordinates == other.coordinates &&
+            double_equal
+    }
+}
+
+impl Eq for MapLocation {}
+
+impl Hash for MapLocation {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.id.hash(state);
+        self.display_name.hash(state);
+        self.team.hash(state);
+        self.coordinates.hash(state);
+        if !self.view_radians.is_nan() {
+            self.view_radians.to_bits().hash(state);
+        } else {
+            f64::MAX.to_bits().hash(state);
         }
     }
 }

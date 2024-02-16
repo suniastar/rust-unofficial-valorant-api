@@ -137,6 +137,32 @@ impl<'de> Deserialize<'de> for Platform {
     }
 }
 
+struct PlayerTeamVisitor;
+
+impl<'de> Visitor<'de> for PlayerTeamVisitor {
+    type Value = PlayerTeam;
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        formatter.write_str("a valid player team")
+    }
+
+    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
+        PlayerTeam::from_str(v).map_err(|msg| E::custom(msg))
+    }
+}
+
+impl Serialize for PlayerTeam {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+        serializer.serialize_str(self.to_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for PlayerTeam {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
+        deserializer.deserialize_str(PlayerTeamVisitor)
+    }
+}
+
 struct RegionVisitor;
 
 impl<'de> Visitor<'de> for RegionVisitor {
