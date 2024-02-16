@@ -106,6 +106,15 @@ pub struct Localized<T> {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct MapLocation {
+    #[serde(rename = "x")]
+    pub x: i32,
+
+    #[serde(rename = "y")]
+    pub y: i32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct OfferTier {
     #[serde(rename = "name")]
     pub name: String,

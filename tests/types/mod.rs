@@ -2,6 +2,7 @@ mod affinity;
 mod card;
 mod localized;
 mod map;
+mod map_location;
 mod mode;
 mod offer_tier;
 mod offer_type;
