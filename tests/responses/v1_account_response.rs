@@ -12,6 +12,8 @@ fn deserialize_bad_request() {
 
     let expected: ValorantApiResponse<V1StatusData> = ValorantApiResponse {
         status: 400,
+        name: None,
+        tag: None,
         errors: Some(
             vec![
                 ValorantApiError {
@@ -21,6 +23,7 @@ fn deserialize_bad_request() {
                 }
             ]
         ),
+        results: None,
         data: None,
     };
 
@@ -36,7 +39,10 @@ fn deserialize_ok_example() {
 
     let expected: ValorantApiResponse<V1AccountData> = ValorantApiResponse {
         status: 200,
+        name: None,
+        tag: None,
         errors: None,
+        results: None,
         data: Some(
             V1AccountData {
                 id: uuid!("f314b09f-7694-5ac0-ba34-5fc27e4d185c"),

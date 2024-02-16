@@ -293,9 +293,33 @@ pub struct ValorantApiResponse<T> {
     #[serde(rename = "status")]
     pub status: u16,
 
+    #[serde(rename = "name")]
+    pub name: Option<String>,
+
+    #[serde(rename = "tag")]
+    pub tag: Option<String>,
+
     #[serde(rename = "errors")]
     pub errors: Option<Vec<ValorantApiError>>,
 
+    #[serde(rename = "results")]
+    pub results: Option<ValorantApiResults>,
+
     #[serde(rename = "data")]
     pub data: Option<T>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct ValorantApiResults {
+    #[serde(rename = "total")]
+    pub total: u32,
+
+    #[serde(rename = "returned")]
+    pub returned: u32,
+
+    #[serde(rename = "before")]
+    pub before: u32,
+
+    #[serde(rename = "after")]
+    pub after: u32,
 }

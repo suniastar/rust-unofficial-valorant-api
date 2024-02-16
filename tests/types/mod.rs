@@ -16,4 +16,5 @@ mod v2_store_offer;
 mod v2_store_offers;
 mod valorant_api_error;
 mod valorant_api_response;
+mod valorant_api_results;
 mod website;

@@ -4,8 +4,10 @@ use rust_unofficial_valorant_api::client::ValorantApiClient;
 async fn test() {
     let _ = env_logger::builder().is_test(true).try_init();
     let client = ValorantApiClient::new();
-    let t = client.get_v2_store_offers()
+    let result = client.get_v2_store_offers()
         .await;
-    assert!(t.is_ok());
-    println!("{:?}", t);
+    println!("{:?}", result);
+    assert!(result.is_ok());
+    let response = result.unwrap();
+    assert_eq!(200, response.status)
 }
