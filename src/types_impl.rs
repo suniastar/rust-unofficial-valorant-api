@@ -1,3 +1,5 @@
+use std::fmt;
+use std::fmt::Formatter;
 use std::str::FromStr;
 
 use unicase::UniCase;
@@ -21,6 +23,12 @@ impl Affinity {
             Affinity::AsiaPacific => AFFINITY_ASIA_PACIFIC.as_ref(),
             Affinity::Korea => AFFINITY_KOREA.as_ref(),
         }
+    }
+}
+
+impl fmt::Display for Affinity {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_str())
     }
 }
 
@@ -78,6 +86,12 @@ impl Map {
             Map::Split => MAP_SPLIT.as_ref(),
             Map::Sunset => MAP_SUNSET.as_ref(),
         }
+    }
+}
+
+impl fmt::Display for Map {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_str())
     }
 }
 
@@ -190,6 +204,12 @@ impl Mode {
     }
 }
 
+impl fmt::Display for Mode {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_str())
+    }
+}
+
 impl FromStr for Mode {
     type Err = String;
 
@@ -275,6 +295,12 @@ impl OfferType {
     }
 }
 
+impl fmt::Display for OfferType {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_str())
+    }
+}
+
 impl FromStr for OfferType {
     type Err = String;
 
@@ -310,6 +336,12 @@ impl Platform {
     }
 }
 
+impl fmt::Display for Platform {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_str())
+    }
+}
+
 impl FromStr for Platform {
     type Err = String;
 
@@ -338,6 +370,12 @@ impl Region {
             Region::AsiaPacific => REGION_ASIA_PACIFIC.as_ref(),
             Region::Korea => REGION_KOREA.as_ref(),
         }
+    }
+}
+
+impl fmt::Display for Region {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_str())
     }
 }
 

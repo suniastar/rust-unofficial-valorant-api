@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum Affinity {
     Europe,
     NorthAmerica,
@@ -14,6 +15,7 @@ pub enum Affinity {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum Map {
     Ascent,
     Bind,
@@ -31,6 +33,7 @@ pub enum Map {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum Mode {
     Competitive,
     Unrated,
@@ -44,6 +47,7 @@ pub enum Mode {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum OfferType {
     Buddy,
     PlayerCard,
@@ -54,12 +58,14 @@ pub enum OfferType {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum Platform {
     PC,
     Console,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum Region {
     Europe,
     NorthAmerica,

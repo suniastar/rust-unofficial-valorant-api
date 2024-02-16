@@ -7,5 +7,6 @@ async fn test() {
     let client = ValorantApiClient::new();
     let t = client.get_v1_status(&Affinity::Europe)
         .await;
+    assert!(t.is_ok());
     println!("{:?}", t);
 }

@@ -1,11 +1,15 @@
 use std::time::Duration;
 
+use url::Url;
+
+use crate::errors::Error;
 use crate::types::*;
 
 const BASE_URI: &'static str = "https://api.henrikdev.xyz";
 const USER_AGENT: &'static str = concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"), );
 
 pub struct ValorantApiClient {
+    base_url: Url,
     client: reqwest::Client,
 }
 
@@ -25,59 +29,101 @@ impl ValorantApiClient {
             .https_only(true)
             .build()
             .unwrap();
+        let base_url = Url::parse(BASE_URI).expect("could not parse base url");
 
         ValorantApiClient {
+            base_url,
             client,
         }
     }
 
-    pub async fn get_v1_status(&self, affinity: &Affinity) -> Result<ValorantApiResponse<V1StatusData>, reqwest::Error> {
-        let aff = affinity.to_str();
-        let response = self.client
-            .get(format!("{BASE_URI}/valorant/v1/status/{aff}"))
+    pub async fn get_v1_account<S>(&self, name: S, tag: S, force_update: Option<bool>) -> Result<ValorantApiResponse<V1AccountData>, Error>
+        where
+            S: AsRef<str>
+    {
+        let mut url = self.base_url
+            .join(
+                &format!(
+                    "/valorant/v1/account/{0}/{1}",
+                    name.as_ref(),
+                    tag.as_ref(),
+                )
+            )?;
+        match force_update {
+            None => {}
+            Some(force) => {
+                url.query_pairs_mut().append_pair("force", &format!("{force}"));
+            }
+        }
+
+        let reqwest = self.client
+            .get(url)
             .send()
             .await;
-        println!("{:?}", response);
-        let json = response?
-            .json::<ValorantApiResponse<V1StatusData>>()
+        println!("{:?}", reqwest);
+        let response = reqwest?
+            .json::<ValorantApiResponse<V1AccountData>>()
             .await;
-        Ok(json?)
+        Ok(response?)
     }
 
-    pub async fn get_v2_store_offers(&self) -> Result<ValorantApiResponse<V2StoreOffersData>, reqwest::Error> {
-        let response = self.client
-            .get(format!("{BASE_URI}/valorant/v2/store-offers"))
+    pub async fn get_v1_status(&self, affinity: &Affinity) -> Result<ValorantApiResponse<V1StatusData>, Error> {
+        let url = self.base_url
+            .join(&format!("/valorant/v1/status/{affinity}"))?;
+
+        let reqwest = self.client
+            .get(url)
             .send()
             .await;
-        println!("{:?}", response);
-        let json = response?
+        println!("{:?}", reqwest);
+        let response = reqwest?
+            .json::<ValorantApiResponse<V1StatusData>>()
+            .await?;
+        Ok(response)
+    }
+
+    pub async fn get_v2_store_offers(&self) -> Result<ValorantApiResponse<V2StoreOffersData>, Error> {
+        let url = self.base_url
+            .join("/valorant/v2/store-offers")?;
+
+        let reqwest = self.client
+            .get(url)
+            .send()
+            .await;
+        println!("{:?}", reqwest);
+        let response = reqwest?
             .json::<ValorantApiResponse<V2StoreOffersData>>()
             .await;
-        Ok(json?)
+        Ok(response?)
     }
 
-    pub async fn get_v1_version(&self, affinity: &Affinity) -> Result<ValorantApiResponse<V1VersionData>, reqwest::Error> {
-        let aff = affinity.to_str();
-        let response = self.client
-            .get(format!("{BASE_URI}/valorant/v1/version/{aff}"))
+    pub async fn get_v1_version(&self, affinity: &Affinity) -> Result<ValorantApiResponse<V1VersionData>, Error> {
+        let url = self.base_url
+            .join(&format!("/valorant/v1/version/{affinity}"))?;
+
+        let reqwest = self.client
+            .get(url)
             .send()
             .await;
-        println!("{:?}", response);
-        let json = response?
+        println!("{:?}", reqwest);
+        let response = reqwest?
             .json::<ValorantApiResponse<V1VersionData>>()
             .await;
-        Ok(json?)
+        Ok(response?)
     }
 
-    pub async fn get_v1_website(&self, country_code: &str) -> Result<ValorantApiResponse<V1WebsiteData>, reqwest::Error> {
-        let response = self.client
-            .get(format!("{BASE_URI}/valorant/v1/website/{country_code}"))
+    pub async fn get_v1_website(&self, country_code: &str) -> Result<ValorantApiResponse<V1WebsiteData>, Error> {
+        let url = self.base_url
+            .join(&format!("/valorant/v1/website/{country_code}"))?;
+
+        let reqwest = self.client
+            .get(url)
             .send()
             .await;
-        println!("{:?}", response);
-        let json = response?
+        println!("{:?}", reqwest);
+        let response = reqwest?
             .json::<ValorantApiResponse<V1WebsiteData>>()
             .await;
-        Ok(json?)
+        Ok(response?)
     }
 }

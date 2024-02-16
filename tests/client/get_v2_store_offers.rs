@@ -6,5 +6,6 @@ async fn test() {
     let client = ValorantApiClient::new();
     let t = client.get_v2_store_offers()
         .await;
+    assert!(t.is_ok());
     println!("{:?}", t);
 }
