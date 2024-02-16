@@ -3,6 +3,10 @@ use reqwest::Url;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// ENUMS
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum Affinity {
@@ -73,6 +77,10 @@ pub enum Region {
     Korea,
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// MODEL STRUCTS
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Card {
     #[serde(rename = "id")]
@@ -89,6 +97,15 @@ pub struct Card {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct Localized<T> {
+    #[serde(rename = "content")]
+    pub content: T,
+
+    #[serde(rename = "locale")]
+    pub locale: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct OfferTier {
     #[serde(rename = "name")]
     pub name: String,
@@ -98,15 +115,6 @@ pub struct OfferTier {
 
     #[serde(rename = "icon")]
     pub icon_url: Url,
-}
-
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct Localized<T> {
-    #[serde(rename = "content")]
-    pub content: T,
-
-    #[serde(rename = "locale")]
-    pub locale: String,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -140,15 +148,6 @@ pub struct Status {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct V1StatusData {
-    #[serde(rename = "maintenances")]
-    pub maintenances: Vec<Status>,
-
-    #[serde(rename = "incidents")]
-    pub incidents: Vec<Status>,
-}
-
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct StatusUpdate {
     #[serde(rename = "id")]
     pub id: u32,
@@ -173,27 +172,12 @@ pub struct StatusUpdate {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct V2StoreOffer {
-    #[serde(rename = "offer_id")]
-    pub offer_id: Uuid,
+pub struct V1StatusData {
+    #[serde(rename = "maintenances")]
+    pub maintenances: Vec<Status>,
 
-    #[serde(rename = "cost")]
-    pub cost: u32,
-
-    #[serde(rename = "name")]
-    pub name: String,
-
-    #[serde(rename = "icon")]
-    pub icon_url: Option<Url>,
-
-    #[serde(rename = "type")]
-    pub type_: OfferType,
-
-    #[serde(rename = "skin_id")]
-    pub skin_id: Option<Uuid>,
-
-    #[serde(rename = "content_tier")]
-    pub offer_tier: Option<OfferTier>,
+    #[serde(rename = "incidents")]
+    pub incidents: Vec<Status>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -224,12 +208,6 @@ pub struct V1AccountData {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct V2StoreOffersData {
-    #[serde(rename = "offers")]
-    pub offers: Vec<V2StoreOffer>,
-}
-
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct V1VersionData {
     #[serde(rename = "region")]
     pub region: Region,
@@ -253,6 +231,38 @@ pub struct V1VersionData {
     pub version_for_api: String,
 }
 
+pub type V1WebsiteData = Vec<Website>;
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct V2StoreOffer {
+    #[serde(rename = "offer_id")]
+    pub offer_id: Uuid,
+
+    #[serde(rename = "cost")]
+    pub cost: u32,
+
+    #[serde(rename = "name")]
+    pub name: String,
+
+    #[serde(rename = "icon")]
+    pub icon_url: Option<Url>,
+
+    #[serde(rename = "type")]
+    pub type_: OfferType,
+
+    #[serde(rename = "skin_id")]
+    pub skin_id: Option<Uuid>,
+
+    #[serde(rename = "content_tier")]
+    pub offer_tier: Option<OfferTier>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct V2StoreOffersData {
+    #[serde(rename = "offers")]
+    pub offers: Vec<V2StoreOffer>,
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Website {
     #[serde(rename = "banner_url")]
@@ -274,7 +284,9 @@ pub struct Website {
     pub url: Url,
 }
 
-pub type V1WebsiteData = Vec<Website>;
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// API STRUCTS
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ValorantApiError {
