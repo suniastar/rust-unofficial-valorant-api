@@ -1,6 +1,7 @@
 use std::time::Duration;
 
 use url::Url;
+use uuid::Uuid;
 
 use crate::errors::Error;
 use crate::types::*;
@@ -37,7 +38,13 @@ impl ValorantApiClient {
         }
     }
 
-    pub async fn get_v1_account<S>(&self, name: S, tag: S, force_update: Option<bool>) -> Result<ValorantApiResponse<V1AccountData>, Error>
+    pub async fn get_v1_account<S>(&self, name: S, tag: S) -> Result<ValorantApiResponse<V1AccountData>, Error>
+        where
+            S: AsRef<str> {
+        self.get_v1_account_opts(name, tag, None).await
+    }
+
+    pub async fn get_v1_account_opts<S>(&self, name: S, tag: S, force_update: Option<bool>) -> Result<ValorantApiResponse<V1AccountData>, Error>
         where
             S: AsRef<str>
     {
@@ -49,6 +56,31 @@ impl ValorantApiClient {
                     tag.as_ref(),
                 )
             )?;
+        match force_update {
+            None => {}
+            Some(force) => {
+                url.query_pairs_mut().append_pair("force", &format!("{force}"));
+            }
+        }
+
+        let reqwest = self.client
+            .get(url)
+            .send()
+            .await;
+        println!("{:?}", reqwest);
+        let response = reqwest?
+            .json::<ValorantApiResponse<V1AccountData>>()
+            .await;
+        Ok(response?)
+    }
+
+    pub async fn get_v1_by_puuid_account(&self, id: &Uuid) -> Result<ValorantApiResponse<V1AccountData>, Error> {
+        self.get_v1_by_puuid_account_opts(id, None).await
+    }
+
+    pub async fn get_v1_by_puuid_account_opts(&self, id: &Uuid, force_update: Option<bool>) -> Result<ValorantApiResponse<V1AccountData>, Error> {
+        let mut url = self.base_url
+            .join(&format!("valorant/v1/by-puuid/account/{id}"))?;
         match force_update {
             None => {}
             Some(force) => {
