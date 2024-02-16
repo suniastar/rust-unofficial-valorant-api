@@ -423,15 +423,6 @@ pub struct StatusUpdate {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct V1StatusData {
-    #[serde(rename = "maintenances")]
-    pub maintenances: Vec<Status>,
-
-    #[serde(rename = "incidents")]
-    pub incidents: Vec<Status>,
-}
-
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct V1AccountData {
     #[serde(rename = "puuid")]
     pub id: Uuid,
@@ -456,6 +447,15 @@ pub struct V1AccountData {
 
     #[serde(rename = "last_update")]
     pub last_update_text: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct V1StatusData {
+    #[serde(rename = "maintenances")]
+    pub maintenances: Vec<Status>,
+
+    #[serde(rename = "incidents")]
+    pub incidents: Vec<Status>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
