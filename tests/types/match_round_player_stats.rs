@@ -1,19 +1,19 @@
 use url::Url;
 use uuid::Uuid;
 
-use rust_unofficial_valorant_api::types::{MapCoordinates, MapLocation, MatchKill, MatchKillAssistant, MatchKillWeaponAssets, MatchRoundPlayerStats, MatchRoundPlayerStatsDamageEvent, MatchRoundPlayerStatsEconomy, MatchRoundPlayerStatsEconomyArmor, MatchRoundPlayerStatsEconomyArmorAssets, MatchRoundPlayerStatsEconomyWeapon, MatchRoundPlayerStatsEconomyWeaponAssets, PlayerTeam};
+use rust_unofficial_valorant_api::types::{MapCoordinates, MapLocation, MatchKill, MatchKillAssistant, MatchKillWeaponAssets, MatchRoundPlayerStats, MatchRoundPlayerStatsAbilityCasts, MatchRoundPlayerStatsDamageEvent, MatchRoundPlayerStatsEconomy, MatchRoundPlayerStatsEconomyArmor, MatchRoundPlayerStatsEconomyArmorAssets, MatchRoundPlayerStatsEconomyWeapon, MatchRoundPlayerStatsEconomyWeaponAssets, PlayerTeam};
 
 #[test]
 fn serialize() {
     let id = Uuid::new_v4();
     let display_name = String::from("t00manysecrets#EUW");
     let team = PlayerTeam::Blue;
-    // let ability_casts = MatchRoundPlayerStatsAbilityCasts {
-    //     c: 4,
-    //     q: 3,
-    //     e: 2,
-    //     x: 1,
-    // };
+    let ability_casts = MatchRoundPlayerStatsAbilityCasts {
+        c: 4,
+        q: 3,
+        e: 2,
+        x: 1,
+    };
     let damage_events: Vec<MatchRoundPlayerStatsDamageEvent> = vec![
         MatchRoundPlayerStatsDamageEvent {
             receiver_id: Uuid::new_v4(),
@@ -97,24 +97,25 @@ fn serialize() {
     let was_penalized = false;
     let stayed_in_spawn = true;
 
-    // removed \"ability_casts\":{0},\ due to api limitations on riots end
     let expected = format!("{{\
     \"player_puuid\":\"{id}\",\
     \"player_display_name\":\"{display_name}\",\
     \"player_team\":\"{team}\",\
-    \"damage_events\":{0},\
+    \"ability_casts\":{0},\
+    \"damage_events\":{1},\
     \"damage\":{damage},\
     \"headshots\":{head_shots},\
     \"bodyshots\":{body_shots},\
     \"legshots\":{leg_shots},\
-    \"kill_events\":{1},\
+    \"kill_events\":{2},\
     \"kills\":{kills},\
     \"score\":{score},\
-    \"economy\":{2},\
+    \"economy\":{3},\
     \"was_afk\":{was_afk},\
     \"was_penalized\":{was_penalized},\
     \"stayed_in_spawn\":{stayed_in_spawn}\
     }}",
+                           serde_json::to_string(&ability_casts).unwrap(),
                            serde_json::to_string(&damage_events).unwrap(),
                            serde_json::to_string(&kill_events).unwrap(),
                            serde_json::to_string(&economy).unwrap());
@@ -123,6 +124,7 @@ fn serialize() {
         id,
         display_name,
         team,
+        ability_casts,
         damage_events,
         damage,
         head_shots,
@@ -147,12 +149,12 @@ fn deserialize() {
     let id = Uuid::new_v4();
     let display_name = String::from("t00manysecrets#EUW");
     let team = PlayerTeam::Blue;
-    // let ability_casts = MatchRoundPlayerStatsAbilityCasts {
-    //     c: 4,
-    //     q: 3,
-    //     e: 2,
-    //     x: 1,
-    // };
+    let ability_casts = MatchRoundPlayerStatsAbilityCasts {
+        c: 4,
+        q: 3,
+        e: 2,
+        x: 1,
+    };
     let damage_events: Vec<MatchRoundPlayerStatsDamageEvent> = vec![
         MatchRoundPlayerStatsDamageEvent {
             receiver_id: Uuid::new_v4(),
@@ -236,24 +238,25 @@ fn deserialize() {
     let was_penalized = false;
     let stayed_in_spawn = true;
 
-    // removed \"ability_casts\":{0},\ due to api limitations on riots end
     let json = format!("{{\
     \"player_puuid\":\"{id}\",\
     \"player_display_name\":\"{display_name}\",\
     \"player_team\":\"{team}\",\
-    \"damage_events\":{0},\
+    \"ability_casts\":{0},\
+    \"damage_events\":{1},\
     \"damage\":{damage},\
     \"headshots\":{head_shots},\
     \"bodyshots\":{body_shots},\
     \"legshots\":{leg_shots},\
-    \"kill_events\":{1},\
+    \"kill_events\":{2},\
     \"kills\":{kills},\
     \"score\":{score},\
-    \"economy\":{2},\
+    \"economy\":{3},\
     \"was_afk\":{was_afk},\
     \"was_penalized\":{was_penalized},\
     \"stayed_in_spawn\":{stayed_in_spawn}\
     }}",
+                       serde_json::to_string(&ability_casts).unwrap(),
                        serde_json::to_string(&damage_events).unwrap(),
                        serde_json::to_string(&kill_events).unwrap(),
                        serde_json::to_string(&economy).unwrap());
@@ -262,6 +265,7 @@ fn deserialize() {
         id,
         display_name,
         team,
+        ability_casts,
         damage_events,
         damage,
         head_shots,

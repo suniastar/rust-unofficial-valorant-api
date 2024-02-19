@@ -63,6 +63,14 @@ pub enum OfferType {
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
+pub enum PlantSite {
+    A,
+    B,
+    C,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum Platform {
     PC,
     Console,
@@ -82,6 +90,14 @@ pub enum Region {
     NorthAmerica,
     AsiaPacific,
     Korea,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub enum RoundEndType {
+    Eliminated,
+    BombDetonated,
+    BombDefused,
+    RoundTimerExpired,
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,7 +155,7 @@ pub struct MapLocation {
     pub view_radians: f64,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchKill {
     #[serde(rename = "kill_time_in_round")]
     pub kill_time_in_round: u32,
@@ -187,7 +203,7 @@ pub struct MatchKill {
     pub assistants: Vec<MatchKillAssistant>,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchKillAssistant {
     #[serde(rename = "assistant_puuid")]
     pub id: Uuid,
@@ -199,7 +215,7 @@ pub struct MatchKillAssistant {
     pub team: PlayerTeam,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchKillWeaponAssets {
     #[serde(rename = "display_icon")]
     pub display_icon_url: Url,
@@ -208,7 +224,76 @@ pub struct MatchKillWeaponAssets {
     pub kill_feed_icon_url: Url,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct MatchRound {
+    #[serde(rename = "winning_team")]
+    pub winning_team: PlayerTeam,
+
+    #[serde(rename = "end_type")]
+    pub end_type: RoundEndType,
+
+    #[serde(rename = "bomb_planted")]
+    pub bomb_planted: bool,
+
+    #[serde(rename = "bomb_defused")]
+    pub bomb_defused: bool,
+
+    #[serde(rename = "plant_events")]
+    pub plant_event: MatchRoundPlantEvent,
+
+    #[serde(rename = "defuse_events")]
+    pub defuse_event: MatchRoundDefuseEvent,
+
+    #[serde(rename = "player_stats")]
+    pub player_stats: Vec<MatchRoundPlayerStats>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct MatchRoundDefuseEvent {
+    #[serde(rename = "defuse_location")]
+    pub defuse_coordinates: MapCoordinates,
+
+    #[serde(rename = "defused_by")]
+    pub defused_by: MatchRoundEventBy,
+
+    #[serde(rename = "defuse_time_in_round")]
+    pub defuse_time_in_round: u32,
+
+    #[serde(rename = "player_locations_on_defuse")]
+    pub player_locations: Vec<MapLocation>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct MatchRoundEventBy {
+    #[serde(rename = "puuid")]
+    pub id: Uuid,
+
+    #[serde(rename = "display_name")]
+    pub display_name: String,
+
+    #[serde(rename = "team")]
+    pub team: PlayerTeam,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct MatchRoundPlantEvent {
+    #[serde(rename = "plant_location")]
+    pub plant_coordinates: MapCoordinates,
+
+    #[serde(rename = "planted_by")]
+    pub planted_by: MatchRoundEventBy,
+
+    #[serde(rename = "plant_site")]
+    pub plant_site: PlantSite,
+
+    #[serde(rename = "plant_time_in_round")]
+    pub plant_time_in_round: u32,
+
+    #[serde(rename = "player_locations_on_plant")]
+    pub player_locations: Vec<MapLocation>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchRoundPlayerStats {
     #[serde(rename = "player_puuid")]
     pub id: Uuid,
@@ -219,9 +304,8 @@ pub struct MatchRoundPlayerStats {
     #[serde(rename = "player_team")]
     pub team: PlayerTeam,
 
-    // values are always null because of riot
-    // #[serde(rename = "ability_casts")]
-    // pub ability_casts: MatchRoundPlayerStatsAbilityCasts,
+    #[serde(rename = "ability_casts")]
+    pub ability_casts: MatchRoundPlayerStatsAbilityCasts,
 
     #[serde(rename = "damage_events")]
     pub damage_events: Vec<MatchRoundPlayerStatsDamageEvent>,
@@ -260,7 +344,7 @@ pub struct MatchRoundPlayerStats {
     pub stayed_in_spawn: bool,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchRoundPlayerStatsAbilityCasts {
     #[serde(rename = "c_casts")]
     pub c: u32,
@@ -275,7 +359,7 @@ pub struct MatchRoundPlayerStatsAbilityCasts {
     pub x: u32,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchRoundPlayerStatsDamageEvent {
     #[serde(rename = "receiver_puuid")]
     pub receiver_id: Uuid,
@@ -299,7 +383,7 @@ pub struct MatchRoundPlayerStatsDamageEvent {
     pub leg_shots: u32,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchRoundPlayerStatsEconomy {
     #[serde(rename = "loadout_value")]
     pub load_out_value: u32,
@@ -317,7 +401,7 @@ pub struct MatchRoundPlayerStatsEconomy {
     pub spent: u32,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchRoundPlayerStatsEconomyArmor {
     #[serde(rename = "id")]
     pub id: Uuid,
@@ -329,13 +413,13 @@ pub struct MatchRoundPlayerStatsEconomyArmor {
     pub assets: MatchRoundPlayerStatsEconomyArmorAssets,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchRoundPlayerStatsEconomyArmorAssets {
     #[serde(rename = "display_icon")]
     pub display_icon_url: Url,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchRoundPlayerStatsEconomyWeapon {
     #[serde(rename = "id")]
     pub id: Uuid,
@@ -347,7 +431,7 @@ pub struct MatchRoundPlayerStatsEconomyWeapon {
     pub assets: MatchRoundPlayerStatsEconomyWeaponAssets,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct MatchRoundPlayerStatsEconomyWeaponAssets {
     #[serde(rename = "display_icon")]
     pub display_icon_url: Url,

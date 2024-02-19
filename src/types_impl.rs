@@ -329,6 +329,43 @@ impl FromStr for OfferType {
     }
 }
 
+const PLANT_SITE_A: UniCase<&str> = UniCase::unicode("A");
+const PLANT_SITE_B: UniCase<&str> = UniCase::unicode("B");
+const PLANT_SITE_C: UniCase<&str> = UniCase::unicode("C");
+
+impl PlantSite {
+    pub fn to_str(&self) -> &'static str {
+        match *self {
+            PlantSite::A => PLANT_SITE_A.as_ref(),
+            PlantSite::B => PLANT_SITE_B.as_ref(),
+            PlantSite::C => PLANT_SITE_C.as_ref(),
+        }
+    }
+}
+
+impl fmt::Display for PlantSite {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        f.write_str(self.to_str())
+    }
+}
+
+impl FromStr for PlantSite {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let p = UniCase::unicode(s);
+        if p == PLANT_SITE_A {
+            Ok(PlantSite::A)
+        } else if p == PLANT_SITE_B {
+            Ok(PlantSite::B)
+        } else if p == PLANT_SITE_C {
+            Ok(PlantSite::C)
+        } else {
+            Err(format!("not a plant site: {s}"))
+        }
+    }
+}
+
 const PLATFORM_PC: UniCase<&str> = UniCase::unicode("PC");
 const PLATFORM_CONSOLE: UniCase<&str> = UniCase::unicode("Console");
 
@@ -432,6 +469,47 @@ impl FromStr for Region {
             Ok(Region::Korea)
         } else {
             Err(format!("not a region: {s}"))
+        }
+    }
+}
+
+const ROUND_END_TYPE_ELIMINATED: UniCase<&str> = UniCase::unicode("Eliminated");
+const ROUND_END_TYPE_BOMB_DETONATED: UniCase<&str> = UniCase::unicode("Bomb detonated");
+const ROUND_END_TYPE_BOMB_DEFUSED: UniCase<&str> = UniCase::unicode("Bomb defused");
+const ROUND_END_TYPE_ROUND_TIMER_EXPIRED: UniCase<&str> = UniCase::unicode("Round timer expired");
+
+impl RoundEndType {
+    pub fn to_str(&self) -> &'static str {
+        match *self {
+            RoundEndType::Eliminated => ROUND_END_TYPE_ELIMINATED.as_ref(),
+            RoundEndType::BombDetonated => ROUND_END_TYPE_BOMB_DETONATED.as_ref(),
+            RoundEndType::BombDefused => ROUND_END_TYPE_BOMB_DEFUSED.as_ref(),
+            RoundEndType::RoundTimerExpired => ROUND_END_TYPE_ROUND_TIMER_EXPIRED.as_ref(),
+        }
+    }
+}
+
+impl fmt::Display for RoundEndType {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        f.write_str(self.to_str())
+    }
+}
+
+impl FromStr for RoundEndType {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let r = UniCase::unicode(s);
+        if r == ROUND_END_TYPE_ELIMINATED {
+            Ok(RoundEndType::Eliminated)
+        } else if r == ROUND_END_TYPE_BOMB_DETONATED {
+            Ok(RoundEndType::BombDetonated)
+        } else if r == ROUND_END_TYPE_BOMB_DEFUSED {
+            Ok(RoundEndType::BombDefused)
+        } else if r == ROUND_END_TYPE_ROUND_TIMER_EXPIRED {
+            Ok(RoundEndType::RoundTimerExpired)
+        } else {
+            Err(format!("not a round end type: {s}"))
         }
     }
 }

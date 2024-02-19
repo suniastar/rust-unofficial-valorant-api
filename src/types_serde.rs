@@ -7,6 +7,10 @@ use serde::de::{Error, Visitor};
 
 use crate::types::*;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// ENUMS
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 struct AffinityVisitor;
 
 impl<'de> Visitor<'de> for AffinityVisitor {
@@ -111,6 +115,32 @@ impl<'de> Deserialize<'de> for OfferType {
     }
 }
 
+struct PlantSiteVisitor;
+
+impl<'de> Visitor<'de> for PlantSiteVisitor {
+    type Value = PlantSite;
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        formatter.write_str("a valid plant site")
+    }
+
+    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
+        PlantSite::from_str(v).map_err(|msg| E::custom(msg))
+    }
+}
+
+impl Serialize for PlantSite {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+        serializer.serialize_str(self.to_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for PlantSite {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
+        deserializer.deserialize_str(PlantSiteVisitor)
+    }
+}
+
 struct PlatformVisitor;
 
 impl<'de> Visitor<'de> for PlatformVisitor {
@@ -188,6 +218,36 @@ impl<'de> Deserialize<'de> for Region {
         deserializer.deserialize_str(RegionVisitor)
     }
 }
+
+struct RoundEndTypeVisitor;
+
+impl<'de> Visitor<'de> for RoundEndTypeVisitor {
+    type Value = RoundEndType;
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        formatter.write_str("a valid round end type")
+    }
+
+    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
+        RoundEndType::from_str(v).map_err(|msg| E::custom(msg))
+    }
+}
+
+impl Serialize for RoundEndType {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+        serializer.serialize_str(self.to_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for RoundEndType {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
+        deserializer.deserialize_str(RoundEndTypeVisitor)
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// OTHERS
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 struct NaiveDateVisitor;
 

@@ -15,6 +15,10 @@ fn from_str() {
 
     assert_eq!(PlayerTeam::Red, PlayerTeam::from_str("red").unwrap());
     assert_eq!(PlayerTeam::Blue, PlayerTeam::from_str("blue").unwrap());
+
+    assert!(PlayerTeam::from_str("not exist").is_err());
+    assert!(PlayerTeam::from_str("").is_err());
+    assert!(PlayerTeam::from_str("    ").is_err());
 }
 
 #[test]
@@ -30,4 +34,8 @@ fn deserialize() {
 
     assert_eq!(PlayerTeam::Red, serde_json::from_str("\"red\"").unwrap());
     assert_eq!(PlayerTeam::Blue, serde_json::from_str("\"blue\"").unwrap());
+
+    assert!(serde_json::from_str::<PlayerTeam>("\"not exist\"").is_err());
+    assert!(serde_json::from_str::<PlayerTeam>("\"\"").is_err());
+    assert!(serde_json::from_str::<PlayerTeam>("\"    \"").is_err());
 }
