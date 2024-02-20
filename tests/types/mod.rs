@@ -1,5 +1,6 @@
 mod affinity;
 mod card;
+mod coach;
 mod localized;
 mod map;
 mod map_coordinates;

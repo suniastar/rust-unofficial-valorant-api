@@ -120,6 +120,15 @@ pub struct Card {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct Coach {
+    #[serde(rename = "puuid")]
+    pub id: Uuid,
+
+    #[serde(rename = "team")]
+    pub team: PlayerTeam,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Localized<T> {
     #[serde(rename = "content")]
     pub content: T,
