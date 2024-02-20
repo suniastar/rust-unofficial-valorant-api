@@ -21,7 +21,7 @@ impl<'de> Visitor<'de> for AffinityVisitor {
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        Affinity::from_str(v).map_err(|msg| E::custom(msg))
+        Affinity::from_str(v).map_err(E::custom)
     }
 }
 
@@ -47,7 +47,7 @@ impl<'de> Visitor<'de> for MapVisitor {
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        Map::from_str(v).map_err(|msg| E::custom(msg))
+        Map::from_str(v).map_err(E::custom)
     }
 }
 
@@ -73,7 +73,7 @@ impl<'de> Visitor<'de> for ModeVisitor {
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        Mode::from_str(v).map_err(|msg| E::custom(msg))
+        Mode::from_str(v).map_err(E::custom)
     }
 }
 
@@ -99,7 +99,7 @@ impl<'de> Visitor<'de> for OfferTypeVisitor {
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        OfferType::from_str(v).map_err(|msg| E::custom(msg))
+        OfferType::from_str(v).map_err(E::custom)
     }
 }
 
@@ -125,7 +125,7 @@ impl<'de> Visitor<'de> for PlantSiteVisitor {
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        PlantSite::from_str(v).map_err(|msg| E::custom(msg))
+        PlantSite::from_str(v).map_err(E::custom)
     }
 }
 
@@ -151,7 +151,7 @@ impl<'de> Visitor<'de> for PlatformVisitor {
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        Platform::from_str(v).map_err(|msg| E::custom(msg))
+        Platform::from_str(v).map_err(E::custom)
     }
 }
 
@@ -177,7 +177,7 @@ impl<'de> Visitor<'de> for PlayerTeamVisitor {
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        PlayerTeam::from_str(v).map_err(|msg| E::custom(msg))
+        PlayerTeam::from_str(v).map_err(E::custom)
     }
 }
 
@@ -203,7 +203,7 @@ impl<'de> Visitor<'de> for RegionVisitor {
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        Region::from_str(v).map_err(|msg| E::custom(msg))
+        Region::from_str(v).map_err(E::custom)
     }
 }
 
@@ -229,7 +229,7 @@ impl<'de> Visitor<'de> for RoundEndTypeVisitor {
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        RoundEndType::from_str(v).map_err(|msg| E::custom(msg))
+        RoundEndType::from_str(v).map_err(E::custom)
     }
 }
 
@@ -249,53 +249,54 @@ impl<'de> Deserialize<'de> for RoundEndType {
 // OTHERS
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-struct NaiveDateVisitor;
-
-impl<'de> Visitor<'de> for NaiveDateVisitor {
-    type Value = NaiveDate;
-
-    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
-        formatter.write_str("a valid date like this: Jan  1 2024")
-    }
-
-    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        NaiveDate::parse_from_str(v, "%b %e %Y").map_err(|msg| E::custom(msg))
-    }
+pub fn serialize_color<S>(color: &u32, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer
+{
+    let value = 0x00FFFFFF_u32 & color;
+    serializer.serialize_str(format!("#{:x}", value).as_ref())
 }
 
-pub fn serialize_naive_date<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+pub fn deserialize_color<'de, D>(deserializer: D) -> Result<u32, D::Error>
+    where
+        D: Deserializer<'de>
+{
+    let value = String::deserialize(deserializer)?;
+    let color = u32::from_str_radix(&value[1..], 16).map_err(Error::custom)?;
+    Ok(0xFF000000_u32 | color)
+}
+
+pub fn serialize_naive_date<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer
+{
     serializer.serialize_str(date.format("%b %e %Y").to_string().as_str())
 }
 
-pub fn deserialize_naive_date<'de, D>(deserializer: D) -> Result<NaiveDate, D::Error> where D: Deserializer<'de> {
-    deserializer.deserialize_str(NaiveDateVisitor)
+pub fn deserialize_naive_date<'de, D>(deserializer: D) -> Result<NaiveDate, D::Error>
+    where
+        D: Deserializer<'de>
+{
+    let value = String::deserialize(deserializer)?;
+    let date = NaiveDate::parse_from_str(value.as_ref(), "%b %e %Y")
+        .map_err(Error::custom)?;
+    Ok(date)
 }
 
-struct DateTimeUtcVisitor;
-
-impl<'de> Visitor<'de> for DateTimeUtcVisitor {
-    type Value = DateTime<Utc>;
-
-    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
-        formatter.write_str("a valid unix timestamp")
-    }
-
-    fn visit_i64<E>(self, v: i64) -> Result<Self::Value, E> where E: Error {
-        match NaiveDateTime::from_timestamp_opt(v, 0) {
-            None => Err(E::custom("not a valid unix timestamp")),
-            Some(naive) => Ok(Utc.from_utc_datetime(&naive)),
-        }
-    }
-
-    fn visit_u64<E>(self, v: u64) -> Result<Self::Value, E> where E: Error {
-        self.visit_i64(v as i64)
-    }
-}
-
-pub fn serialize_date_time_utc<S>(dt: &DateTime<Utc>, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+pub fn serialize_date_time_utc<S>(dt: &DateTime<Utc>, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer
+{
     serializer.serialize_i64(dt.timestamp())
 }
 
-pub fn deserialize_date_time_utc<'de, D>(deserializer: D) -> Result<DateTime<Utc>, D::Error> where D: Deserializer<'de> {
-    deserializer.deserialize_i64(DateTimeUtcVisitor)
+pub fn deserialize_date_time_utc<'de, D>(deserializer: D) -> Result<DateTime<Utc>, D::Error>
+    where
+        D: Deserializer<'de>
+{
+    let value = i64::deserialize(deserializer)?;
+    match NaiveDateTime::from_timestamp_opt(value, 0) {
+        None => Err(Error::custom("not a valid unix timestamp")),
+        Some(naive) => Ok(Utc.from_utc_datetime(&naive)),
+    }
 }

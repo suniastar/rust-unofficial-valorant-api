@@ -507,6 +507,54 @@ pub struct StatusUpdate {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct Team {
+    #[serde(rename = "has_won")]
+    pub has_won: bool,
+
+    #[serde(rename = "rounds_won")]
+    pub rounds_won: u32,
+
+    #[serde(rename = "rounds_lost")]
+    pub rounds_lost: u32,
+
+    #[serde(rename = "roaster")]
+    pub roaster: TeamRoaster,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct TeamRoaster {
+    #[serde(rename = "members")]
+    pub members: [Uuid; 5],
+
+    #[serde(rename = "name")]
+    pub name: String,
+
+    #[serde(rename = "tag")]
+    pub tag: String,
+
+    #[serde(rename = "customization")]
+    pub customization: TeamRoasterCustomization,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct TeamRoasterCustomization {
+    #[serde(rename = "icon")]
+    pub icon: Uuid,
+
+    #[serde(rename = "image")]
+    pub image_url: Url,
+
+    #[serde(rename = "primary_color", serialize_with = "crate::types_serde::serialize_color", deserialize_with = "crate::types_serde::deserialize_color")]
+    pub color_primary: u32,
+
+    #[serde(rename = "secondary_color", serialize_with = "crate::types_serde::serialize_color", deserialize_with = "crate::types_serde::deserialize_color")]
+    pub color_secondary: u32,
+
+    #[serde(rename = "tertiary_color", serialize_with = "crate::types_serde::serialize_color", deserialize_with = "crate::types_serde::deserialize_color")]
+    pub color_tertiary: u32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct V1AccountData {
     #[serde(rename = "puuid")]
     pub id: Uuid,
