@@ -1,7 +1,7 @@
 use std::fmt::Formatter;
 use std::str::FromStr;
 
-use chrono::{DateTime, NaiveDate, NaiveDateTime, TimeZone, Utc};
+use chrono::{DateTime, Duration, NaiveDate, NaiveDateTime, TimeZone, Utc};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde::de::{Error, Visitor};
 
@@ -141,32 +141,6 @@ impl<'de> Deserialize<'de> for PlantSite {
     }
 }
 
-struct PlatformVisitor;
-
-impl<'de> Visitor<'de> for PlatformVisitor {
-    type Value = Platform;
-
-    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
-        formatter.write_str("a valid platform")
-    }
-
-    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
-        Platform::from_str(v).map_err(E::custom)
-    }
-}
-
-impl Serialize for Platform {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
-        serializer.serialize_str(self.to_str())
-    }
-}
-
-impl<'de> Deserialize<'de> for Platform {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
-        deserializer.deserialize_str(PlatformVisitor)
-    }
-}
-
 struct PlayerTeamVisitor;
 
 impl<'de> Visitor<'de> for PlayerTeamVisitor {
@@ -190,6 +164,32 @@ impl Serialize for PlayerTeam {
 impl<'de> Deserialize<'de> for PlayerTeam {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
         deserializer.deserialize_str(PlayerTeamVisitor)
+    }
+}
+
+struct PlatformTypeVisitor;
+
+impl<'de> Visitor<'de> for PlatformTypeVisitor {
+    type Value = PlatformType;
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        formatter.write_str("a valid platform")
+    }
+
+    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
+        PlatformType::from_str(v).map_err(E::custom)
+    }
+}
+
+impl Serialize for PlatformType {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+        serializer.serialize_str(self.to_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for PlatformType {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
+        deserializer.deserialize_str(PlatformTypeVisitor)
     }
 }
 
@@ -264,6 +264,39 @@ pub fn deserialize_color<'de, D>(deserializer: D) -> Result<u32, D::Error>
     let value = String::deserialize(deserializer)?;
     let color = u32::from_str_radix(&value[1..], 16).map_err(Error::custom)?;
     Ok(0xFF000000_u32 | color)
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+struct SessionPlaytime {
+    #[serde(rename = "minutes")]
+    pub minutes: u32,
+
+    #[serde(rename = "seconds")]
+    pub seconds: u32,
+
+    #[serde(rename = "milliseconds")]
+    pub milliseconds: u64,
+}
+
+pub fn serialize_playtime<S>(playtime: &Duration, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer
+{
+    let s = SessionPlaytime {
+        minutes: playtime.num_minutes() as u32,
+        seconds: playtime.num_seconds() as u32,
+        milliseconds: playtime.num_milliseconds() as u64,
+    };
+    s.serialize(serializer)
+}
+
+pub fn deserialize_playtime<'de, D>(deserializer: D) -> Result<Duration, D::Error>
+    where
+        D: Deserializer<'de>
+{
+    let value = SessionPlaytime::deserialize(deserializer)?;
+    let duration = Duration::milliseconds(value.milliseconds as i64);
+    Ok(duration)
 }
 
 pub fn serialize_naive_date<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error>

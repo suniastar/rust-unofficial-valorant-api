@@ -1,4 +1,4 @@
-use chrono::{DateTime, FixedOffset, NaiveDate, Utc};
+use chrono::{DateTime, Duration, FixedOffset, NaiveDate, Utc};
 use reqwest::Url;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -71,16 +71,17 @@ pub enum PlantSite {
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
-pub enum Platform {
-    PC,
-    Console,
+pub enum PlayerTeam {
+    Neutral,
+    Red,
+    Blue,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
-pub enum PlayerTeam {
-    Red,
-    Blue,
+pub enum PlatformType {
+    PC,
+    Console,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
@@ -450,6 +451,39 @@ pub struct MatchRoundPlayerStatsEconomyWeaponAssets {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct Observer {
+    #[serde(rename = "puuid")]
+    pub id: Uuid,
+
+    #[serde(rename = "name")]
+    pub name: String,
+
+    #[serde(rename = "tag")]
+    pub tag: String,
+
+    #[serde(rename = "platform")]
+    pub platform: Platform,
+
+    #[serde(rename = "session_playtime", serialize_with = "crate::types_serde::serialize_playtime", deserialize_with = "crate::types_serde::deserialize_playtime")]
+    pub playtime: Duration,
+
+    #[serde(rename = "team")]
+    pub team: PlayerTeam,
+
+    #[serde(rename = "level")]
+    pub level: u32,
+
+    #[serde(rename = "player_card")]
+    pub card_id: Uuid,
+
+    #[serde(rename = "player_title")]
+    pub title_id: Uuid,
+
+    #[serde(rename = "party_id")]
+    pub party_id: Uuid,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct OfferTier {
     #[serde(rename = "name")]
     pub name: String,
@@ -459,6 +493,24 @@ pub struct OfferTier {
 
     #[serde(rename = "icon")]
     pub icon_url: Url,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct Platform {
+    #[serde(rename = "type")]
+    pub type_: PlatformType,
+
+    #[serde(rename = "os")]
+    pub os: PlatformOs,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlatformOs {
+    #[serde(rename = "name")]
+    pub name: String,
+
+    #[serde(rename = "version")]
+    pub version: String,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]

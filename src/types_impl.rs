@@ -366,45 +366,14 @@ impl FromStr for PlantSite {
     }
 }
 
-const PLATFORM_PC: UniCase<&str> = UniCase::unicode("PC");
-const PLATFORM_CONSOLE: UniCase<&str> = UniCase::unicode("Console");
-
-impl Platform {
-    pub fn to_str(&self) -> &'static str {
-        match *self {
-            Platform::PC => PLATFORM_PC.as_ref(),
-            Platform::Console => PLATFORM_CONSOLE.as_ref(),
-        }
-    }
-}
-
-impl fmt::Display for Platform {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        f.write_str(self.to_str())
-    }
-}
-
-impl FromStr for Platform {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let p = UniCase::unicode(s);
-        if p == PLATFORM_PC {
-            Ok(Platform::PC)
-        } else if p == PLATFORM_CONSOLE {
-            Ok(Platform::Console)
-        } else {
-            Err(format!("not a platform: {s}"))
-        }
-    }
-}
-
+const PLAYER_TEAM_NEUTRAL: UniCase<&str> = UniCase::unicode("Neutral");
 const PLAYER_TEAM_RED: UniCase<&str> = UniCase::unicode("Red");
 const PLAYER_TEAM_BLUE: UniCase<&str> = UniCase::unicode("Blue");
 
 impl PlayerTeam {
     pub fn to_str(&self) -> &'static str {
         match *self {
+            PlayerTeam::Neutral => PLAYER_TEAM_NEUTRAL.as_ref(),
             PlayerTeam::Red => PLAYER_TEAM_RED.as_ref(),
             PlayerTeam::Blue => PLAYER_TEAM_BLUE.as_ref(),
         }
@@ -422,12 +391,47 @@ impl FromStr for PlayerTeam {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let p = UniCase::unicode(s);
-        if p == PLAYER_TEAM_RED {
+        if p == PLAYER_TEAM_NEUTRAL {
+            Ok(PlayerTeam::Neutral)
+        } else if p == PLAYER_TEAM_RED {
             Ok(PlayerTeam::Red)
         } else if p == PLAYER_TEAM_BLUE {
             Ok(PlayerTeam::Blue)
         } else {
             Err(format!("not a player team: {s}"))
+        }
+    }
+}
+
+const PLATFORM_TYPE_PC: UniCase<&str> = UniCase::unicode("PC");
+const PLATFORM_TYPE_CONSOLE: UniCase<&str> = UniCase::unicode("Console");
+
+impl PlatformType {
+    pub fn to_str(&self) -> &'static str {
+        match *self {
+            PlatformType::PC => PLATFORM_TYPE_PC.as_ref(),
+            PlatformType::Console => PLATFORM_TYPE_CONSOLE.as_ref(),
+        }
+    }
+}
+
+impl fmt::Display for PlatformType {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        f.write_str(self.to_str())
+    }
+}
+
+impl FromStr for PlatformType {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let p = UniCase::unicode(s);
+        if p == PLATFORM_TYPE_PC {
+            Ok(PlatformType::PC)
+        } else if p == PLATFORM_TYPE_CONSOLE {
+            Ok(PlatformType::Console)
+        } else {
+            Err(format!("not a platform: {s}"))
         }
     }
 }
