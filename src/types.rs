@@ -20,6 +20,35 @@ pub enum Affinity {
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
+pub enum Character {
+    Brimstone = 1,
+    Viper = 2,
+    Omen = 3,
+    Killjoy = 4,
+    Cypher = 5,
+    Sova = 6,
+    Sage = 7,
+    // Agent 8 does not exist (yet)
+    Phoenix = 9,
+    Jett = 10,
+    Reyna = 11,
+    Raze = 12,
+    Breach = 13,
+    Skye = 14,
+    Yoru = 15,
+    Astra = 16,
+    KAYO = 17,
+    Chamber = 18,
+    Neon = 19,
+    Fade = 20,
+    Harbor = 21,
+    Gekko = 22,
+    Deadlock = 23,
+    Iso = 24,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum Map {
     Ascent,
     Bind,
@@ -511,6 +540,183 @@ pub struct PlatformOs {
 
     #[serde(rename = "version")]
     pub version: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Player {
+    #[serde(rename = "puuid")]
+    pub id: Uuid,
+
+    #[serde(rename = "name")]
+    pub name: String,
+
+    #[serde(rename = "tag")]
+    pub tag: String,
+
+    #[serde(rename = "team")]
+    pub team: PlayerTeam,
+
+    #[serde(rename = "level")]
+    pub level: u32,
+
+    #[serde(rename = "character")]
+    pub character: Character,
+
+    #[serde(rename = "currenttier")]
+    pub current_tier: u32,
+
+    #[serde(rename = "currenttier_patched")]
+    pub current_tier_patched: String,
+
+    #[serde(rename = "player_card")]
+    pub card_id: Uuid,
+
+    #[serde(rename = "player_title")]
+    pub title_id: Uuid,
+
+    #[serde(rename = "party_id")]
+    pub party_id: Uuid,
+
+    #[serde(rename = "session_playtime", serialize_with = "crate::types_serde::serialize_playtime", deserialize_with = "crate::types_serde::deserialize_playtime")]
+    pub playtime: Duration,
+
+    #[serde(rename = "assets")]
+    pub assets: PlayerAssets,
+
+    #[serde(rename = "behaviour")]
+    pub behaviour: PlayerBehavior,
+
+    #[serde(rename = "platform")]
+    pub platform: Platform,
+
+    #[serde(rename = "ability_casts")]
+    pub ability_casts: PlayerAbilityCasts,
+
+    #[serde(rename = "stats")]
+    pub stats: PlayerStats,
+
+    #[serde(rename = "economy")]
+    pub economy: PlayerEconomy,
+
+    #[serde(rename = "damage_made")]
+    pub damage_made: u32,
+
+    #[serde(rename = "damage_received")]
+    pub damage_received: u32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PlayerAbilityCasts {
+    #[serde(rename = "c_cast")]
+    pub c: u32,
+
+    #[serde(rename = "q_cast")]
+    pub q: u32,
+
+    #[serde(rename = "e_cast")]
+    pub e: u32,
+
+    #[serde(rename = "x_cast")]
+    pub x: u32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlayerAssets {
+    #[serde(rename = "card")]
+    pub card: PlayerAssetsCard,
+
+    #[serde(rename = "agent")]
+    pub agent: PlayerAssetsAgent,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlayerAssetsAgent {
+    #[serde(rename = "small")]
+    pub small_url: Url,
+
+    #[serde(rename = "full")]
+    pub full_url: Url,
+
+    #[serde(rename = "bust")]
+    pub bust_url: Url,
+
+    #[serde(rename = "killfeed")]
+    pub kill_feed_url: Url,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlayerAssetsCard {
+    #[serde(rename = "small")]
+    pub small_url: Url,
+
+    #[serde(rename = "large")]
+    pub large_url: Url,
+
+    #[serde(rename = "wide")]
+    pub wide_url: Url,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlayerBehavior {
+    #[serde(rename = "afk_rounds")]
+    pub afk_rounds: u32,
+
+    #[serde(rename = "friendly_fire")]
+    pub friendly_fire: PlayerBehaviorFriendlyFire,
+
+    #[serde(rename = "rounds_in_spawn")]
+    pub rounds_in_spawn: u32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlayerBehaviorFriendlyFire {
+    #[serde(rename = "incoming")]
+    pub incoming: u32,
+
+    #[serde(rename = "outgoing")]
+    pub outgoing: u32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlayerEconomy {
+    #[serde(rename = "spent")]
+    pub spent: PlayerEconomyCredits,
+
+    #[serde(rename = "loadout_value")]
+    pub load_out_value: PlayerEconomyCredits,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlayerEconomyCredits {
+    #[serde(rename = "overall")]
+    pub overall: u32,
+
+    #[serde(rename = "average")]
+    pub average: u32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlayerStats {
+    #[serde(rename = "score")]
+    pub score: u32,
+
+    #[serde(rename = "kills")]
+    pub kills: u32,
+
+    #[serde(rename = "deaths")]
+    pub deaths: u32,
+
+    #[serde(rename = "assists")]
+    pub assists: u32,
+
+    #[serde(rename = "bodyshots")]
+    pub body_shots: u32,
+
+    #[serde(rename = "headshots")]
+    pub head_shots: u32,
+
+    #[serde(rename = "legshots")]
+    pub leg_shots: u32,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]

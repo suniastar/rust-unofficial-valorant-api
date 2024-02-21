@@ -60,6 +60,123 @@ impl FromStr for Affinity {
     }
 }
 
+const CHARACTER_BRIMSTONE: UniCase<&str> = UniCase::unicode("Brimstone");
+const CHARACTER_VIPER: UniCase<&str> = UniCase::unicode("Viper");
+const CHARACTER_OMEN: UniCase<&str> = UniCase::unicode("Omen");
+const CHARACTER_KILLJOY: UniCase<&str> = UniCase::unicode("Killjoy");
+const CHARACTER_CYPHER: UniCase<&str> = UniCase::unicode("Cypher");
+const CHARACTER_SOVA: UniCase<&str> = UniCase::unicode("Sova");
+const CHARACTER_SAGE: UniCase<&str> = UniCase::unicode("Sage");
+const CHARACTER_PHOENIX: UniCase<&str> = UniCase::unicode("Phoenix");
+const CHARACTER_JETT: UniCase<&str> = UniCase::unicode("Jett");
+const CHARACTER_REYNA: UniCase<&str> = UniCase::unicode("Reyna");
+const CHARACTER_RAZE: UniCase<&str> = UniCase::unicode("Raze");
+const CHARACTER_BREACH: UniCase<&str> = UniCase::unicode("Breach");
+const CHARACTER_SKYE: UniCase<&str> = UniCase::unicode("Skye");
+const CHARACTER_YORU: UniCase<&str> = UniCase::unicode("Yoru");
+const CHARACTER_ASTRA: UniCase<&str> = UniCase::unicode("Astra");
+const CHARACTER_KAYO: UniCase<&str> = UniCase::unicode("KAY/O");
+const CHARACTER_CHAMBER: UniCase<&str> = UniCase::unicode("Chamber");
+const CHARACTER_NEON: UniCase<&str> = UniCase::unicode("Neon");
+const CHARACTER_FADE: UniCase<&str> = UniCase::unicode("Fade");
+const CHARACTER_HARBOR: UniCase<&str> = UniCase::unicode("Harbor");
+const CHARACTER_GEKKO: UniCase<&str> = UniCase::unicode("Gekko");
+const CHARACTER_DEADLOCK: UniCase<&str> = UniCase::unicode("Deadlock");
+const CHARACTER_ISO: UniCase<&str> = UniCase::unicode("Iso");
+
+impl Character {
+    pub fn to_str(&self) -> &'static str {
+        match *self {
+            Character::Brimstone => CHARACTER_BRIMSTONE.as_ref(),
+            Character::Viper => CHARACTER_VIPER.as_ref(),
+            Character::Omen => CHARACTER_OMEN.as_ref(),
+            Character::Killjoy => CHARACTER_KILLJOY.as_ref(),
+            Character::Cypher => CHARACTER_CYPHER.as_ref(),
+            Character::Sova => CHARACTER_SOVA.as_ref(),
+            Character::Sage => CHARACTER_SAGE.as_ref(),
+            Character::Phoenix => CHARACTER_PHOENIX.as_ref(),
+            Character::Jett => CHARACTER_JETT.as_ref(),
+            Character::Reyna => CHARACTER_REYNA.as_ref(),
+            Character::Raze => CHARACTER_RAZE.as_ref(),
+            Character::Breach => CHARACTER_BREACH.as_ref(),
+            Character::Skye => CHARACTER_SKYE.as_ref(),
+            Character::Yoru => CHARACTER_YORU.as_ref(),
+            Character::Astra => CHARACTER_ASTRA.as_ref(),
+            Character::KAYO => CHARACTER_KAYO.as_ref(),
+            Character::Chamber => CHARACTER_CHAMBER.as_ref(),
+            Character::Neon => CHARACTER_NEON.as_ref(),
+            Character::Fade => CHARACTER_FADE.as_ref(),
+            Character::Harbor => CHARACTER_HARBOR.as_ref(),
+            Character::Gekko => CHARACTER_GEKKO.as_ref(),
+            Character::Deadlock => CHARACTER_DEADLOCK.as_ref(),
+            Character::Iso => CHARACTER_ISO.as_ref(),
+        }
+    }
+}
+
+impl fmt::Display for Character {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        f.write_str(self.to_str())
+    }
+}
+
+impl FromStr for Character {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let c = UniCase::unicode(s);
+        if c == CHARACTER_BRIMSTONE {
+            Ok(Character::Brimstone)
+        } else if c == CHARACTER_VIPER {
+            Ok(Character::Viper)
+        } else if c == CHARACTER_OMEN {
+            Ok(Character::Omen)
+        } else if c == CHARACTER_KILLJOY {
+            Ok(Character::Killjoy)
+        } else if c == CHARACTER_CYPHER {
+            Ok(Character::Cypher)
+        } else if c == CHARACTER_SOVA {
+            Ok(Character::Sova)
+        } else if c == CHARACTER_SAGE {
+            Ok(Character::Sage)
+        } else if c == CHARACTER_PHOENIX {
+            Ok(Character::Phoenix)
+        } else if c == CHARACTER_JETT {
+            Ok(Character::Jett)
+        } else if c == CHARACTER_REYNA {
+            Ok(Character::Reyna)
+        } else if c == CHARACTER_RAZE {
+            Ok(Character::Raze)
+        } else if c == CHARACTER_BREACH {
+            Ok(Character::Breach)
+        } else if c == CHARACTER_SKYE {
+            Ok(Character::Skye)
+        } else if c == CHARACTER_YORU {
+            Ok(Character::Yoru)
+        } else if c == CHARACTER_ASTRA {
+            Ok(Character::Astra)
+        } else if c == CHARACTER_KAYO {
+            Ok(Character::KAYO)
+        } else if c == CHARACTER_CHAMBER {
+            Ok(Character::Chamber)
+        } else if c == CHARACTER_NEON {
+            Ok(Character::Neon)
+        } else if c == CHARACTER_FADE {
+            Ok(Character::Fade)
+        } else if c == CHARACTER_HARBOR {
+            Ok(Character::Harbor)
+        } else if c == CHARACTER_GEKKO {
+            Ok(Character::Gekko)
+        } else if c == CHARACTER_DEADLOCK {
+            Ok(Character::Deadlock)
+        } else if c == CHARACTER_ISO {
+            Ok(Character::Iso)
+        } else {
+            Err(format!("not a character: {s}"))
+        }
+    }
+}
+
 const MAP_ASCENT: UniCase<&str> = UniCase::unicode("Ascent");
 const MAP_BIND: UniCase<&str> = UniCase::unicode("Bind");
 const MAP_BREEZE: UniCase<&str> = UniCase::unicode("Breeze");

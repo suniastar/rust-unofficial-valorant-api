@@ -37,6 +37,32 @@ impl<'de> Deserialize<'de> for Affinity {
     }
 }
 
+struct CharacterVisitor;
+
+impl<'de> Visitor<'de> for CharacterVisitor {
+    type Value = Character;
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        formatter.write_str("a valid character")
+    }
+
+    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E> where E: Error {
+        Character::from_str(v).map_err(E::custom)
+    }
+}
+
+impl Serialize for Character {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+        serializer.serialize_str(self.to_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for Character {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
+        deserializer.deserialize_str(CharacterVisitor)
+    }
+}
+
 struct MapVisitor;
 
 impl<'de> Visitor<'de> for MapVisitor {
