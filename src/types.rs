@@ -69,6 +69,7 @@ pub enum Map {
 #[non_exhaustive]
 pub enum Mode {
     Competitive,
+    Premier,
     Unrated,
     Deathmatch,
     TeamDeathmatch,
@@ -261,6 +262,69 @@ pub struct MatchKillWeaponAssets {
 
     #[serde(rename = "killfeed_icon")]
     pub kill_feed_icon_url: Url,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Deserialize)]
+pub struct MatchMetadata {
+    #[serde(rename = "matchid")]
+    pub id: Uuid,
+
+    #[serde(rename = "map")]
+    pub map: Map,
+
+    #[serde(rename = "game_version")]
+    pub game_version: String,
+
+    #[serde(rename = "game_length", serialize_with = "crate::types_serde::serialize_duration", deserialize_with = "crate::types_serde::deserialize_duration")]
+    pub game_length: Duration,
+
+    #[serde(rename = "game_start", serialize_with = "crate::types_serde::serialize_date_time_utc", deserialize_with = "crate::types_serde::deserialize_date_time_utc")]
+    pub game_start: DateTime<Utc>,
+
+    #[serde(rename = "rounds_played")]
+    pub rounds_played: u32,
+
+    #[serde(rename = "mode_id")]
+    pub mode: Mode,
+
+    #[serde(rename = "queue")]
+    pub queue: String,
+
+    #[serde(rename = "session_id")]
+    pub session_id: Uuid,
+
+    #[serde(rename = "platform")]
+    pub platform: PlatformType,
+
+    #[serde(rename = "premier_info")]
+    pub premier_info: MatchMetadataPremierInfo,
+
+    #[serde(rename = "region")]
+    pub region: Region,
+
+    #[serde(rename = "cluster")]
+    pub cluster: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct MatchMetadataPremierInfo {
+    #[serde(rename = "tournament_id")]
+    pub tournament_id: Uuid,
+
+    #[serde(rename = "matchup_id")]
+    pub matchup_id: Uuid,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct MatchPlayers {
+    #[serde(rename = "all_players")]
+    pub all: Vec<Player>,
+
+    #[serde(rename = "red")]
+    pub red: Vec<Player>,
+
+    #[serde(rename = "blue")]
+    pub blue: Vec<Player>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -542,7 +606,7 @@ pub struct PlatformOs {
     pub version: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Player {
     #[serde(rename = "puuid")]
     pub id: Uuid,
@@ -605,7 +669,7 @@ pub struct Player {
     pub damage_received: u32,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct PlayerAbilityCasts {
     #[serde(rename = "c_cast")]
     pub c: u32,
@@ -737,7 +801,7 @@ pub struct Status {
     pub incident_severity: Option<String>,
 
     #[serde(rename = "maintenance_status")]
-    pub maintenance_status: String,
+    pub maintenance_status: Option<String>,
 
     #[serde(rename = "titles")]
     pub titles: Vec<Localized<String>>,
@@ -791,7 +855,7 @@ pub struct Team {
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct TeamRoaster {
     #[serde(rename = "members")]
-    pub members: [Uuid; 5],
+    pub members: Vec<Uuid>,
 
     #[serde(rename = "name")]
     pub name: String,

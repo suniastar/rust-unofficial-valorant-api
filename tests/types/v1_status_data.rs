@@ -26,7 +26,7 @@ fn serialize() {
             ),
             archived: None,
             incident_severity: Some(String::from("warning")),
-            maintenance_status: String::from("in_progress"),
+            maintenance_status: Some(String::from("in_progress")),
             titles: vec![
                 Localized {
                     content: String::from("Emergency Maintenance In Progress"),
@@ -81,7 +81,7 @@ fn serialize() {
             ),
             archived: None,
             incident_severity: Some(String::from("warning")),
-            maintenance_status: String::from("in_progress"),
+            maintenance_status: Some(String::from("in_progress")),
             titles: vec![
                 Localized {
                     content: String::from("Emergency Maintenance In Progress"),
@@ -157,7 +157,7 @@ fn deserialize() {
             ),
             archived: None,
             incident_severity: Some(String::from("warning")),
-            maintenance_status: String::from("in_progress"),
+            maintenance_status: Some(String::from("in_progress")),
             titles: vec![
                 Localized {
                     content: String::from("Emergency Maintenance In Progress"),
@@ -212,7 +212,7 @@ fn deserialize() {
             ),
             archived: None,
             incident_severity: Some(String::from("warning")),
-            maintenance_status: String::from("in_progress"),
+            maintenance_status: Some(String::from("in_progress")),
             titles: vec![
                 Localized {
                     content: String::from("Emergency Maintenance In Progress"),

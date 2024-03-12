@@ -1,0 +1,230 @@
+{
+  "status": 200,
+  "region": "eu",
+  "data": {
+    "maintenances": [],
+    "incidents": [
+      {
+        "id": 8082,
+        "created_at": "2024-02-21T16:21:56.676828+00:00",
+        "updated_at": "2024-02-26T00:27:09.462588+00:00",
+        "archive_at": null,
+        "titles": [
+          {
+            "locale": "en_US",
+            "content": "Payment Issues"
+          },
+          {
+            "locale": "ru_RU",
+            "content": "Проблемы с оплатой\r\n"
+          }
+        ],
+        "updates": [
+          {
+            "id": 14057,
+            "created_at": "2024-02-21T16:21:56.683227+00:00",
+            "updated_at": "2024-02-21T16:21:00+00:00",
+            "publish": true,
+            "author": "Riot Games",
+            "translations": [
+              {
+                "locale": "en_US",
+                "content": "We're aware of a problem that's causing VP purchases to fail and are working on a fix."
+              },
+              {
+                "locale": "ru_RU",
+                "content": "Мы знаем о проблеме, из-за которой не удается приобрести VP, и работаем над ее решением."
+              }
+            ],
+            "publish_locations": [
+              "game",
+              "riotclient",
+              "riotstatus"
+            ]
+          }
+        ],
+        "platforms": [
+          "windows",
+          "macos",
+          "android",
+          "ios"
+        ],
+        "maintenance_status": null,
+        "incident_severity": "info"
+      },
+      {
+        "id": 8148,
+        "created_at": "2024-03-01T22:37:43.103270+00:00",
+        "updated_at": "2024-03-03T23:49:48.652038+00:00",
+        "archive_at": "2024-03-06T02:30:00+00:00",
+        "titles": [
+          {
+            "locale": "en_US",
+            "content": "Competitive Queue is Ending"
+          },
+          {
+            "locale": "ar_AE",
+            "content": "يوشك طابور اللعب التنافسي على الانتهاء"
+          },
+          {
+            "locale": "de_DE",
+            "content": "Gewertete Warteschlange endet"
+          },
+          {
+            "locale": "en_SG",
+            "content": "Competitive Queue is Ending"
+          },
+          {
+            "locale": "es_ES",
+            "content": "La cola competitiva se cerrará pronto."
+          },
+          {
+            "locale": "es_MX",
+            "content": "El modo competitivo está por terminar"
+          },
+          {
+            "locale": "fr_FR",
+            "content": "La file classée va bientôt fermer"
+          },
+          {
+            "locale": "id_ID",
+            "content": "Antrean Kompetitif Akan Berakhir"
+          },
+          {
+            "locale": "it_IT",
+            "content": "La coda competitiva sta per terminare"
+          },
+          {
+            "locale": "ja_JP",
+            "content": "コンペティティブがまもなく終了"
+          },
+          {
+            "locale": "ko_KR",
+            "content": "경쟁전 종료 예정"
+          },
+          {
+            "locale": "pl_PL",
+            "content": "Kolejka rankingowa zostanie zamknięta"
+          },
+          {
+            "locale": "pt_BR",
+            "content": "A fila do Competitivo vai fechar logo"
+          },
+          {
+            "locale": "ru_RU",
+            "content": "Рейтинговые игры завершаются"
+          },
+          {
+            "locale": "th_TH",
+            "content": "คิวการแข่งขันกำลังจะจบลง"
+          },
+          {
+            "locale": "tr_TR",
+            "content": "Rekabet Modu Sona Eriyor"
+          },
+          {
+            "locale": "vi_VN",
+            "content": "Hàng Chờ Đấu Xếp Hạng sắp kết thúc"
+          },
+          {
+            "locale": "zh_TW",
+            "content": "競技模式即將關閉"
+          }
+        ],
+        "updates": [
+          {
+            "id": 14182,
+            "created_at": "2024-03-01T22:37:43.153783+00:00",
+            "updated_at": "2024-03-01T22:37:00+00:00",
+            "publish": true,
+            "author": "Riot Games",
+            "translations": [
+              {
+                "locale": "en_US",
+                "content": "This Act's Competitive queue is ending soon. Check your Act Rank tab for specific times."
+              },
+              {
+                "locale": "ar_AE",
+                "content": "سينتهي طابور اللعب التنافسي لهذا المشهد قريبًا. راجع نافذة تصنيف المشهد الخاص بك للاطلاع على المواعيد المحددة."
+              },
+              {
+                "locale": "de_DE",
+                "content": "Die gewertete Warteschlange dieses Akts endet bald. Schau im Tab „Akt-Rang“ die genauen Termine nach."
+              },
+              {
+                "locale": "en_SG",
+                "content": "This Act's Competitive queue is ending soon. Check your Act Rank tab for specific times."
+              },
+              {
+                "locale": "es_ES",
+                "content": "La cola competitiva de este acto se cerrará pronto. Echa un vistazo a la pestaña del rango de acto para conocer la fecha exacta."
+              },
+              {
+                "locale": "es_MX",
+                "content": "El modo competitivo de este acto está por terminar. Revisa la pestaña de rango de acto para consultar el horario."
+              },
+              {
+                "locale": "fr_FR",
+                "content": "La file classée de l'acte en cours sera bientôt close. Consultez votre onglet Rang d'acte pour connaître l'heure exacte de fermeture."
+              },
+              {
+                "locale": "id_ID",
+                "content": "Antrean Competitive untuk Act ini akan segera berakhir. Periksa tab Rank Act kamu untuk mengetahui waktu tepatnya."
+              },
+              {
+                "locale": "it_IT",
+                "content": "La coda competitiva di quest'Atto sta per terminare. Consulta la scheda Grado Atto della tua Carriera per conoscere le date precise."
+              },
+              {
+                "locale": "ja_JP",
+                "content": "現 Act のコンペティティブがまもなく終了します。詳細な日程は「Act ランク」タブからご確認ください。"
+              },
+              {
+                "locale": "ko_KR",
+                "content": "이번 액트의 경쟁전이 곧 종료됩니다. 정확한 시간은 액트 랭크 탭에서 확인할 수 있습니다."
+              },
+              {
+                "locale": "pl_PL",
+                "content": "Kolejka rankingowa tego aktu wkrótce zostanie zamknięta. Zajrzyj do zakładki z rangą aktu, aby poznać konkretne terminy."
+              },
+              {
+                "locale": "pt_BR",
+                "content": "A fila do Competitivo deste Ato vai fechar em breve. Verifique os horários específicos na aba do seu Ranque de Ato."
+              },
+              {
+                "locale": "ru_RU",
+                "content": "Рейтинговые игры этого акта близятся к завершению. Точное время окончания можно посмотреть в ранге акта."
+              },
+              {
+                "locale": "th_TH",
+                "content": "คิวการแข่งขันจัดอันดับของ Act นี้กำลังจะจบลง ตรวจสอบแถบแรงค์ Act สำหรับเวลาที่แน่นอน"
+              },
+              {
+                "locale": "tr_TR",
+                "content": "Bu kısımdaki rekabet modu yakında sona eriyor. Tam tarihleri görmek için Kısım Kademesi sekmesine göz at."
+              },
+              {
+                "locale": "vi_VN",
+                "content": "Hàng chờ Đấu Xếp Hạng của Phần này sắp kết thúc. Hãy xem trong mục Xếp Hạng Phần của bạn để biết thời gian cụ thể."
+              },
+              {
+                "locale": "zh_TW",
+                "content": "此章的競技模式即將關閉，請至章牌階頁面查看確切結束時間。"
+              }
+            ],
+            "publish_locations": [
+              "game",
+              "riotclient",
+              "riotstatus"
+            ]
+          }
+        ],
+        "platforms": [
+          "windows"
+        ],
+        "maintenance_status": null,
+        "incident_severity": "warning"
+      }
+    ]
+  }
+}

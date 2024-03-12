@@ -1,0 +1,231 @@
+{
+  "status": 200,
+  "region": "eu",
+  "data": {
+    "maintenances": [
+      {
+        "id": 8183,
+        "created_at": "2024-03-05T14:25:07.688150+00:00",
+        "updated_at": null,
+        "archive_at": null,
+        "titles": [
+          {
+            "locale": "en_US",
+            "content": "Queues Disabled for Maintenance"
+          },
+          {
+            "locale": "ar_AE",
+            "content": "الطوابير معطلة لإجراء الصيانة"
+          },
+          {
+            "locale": "de_DE",
+            "content": "Spiel aufgrund von Wartungsarbeiten deaktiviert"
+          },
+          {
+            "locale": "en_SG",
+            "content": "Queues Disabled for Maintenance"
+          },
+          {
+            "locale": "es_ES",
+            "content": "Colas desactivadas por mantenimiento"
+          },
+          {
+            "locale": "es_MX",
+            "content": "Colas inhabilitadas debido a mantenimiento"
+          },
+          {
+            "locale": "fr_FR",
+            "content": "Files désactivées pour maintenance"
+          },
+          {
+            "locale": "id_ID",
+            "content": "Antrean Dinonaktifkan untuk maintenance"
+          },
+          {
+            "locale": "it_IT",
+            "content": "Code disattivate per manutenzione"
+          },
+          {
+            "locale": "ja_JP",
+            "content": "キューは現在無効化されています"
+          },
+          {
+            "locale": "ko_KR",
+            "content": "점검으로 인한 대전 비활성화"
+          },
+          {
+            "locale": "pl_PL",
+            "content": "Kolejki wyłączone z powodu przerwy technicznej"
+          },
+          {
+            "locale": "pt_BR",
+            "content": "Filas desativadas para manutenção"
+          },
+          {
+            "locale": "ru_RU",
+            "content": "Очереди временно отключены"
+          },
+          {
+            "locale": "th_TH",
+            "content": "ไม่สามารถใช้งานคิวได้เนื่องจากการปิดปรับปรุงระบบ"
+          },
+          {
+            "locale": "tr_TR",
+            "content": "Sıralar Bakım Çalışması Nedeniyle Devre Dışı"
+          },
+          {
+            "locale": "vi_VN",
+            "content": "Hàng Chờ Bị Vô Hiệu Hóa Để Bảo Trì"
+          },
+          {
+            "locale": "zh_TW",
+            "content": "列隊功能維護中"
+          }
+        ],
+        "updates": [
+          {
+            "id": 14267,
+            "created_at": "2024-03-05T14:25:07.750298+00:00",
+            "updated_at": "2024-03-06T03:30:00+00:00",
+            "publish": true,
+            "author": "Riot Games",
+            "translations": [
+              {
+                "locale": "en_US",
+                "content": "Queues are temporarily unavailable while we perform scheduled maintenance."
+              },
+              {
+                "locale": "ar_AE",
+                "content": "الطوابير غير متاحة مؤقتًا ريثما نجري عملية صيانة مقررة."
+              },
+              {
+                "locale": "de_DE",
+                "content": "Aufgrund von geplanten Wartungsarbeiten ist das Spiel vorübergehend nicht verfügbar."
+              },
+              {
+                "locale": "en_SG",
+                "content": "Queues are temporarily unavailable while we perform scheduled maintenance."
+              },
+              {
+                "locale": "es_ES",
+                "content": "Las colas están desactivadas temporalmente mientras realizamos tareas de mantenimiento."
+              },
+              {
+                "locale": "es_MX",
+                "content": "Las colas estarán temporalmente fuera de servicio mientras llevamos a cabo las tareas de mantenimiento programado."
+              },
+              {
+                "locale": "fr_FR",
+                "content": "Les files d'attente sont temporairement indisponibles pendant que nous effectuons une maintenance programmée."
+              },
+              {
+                "locale": "id_ID",
+                "content": "Antrean tak tersedia sementara selagi kami melakukan maintenance terjadwal."
+              },
+              {
+                "locale": "it_IT",
+                "content": "Durante gli interventi di manutenzione programmati, le code saranno temporaneamente disabilitate."
+              },
+              {
+                "locale": "ja_JP",
+                "content": "定期メンテナンス中のため、現在キューはご利用になれません。"
+              },
+              {
+                "locale": "ko_KR",
+                "content": "정기 점검으로 인해 대전이 일시적으로 비활성화되었습니다. 양해 부탁드립니다."
+              },
+              {
+                "locale": "pl_PL",
+                "content": "Kolejki są tymczasowo niedostępne z powodu zaplanowanej przerwy technicznej."
+              },
+              {
+                "locale": "pt_BR",
+                "content": "As filas estão temporariamente indisponíveis enquanto realizamos uma manutenção agendada."
+              },
+              {
+                "locale": "ru_RU",
+                "content": "Очереди временно отключены, пока мы проводим плановое техническое обслуживание."
+              },
+              {
+                "locale": "th_TH",
+                "content": "คิวจับคู่ไม่สามารถใช้งานได้ชั่วคราวในระหว่างที่เราทำการปิดปรับปรุงระบบ"
+              },
+              {
+                "locale": "tr_TR",
+                "content": "Planlı bakım çalışması süresince sıralar geçici olarak devre dışı bırakıldı."
+              },
+              {
+                "locale": "vi_VN",
+                "content": "Hàng chờ tạm thời không khả dụng trong khi chúng tôi thực hiện bảo trì theo kế hoạch."
+              },
+              {
+                "locale": "zh_TW",
+                "content": "我們正在進行例行維護，列隊功能將暫時關閉。"
+              }
+            ],
+            "publish_locations": [
+              "game",
+              "riotclient",
+              "riotstatus"
+            ]
+          }
+        ],
+        "platforms": [
+          "windows"
+        ],
+        "maintenance_status": "scheduled",
+        "incident_severity": null
+      }
+    ],
+    "incidents": [
+      {
+        "id": 8082,
+        "created_at": "2024-02-21T16:21:56.676828+00:00",
+        "updated_at": "2024-02-26T00:27:09.462588+00:00",
+        "archive_at": null,
+        "titles": [
+          {
+            "locale": "en_US",
+            "content": "Payment Issues"
+          },
+          {
+            "locale": "ru_RU",
+            "content": "Проблемы с оплатой\r\n"
+          }
+        ],
+        "updates": [
+          {
+            "id": 14057,
+            "created_at": "2024-02-21T16:21:56.683227+00:00",
+            "updated_at": "2024-02-21T16:21:00+00:00",
+            "publish": true,
+            "author": "Riot Games",
+            "translations": [
+              {
+                "locale": "en_US",
+                "content": "We're aware of a problem that's causing VP purchases to fail and are working on a fix."
+              },
+              {
+                "locale": "ru_RU",
+                "content": "Мы знаем о проблеме, из-за которой не удается приобрести VP, и работаем над ее решением."
+              }
+            ],
+            "publish_locations": [
+              "game",
+              "riotclient",
+              "riotstatus"
+            ]
+          }
+        ],
+        "platforms": [
+          "windows",
+          "macos",
+          "android",
+          "ios"
+        ],
+        "maintenance_status": null,
+        "incident_severity": "info"
+      }
+    ]
+  }
+}

@@ -5,7 +5,7 @@ use rust_unofficial_valorant_api::types::{TeamRoaster, TeamRoasterCustomization}
 
 #[test]
 fn serialize() {
-    let members = [Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4()];
+    let members = vec![Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4()];
     let name = String::from("Team");
     let tag = String::from("Tag");
     let customization = TeamRoasterCustomization {
@@ -43,7 +43,7 @@ fn serialize() {
 
 #[test]
 fn deserialize() {
-    let members = [Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4()];
+    let members = vec![Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4()];
     let name = String::from("Team");
     let tag = String::from("Tag");
     let customization = TeamRoasterCustomization {

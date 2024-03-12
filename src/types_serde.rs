@@ -4,6 +4,7 @@ use std::str::FromStr;
 use chrono::{DateTime, Duration, NaiveDate, NaiveDateTime, TimeZone, Utc};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde::de::{Error, Visitor};
+use serde::ser::SerializeStruct;
 
 use crate::types::*;
 
@@ -272,6 +273,68 @@ impl<'de> Deserialize<'de> for RoundEndType {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+// MODEL STRUCTS
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+impl Serialize for MatchMetadata {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+        let mut s = serializer.serialize_struct("MatchMetadata", 15)?;
+        s.serialize_field("matchid", &self.id)?;
+        s.serialize_field("map", &self.map)?;
+        s.serialize_field("game_version", &self.game_version)?;
+        s.serialize_field("game_length", {
+            struct SerializeWith<'l> {
+                value: &'l Duration,
+            }
+            impl<'l> Serialize for SerializeWith<'l> {
+                fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+                    serialize_duration(self.value, serializer)
+                }
+            }
+            &SerializeWith {
+                value: &self.game_length,
+            }
+        })?;
+        s.serialize_field("game_start", {
+            struct SerializeWith<'l> {
+                value: &'l DateTime<Utc>,
+            }
+            impl<'l> Serialize for SerializeWith<'l> {
+                fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+                    serialize_date_time_utc(self.value, serializer)
+                }
+            }
+            &SerializeWith {
+                value: &self.game_start,
+            }
+        })?;
+        s.serialize_field("game_start_patched", {
+            struct SerializeWith<'l> {
+                value: &'l DateTime<Utc>,
+            }
+            impl<'l> Serialize for SerializeWith<'l> {
+                fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+                    serializer.serialize_str(&self.value.format("%A, %B %-d %Y %-I:%M %p").to_string())
+                }
+            }
+            &SerializeWith {
+                value: &self.game_start,
+            }
+        })?;
+        s.serialize_field("rounds_played", &self.rounds_played)?;
+        s.serialize_field("mode", &self.mode.to_str())?;
+        s.serialize_field("mode_id", &self.mode.id())?;
+        s.serialize_field("queue", &self.queue)?;
+        s.serialize_field("session_id", &self.session_id)?;
+        s.serialize_field("platform", &self.platform)?;
+        s.serialize_field("premier_info", &self.premier_info)?;
+        s.serialize_field("region", &self.region)?;
+        s.serialize_field("cluster", &self.cluster)?;
+        s.end()
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 // OTHERS
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -290,6 +353,21 @@ pub fn deserialize_color<'de, D>(deserializer: D) -> Result<u32, D::Error>
     let value = String::deserialize(deserializer)?;
     let color = u32::from_str_radix(&value[1..], 16).map_err(Error::custom)?;
     Ok(0xFF000000_u32 | color)
+}
+
+pub fn serialize_duration<S>(duration: &Duration, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer
+{
+    serializer.serialize_u32(duration.num_seconds() as u32)
+}
+
+pub fn deserialize_duration<'de, D>(deserializer: D) -> Result<Duration, D::Error>
+    where
+        D: Deserializer<'de>
+{
+    let value = u32::deserialize(deserializer)?;
+    Ok(Duration::seconds(value as i64))
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]

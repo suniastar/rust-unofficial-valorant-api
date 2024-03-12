@@ -31,7 +31,7 @@ fn serialize() {
             .unwrap()
     );
     let incident_severity = Some(String::from("warning"));
-    let maintenance_status = String::from("in_progress");
+    let maintenance_status = Some(String::from("in_progress"));
     let titles = vec![
         Localized {
             content: String::from("Emergency Maintenance In Progress"),
@@ -67,15 +67,16 @@ fn serialize() {
     \"updated_at\":\"{1}\",\
     \"archive_at\":\"{2}\",\
     \"incident_severity\":\"{3}\",\
-    \"maintenance_status\":\"{maintenance_status}\",\
-    \"titles\":{4},\
-    \"platforms\":{5},\
-    \"updates\":{6}\
+    \"maintenance_status\":\"{4}\",\
+    \"titles\":{5},\
+    \"platforms\":{6},\
+    \"updates\":{7}\
     }}",
                            created.to_rfc3339_opts(SecondsFormat::AutoSi, true),
                            updated.unwrap().to_rfc3339_opts(SecondsFormat::AutoSi, true),
                            archived.unwrap().to_rfc3339_opts(SecondsFormat::AutoSi, true),
                            incident_severity.clone().unwrap(),
+                           maintenance_status.clone().unwrap(),
                            serde_json::to_string(&titles).unwrap(),
                            serde_json::to_string(&platforms).unwrap(),
                            serde_json::to_string(&updates).unwrap(),
@@ -126,7 +127,7 @@ fn deserialize() {
             .unwrap()
     );
     let incident_severity = Some(String::from("warning"));
-    let maintenance_status = String::from("in_progress");
+    let maintenance_status = Some(String::from("in_progress"));
     let titles = vec![
         Localized {
             content: String::from("Emergency Maintenance In Progress"),
@@ -162,15 +163,16 @@ fn deserialize() {
     \"updated_at\":\"{1}\",\
     \"archive_at\":\"{2}\",\
     \"incident_severity\":\"{3}\",\
-    \"maintenance_status\":\"{maintenance_status}\",\
-    \"titles\":{4},\
-    \"platforms\":{5},\
-    \"updates\":{6}\
+    \"maintenance_status\":\"{4}\",\
+    \"titles\":{5},\
+    \"platforms\":{6},\
+    \"updates\":{7}\
     }}",
                        created.to_rfc3339_opts(SecondsFormat::AutoSi, true),
                        updated.unwrap().to_rfc3339_opts(SecondsFormat::AutoSi, true),
                        archived.unwrap().to_rfc3339_opts(SecondsFormat::AutoSi, true),
                        incident_severity.clone().unwrap(),
+                       maintenance_status.clone().unwrap(),
                        serde_json::to_string(&titles).unwrap(),
                        serde_json::to_string(&platforms).unwrap(),
                        serde_json::to_string(&updates).unwrap(),
@@ -205,7 +207,7 @@ fn serialize_null() {
     let updated = None;
     let archived = None;
     let incident_severity = None;
-    let maintenance_status = String::from("in_progress");
+    let maintenance_status = None;
     let titles = vec![
         Localized {
             content: String::from("Emergency Maintenance In Progress"),
@@ -241,12 +243,13 @@ fn serialize_null() {
     \"updated_at\":{1},\
     \"archive_at\":{2},\
     \"incident_severity\":{3},\
-    \"maintenance_status\":\"{maintenance_status}\",\
-    \"titles\":{4},\
-    \"platforms\":{5},\
-    \"updates\":{6}\
+    \"maintenance_status\":{4},\
+    \"titles\":{5},\
+    \"platforms\":{6},\
+    \"updates\":{7}\
     }}",
                            created.to_rfc3339_opts(SecondsFormat::AutoSi, true),
+                           "null",
                            "null",
                            "null",
                            "null",
@@ -284,7 +287,7 @@ fn deserialize_null() {
     let updated = None;
     let archived = None;
     let incident_severity = None;
-    let maintenance_status = String::from("in_progress");
+    let maintenance_status = None;
     let titles = vec![
         Localized {
             content: String::from("Emergency Maintenance In Progress"),
@@ -320,12 +323,13 @@ fn deserialize_null() {
     \"updated_at\":{1},\
     \"archive_at\":{2},\
     \"incident_severity\":{3},\
-    \"maintenance_status\":\"{maintenance_status}\",\
-    \"titles\":{4},\
-    \"platforms\":{5},\
-    \"updates\":{6}\
+    \"maintenance_status\":{4},\
+    \"titles\":{5},\
+    \"platforms\":{6},\
+    \"updates\":{7}\
     }}",
                        created.to_rfc3339_opts(SecondsFormat::AutoSi, true),
+                       "null",
                        "null",
                        "null",
                        "null",

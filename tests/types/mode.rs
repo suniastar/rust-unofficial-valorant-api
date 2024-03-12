@@ -5,6 +5,7 @@ use rust_unofficial_valorant_api::types::Mode;
 #[test]
 fn to_str() {
     assert_eq!("Competitive", Mode::Competitive.to_str());
+    assert_eq!("Premier", Mode::Premier.to_str());
     assert_eq!("Unrated", Mode::Unrated.to_str());
     assert_eq!("Deathmatch", Mode::Deathmatch.to_str());
     assert_eq!("Team Deathmatch", Mode::TeamDeathmatch.to_str());
@@ -18,6 +19,7 @@ fn to_str() {
 #[test]
 fn api() {
     assert_eq!("competitive", Mode::Competitive.api());
+    assert_eq!("premier", Mode::Premier.api());
     assert_eq!("unrated", Mode::Unrated.api());
     assert_eq!("deathmatch", Mode::Deathmatch.api());
     assert_eq!("teamdeathmatch", Mode::TeamDeathmatch.api());
@@ -31,6 +33,7 @@ fn api() {
 #[test]
 fn id() {
     assert_eq!("competitive", Mode::Competitive.id());
+    assert_eq!("premier", Mode::Premier.id());
     assert_eq!("unrated", Mode::Unrated.id());
     assert_eq!("deathmatch", Mode::Deathmatch.id());
     assert_eq!("hurm", Mode::TeamDeathmatch.id());
@@ -44,6 +47,7 @@ fn id() {
 #[test]
 fn from_str() {
     assert_eq!(Mode::Competitive, Mode::from_str("Competitive").unwrap());
+    assert_eq!(Mode::Premier, Mode::from_str("Premier").unwrap());
     assert_eq!(Mode::Unrated, Mode::from_str("Unrated").unwrap());
     assert_eq!(Mode::Deathmatch, Mode::from_str("Deathmatch").unwrap());
     assert_eq!(Mode::TeamDeathmatch, Mode::from_str("Team Deathmatch").unwrap());
@@ -54,6 +58,7 @@ fn from_str() {
     assert_eq!(Mode::CustomGame, Mode::from_str("Custom Game").unwrap());
 
     assert_eq!(Mode::Competitive, Mode::from_str("competitive").unwrap());
+    assert_eq!(Mode::Premier, Mode::from_str("premier").unwrap());
     assert_eq!(Mode::Unrated, Mode::from_str("unrated").unwrap());
     assert_eq!(Mode::Deathmatch, Mode::from_str("deathmatch").unwrap());
     assert_eq!(Mode::TeamDeathmatch, Mode::from_str("teamdeathmatch").unwrap());
@@ -64,6 +69,7 @@ fn from_str() {
     assert_eq!(Mode::CustomGame, Mode::from_str("custom").unwrap());
 
     assert_eq!(Mode::Competitive, Mode::from_str("competitive").unwrap());
+    assert_eq!(Mode::Premier, Mode::from_str("premier").unwrap());
     assert_eq!(Mode::Unrated, Mode::from_str("unrated").unwrap());
     assert_eq!(Mode::Deathmatch, Mode::from_str("deathmatch").unwrap());
     assert_eq!(Mode::TeamDeathmatch, Mode::from_str("hurm").unwrap());
@@ -74,6 +80,7 @@ fn from_str() {
     assert_eq!(Mode::CustomGame, Mode::from_str("custom").unwrap());
 
     assert_eq!(Mode::Competitive, Mode::from_str("COMPETITIVE").unwrap());
+    assert_eq!(Mode::Premier, Mode::from_str("PREMIER").unwrap());
     assert_eq!(Mode::Unrated, Mode::from_str("UNRATED").unwrap());
     assert_eq!(Mode::Deathmatch, Mode::from_str("DEATHMATCH").unwrap());
     assert_eq!(Mode::TeamDeathmatch, Mode::from_str("HURM").unwrap());
@@ -91,6 +98,7 @@ fn from_str() {
 #[test]
 fn serialize() {
     assert_eq!("\"competitive\"", serde_json::to_string(&Mode::Competitive).unwrap());
+    assert_eq!("\"premier\"", serde_json::to_string(&Mode::Premier).unwrap());
     assert_eq!("\"unrated\"", serde_json::to_string(&Mode::Unrated).unwrap());
     assert_eq!("\"deathmatch\"", serde_json::to_string(&Mode::Deathmatch).unwrap());
     assert_eq!("\"hurm\"", serde_json::to_string(&Mode::TeamDeathmatch).unwrap());
@@ -104,6 +112,7 @@ fn serialize() {
 #[test]
 fn deserialize() {
     assert_eq!(Mode::Competitive, serde_json::from_str("\"Competitive\"").unwrap());
+    assert_eq!(Mode::Premier, serde_json::from_str("\"Premier\"").unwrap());
     assert_eq!(Mode::Unrated, serde_json::from_str("\"Unrated\"").unwrap());
     assert_eq!(Mode::Deathmatch, serde_json::from_str("\"Deathmatch\"").unwrap());
     assert_eq!(Mode::TeamDeathmatch, serde_json::from_str("\"Team Deathmatch\"").unwrap());
@@ -114,6 +123,7 @@ fn deserialize() {
     assert_eq!(Mode::CustomGame, serde_json::from_str("\"Custom Game\"").unwrap());
 
     assert_eq!(Mode::Competitive, serde_json::from_str("\"competitive\"").unwrap());
+    assert_eq!(Mode::Premier, serde_json::from_str("\"premier\"").unwrap());
     assert_eq!(Mode::Unrated, serde_json::from_str("\"unrated\"").unwrap());
     assert_eq!(Mode::Deathmatch, serde_json::from_str("\"deathmatch\"").unwrap());
     assert_eq!(Mode::TeamDeathmatch, serde_json::from_str("\"teamdeathmatch\"").unwrap());
@@ -124,6 +134,7 @@ fn deserialize() {
     assert_eq!(Mode::CustomGame, serde_json::from_str("\"custom\"").unwrap());
 
     assert_eq!(Mode::Competitive, serde_json::from_str("\"competitive\"").unwrap());
+    assert_eq!(Mode::Premier, serde_json::from_str("\"premier\"").unwrap());
     assert_eq!(Mode::Unrated, serde_json::from_str("\"unrated\"").unwrap());
     assert_eq!(Mode::Deathmatch, serde_json::from_str("\"deathmatch\"").unwrap());
     assert_eq!(Mode::TeamDeathmatch, serde_json::from_str("\"hurm\"").unwrap());
@@ -134,6 +145,7 @@ fn deserialize() {
     assert_eq!(Mode::CustomGame, serde_json::from_str("\"custom\"").unwrap());
 
     assert_eq!(Mode::Competitive, serde_json::from_str("\"COMPETITIVE\"").unwrap());
+    assert_eq!(Mode::Premier, serde_json::from_str("\"PREMIER\"").unwrap());
     assert_eq!(Mode::Unrated, serde_json::from_str("\"UNRATED\"").unwrap());
     assert_eq!(Mode::Deathmatch, serde_json::from_str("\"DEATHMATCH\"").unwrap());
     assert_eq!(Mode::TeamDeathmatch, serde_json::from_str("\"HURM\"").unwrap());

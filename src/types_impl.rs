@@ -257,6 +257,9 @@ impl FromStr for Map {
 const MODE_COMPETITIVE: UniCase<&str> = UniCase::unicode("Competitive");
 const MODE_COMPETITIVE_ID: UniCase<&str> = UniCase::unicode("competitive");
 const MODE_COMPETITIVE_API: UniCase<&str> = UniCase::unicode("competitive");
+const MODE_PREMIER: UniCase<&str> = UniCase::unicode("Premier");
+const MODE_PREMIER_ID: UniCase<&str> = UniCase::unicode("premier");
+const MODE_PREMIER_API: UniCase<&str> = UniCase::unicode("premier");
 const MODE_UNRATED: UniCase<&str> = UniCase::unicode("Unrated");
 const MODE_UNRATED_ID: UniCase<&str> = UniCase::unicode("unrated");
 const MODE_UNRATED_API: UniCase<&str> = UniCase::unicode("unrated");
@@ -286,6 +289,7 @@ impl Mode {
     pub fn to_str(&self) -> &'static str {
         match *self {
             Mode::Competitive => MODE_COMPETITIVE.as_ref(),
+            Mode::Premier => MODE_PREMIER.as_ref(),
             Mode::Unrated => MODE_UNRATED.as_ref(),
             Mode::Deathmatch => MODE_DEATHMATCH.as_ref(),
             Mode::TeamDeathmatch => MODE_TEAM_DEATHMATCH.as_ref(),
@@ -300,6 +304,7 @@ impl Mode {
     pub fn api(&self) -> &'static str {
         match *self {
             Mode::Competitive => MODE_COMPETITIVE_API.as_ref(),
+            Mode::Premier => MODE_PREMIER_API.as_ref(),
             Mode::Unrated => MODE_UNRATED_API.as_ref(),
             Mode::Deathmatch => MODE_DEATHMATCH_API.as_ref(),
             Mode::TeamDeathmatch => MODE_TEAM_DEATHMATCH_API.as_ref(),
@@ -314,6 +319,7 @@ impl Mode {
     pub fn id(&self) -> &'static str {
         match *self {
             Mode::Competitive => MODE_COMPETITIVE_ID.as_ref(),
+            Mode::Premier => MODE_PREMIER_ID.as_ref(),
             Mode::Unrated => MODE_UNRATED_ID.as_ref(),
             Mode::Deathmatch => MODE_DEATHMATCH_ID.as_ref(),
             Mode::TeamDeathmatch => MODE_TEAM_DEATHMATCH_ID.as_ref(),
@@ -343,6 +349,12 @@ impl FromStr for Mode {
             Ok(Mode::Competitive)
         } else if m == MODE_COMPETITIVE_ID {
             Ok(Mode::Competitive)
+        } else if m == MODE_PREMIER {
+            Ok(Mode::Premier)
+        } else if m == MODE_PREMIER_API {
+            Ok(Mode::Premier)
+        } else if m == MODE_PREMIER_ID {
+            Ok(Mode::Premier)
         } else if m == MODE_UNRATED {
             Ok(Mode::Unrated)
         } else if m == MODE_UNRATED_API {

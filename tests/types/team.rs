@@ -12,7 +12,7 @@ fn serialize() {
     let rounds_won: u32 = rng.gen();
     let rounds_lost: u32 = rng.gen();
     let roaster = TeamRoaster {
-        members: [Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4()],
+        members: vec![Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4()],
         name: String::from("Team"),
         tag: String::from("Tag"),
         customization: TeamRoasterCustomization {
@@ -53,7 +53,7 @@ fn deserialize() {
     let rounds_won: u32 = rng.gen();
     let rounds_lost: u32 = rng.gen();
     let roaster = TeamRoaster {
-        members: [Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4()],
+        members: vec![Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4(), Uuid::new_v4()],
         name: String::from("Team"),
         tag: String::from("Tag"),
         customization: TeamRoasterCustomization {
