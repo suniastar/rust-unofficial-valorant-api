@@ -3,7 +3,7 @@ use rand::Rng;
 use url::Url;
 use uuid::Uuid;
 
-use rust_unofficial_valorant_api::types::{Character, Platform, PlatformOs, PlatformType, Player, PlayerAbilityCasts, PlayerAssets, PlayerAssetsAgent, PlayerAssetsCard, PlayerBehavior, PlayerBehaviorFriendlyFire, PlayerEconomy, PlayerEconomyCredits, PlayerStats, PlayerTeam};
+use rust_unofficial_valorant_api::types::{Character, Platform, PlatformOs, PlatformType, Player, PlayerAbilityCasts, PlayerAssets, PlayerAssetsAgent, PlayerAssetsCard, PlayerBehavior, PlayerBehaviorFriendlyFire, PlayerEconomy, PlayerEconomyCredits, PlayerStats, PlayerTeam, Tier};
 
 #[test]
 fn serialize() {
@@ -15,13 +15,12 @@ fn serialize() {
     let team = PlayerTeam::Blue;
     let level: u32 = rng.gen();
     let character = Character::Killjoy;
-    let current_tier: u32 = rng.gen();
-    let current_tier_patched = String::from("Unrated");
+    let current_tier = Tier::Unrated;
     let card_id = Uuid::new_v4();
     let title_id = Uuid::new_v4();
     let party_id = Uuid::new_v4();
     let playtime = Duration::seconds(8160);
-    let behaviour = PlayerBehavior {
+    let behavior = PlayerBehavior {
         afk_rounds: rng.gen(),
         friendly_fire: PlayerBehaviorFriendlyFire {
             incoming: rng.gen(),
@@ -84,8 +83,8 @@ fn serialize() {
     \"team\":\"{team}\",\
     \"level\":{level},\
     \"character\":\"{character}\",\
-    \"currenttier\":{current_tier},\
-    \"currenttier_patched\":\"{current_tier_patched}\",\
+    \"currenttier\":{0},\
+    \"currenttier_patched\":\"{1}\",\
     \"player_card\":\"{card_id}\",\
     \"player_title\":\"{title_id}\",\
     \"party_id\":\"{party_id}\",\
@@ -94,17 +93,19 @@ fn serialize() {
         \"seconds\":8160,\
         \"milliseconds\":8160000\
     }},\
-    \"assets\":{0},\
-    \"behaviour\":{1},\
-    \"platform\":{2},\
-    \"ability_casts\":{3},\
-    \"stats\":{4},\
-    \"economy\":{5},\
+    \"assets\":{2},\
+    \"behaviour\":{3},\
+    \"platform\":{4},\
+    \"ability_casts\":{5},\
+    \"stats\":{6},\
+    \"economy\":{7},\
     \"damage_made\":{damage_made},\
     \"damage_received\":{damage_received}\
     }}",
+                           current_tier.clone() as u8,
+                           current_tier.to_str(),
                            serde_json::to_string(&assets).unwrap(),
-                           serde_json::to_string(&behaviour).unwrap(),
+                           serde_json::to_string(&behavior).unwrap(),
                            serde_json::to_string(&platform).unwrap(),
                            serde_json::to_string(&ability_casts).unwrap(),
                            serde_json::to_string(&stats).unwrap(),
@@ -119,13 +120,12 @@ fn serialize() {
         level,
         character,
         current_tier,
-        current_tier_patched,
         card_id,
         title_id,
         party_id,
         playtime,
         assets,
-        behaviour,
+        behavior,
         platform,
         ability_casts,
         stats,
@@ -149,13 +149,12 @@ fn deserialize() {
     let team = PlayerTeam::Blue;
     let level: u32 = rng.gen();
     let character = Character::Killjoy;
-    let current_tier: u32 = rng.gen();
-    let current_tier_patched = String::from("Unrated");
+    let current_tier = Tier::Unrated;
     let card_id = Uuid::new_v4();
     let title_id = Uuid::new_v4();
     let party_id = Uuid::new_v4();
     let playtime = Duration::seconds(8160);
-    let behaviour = PlayerBehavior {
+    let behavior = PlayerBehavior {
         afk_rounds: rng.gen(),
         friendly_fire: PlayerBehaviorFriendlyFire {
             incoming: rng.gen(),
@@ -218,8 +217,8 @@ fn deserialize() {
     \"team\":\"{team}\",\
     \"level\":{level},\
     \"character\":\"{character}\",\
-    \"currenttier\":{current_tier},\
-    \"currenttier_patched\":\"{current_tier_patched}\",\
+    \"currenttier\":{0},\
+    \"currenttier_patched\":\"{1}\",\
     \"player_card\":\"{card_id}\",\
     \"player_title\":\"{title_id}\",\
     \"party_id\":\"{party_id}\",\
@@ -228,17 +227,19 @@ fn deserialize() {
         \"seconds\":8160,\
         \"milliseconds\":8160000\
     }},\
-    \"assets\":{0},\
-    \"behaviour\":{1},\
-    \"platform\":{2},\
-    \"ability_casts\":{3},\
-    \"stats\":{4},\
-    \"economy\":{5},\
+    \"assets\":{2},\
+    \"behaviour\":{3},\
+    \"platform\":{4},\
+    \"ability_casts\":{5},\
+    \"stats\":{6},\
+    \"economy\":{7},\
     \"damage_made\":{damage_made},\
     \"damage_received\":{damage_received}\
     }}",
+                       current_tier.clone() as u8,
+                       current_tier.to_str(),
                        serde_json::to_string(&assets).unwrap(),
-                       serde_json::to_string(&behaviour).unwrap(),
+                       serde_json::to_string(&behavior).unwrap(),
                        serde_json::to_string(&platform).unwrap(),
                        serde_json::to_string(&ability_casts).unwrap(),
                        serde_json::to_string(&stats).unwrap(),
@@ -253,13 +254,12 @@ fn deserialize() {
         level,
         character,
         current_tier,
-        current_tier_patched,
         card_id,
         title_id,
         party_id,
         playtime,
         assets,
-        behaviour,
+        behavior,
         platform,
         ability_casts,
         stats,

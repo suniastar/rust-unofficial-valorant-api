@@ -647,6 +647,263 @@ impl FromStr for RoundEndType {
     }
 }
 
+const TIER_UNRATED: UniCase<&str> = UniCase::unicode("Unrated");
+const TIER_UNKNOWN1: UniCase<&str> = UniCase::unicode("Unknown 1");
+const TIER_UNKNOWN2: UniCase<&str> = UniCase::unicode("Unknown 2");
+const TIER_IRON1: UniCase<&str> = UniCase::unicode("Iron 1");
+const TIER_IRON2: UniCase<&str> = UniCase::unicode("Iron 2");
+const TIER_IRON3: UniCase<&str> = UniCase::unicode("Iron 3");
+const TIER_BRONZE1: UniCase<&str> = UniCase::unicode("Bronze 1");
+const TIER_BRONZE2: UniCase<&str> = UniCase::unicode("Bronze 2");
+const TIER_BRONZE3: UniCase<&str> = UniCase::unicode("Bronze 3");
+const TIER_SILVER1: UniCase<&str> = UniCase::unicode("Silver 1");
+const TIER_SILVER2: UniCase<&str> = UniCase::unicode("Silver 2");
+const TIER_SILVER3: UniCase<&str> = UniCase::unicode("Silver 3");
+const TIER_GOLD1: UniCase<&str> = UniCase::unicode("Gold 1");
+const TIER_GOLD2: UniCase<&str> = UniCase::unicode("Gold 2");
+const TIER_GOLD3: UniCase<&str> = UniCase::unicode("Gold 3");
+const TIER_PLATINUM1: UniCase<&str> = UniCase::unicode("Platinum 1");
+const TIER_PLATINUM2: UniCase<&str> = UniCase::unicode("Platinum 2");
+const TIER_PLATINUM3: UniCase<&str> = UniCase::unicode("Platinum 3");
+const TIER_DIAMOND1: UniCase<&str> = UniCase::unicode("Diamond 1");
+const TIER_DIAMOND2: UniCase<&str> = UniCase::unicode("Diamond 2");
+const TIER_DIAMOND3: UniCase<&str> = UniCase::unicode("Diamond 3");
+const TIER_ASCENDANT1: UniCase<&str> = UniCase::unicode("Ascendant 1");
+const TIER_ASCENDANT2: UniCase<&str> = UniCase::unicode("Ascendant 2");
+const TIER_ASCENDANT3: UniCase<&str> = UniCase::unicode("Ascendant 3");
+const TIER_IMMORTAL1: UniCase<&str> = UniCase::unicode("Immortal 1");
+const TIER_IMMORTAL2: UniCase<&str> = UniCase::unicode("Immortal 2");
+const TIER_IMMORTAL3: UniCase<&str> = UniCase::unicode("Immortal 3");
+const TIER_RADIANT: UniCase<&str> = UniCase::unicode("Radiant");
+
+impl Tier {
+    pub fn to_str(&self) -> &'static str {
+        match *self {
+            Tier::Unrated => TIER_UNRATED.as_ref(),
+            Tier::Unknown1 => TIER_UNKNOWN1.as_ref(),
+            Tier::Unknown2 => TIER_UNKNOWN2.as_ref(),
+            Tier::Iron1 => TIER_IRON1.as_ref(),
+            Tier::Iron2 => TIER_IRON2.as_ref(),
+            Tier::Iron3 => TIER_IRON3.as_ref(),
+            Tier::Bronze1 => TIER_BRONZE1.as_ref(),
+            Tier::Bronze2 => TIER_BRONZE2.as_ref(),
+            Tier::Bronze3 => TIER_BRONZE3.as_ref(),
+            Tier::Silver1 => TIER_SILVER1.as_ref(),
+            Tier::Silver2 => TIER_SILVER2.as_ref(),
+            Tier::Silver3 => TIER_SILVER3.as_ref(),
+            Tier::Gold1 => TIER_GOLD1.as_ref(),
+            Tier::Gold2 => TIER_GOLD2.as_ref(),
+            Tier::Gold3 => TIER_GOLD3.as_ref(),
+            Tier::Platinum1 => TIER_PLATINUM1.as_ref(),
+            Tier::Platinum2 => TIER_PLATINUM2.as_ref(),
+            Tier::Platinum3 => TIER_PLATINUM3.as_ref(),
+            Tier::Diamond1 => TIER_DIAMOND1.as_ref(),
+            Tier::Diamond2 => TIER_DIAMOND2.as_ref(),
+            Tier::Diamond3 => TIER_DIAMOND3.as_ref(),
+            Tier::Ascendant1 => TIER_ASCENDANT1.as_ref(),
+            Tier::Ascendant2 => TIER_ASCENDANT2.as_ref(),
+            Tier::Ascendant3 => TIER_ASCENDANT3.as_ref(),
+            Tier::Immortal1 => TIER_IMMORTAL1.as_ref(),
+            Tier::Immortal2 => TIER_IMMORTAL2.as_ref(),
+            Tier::Immortal3 => TIER_IMMORTAL3.as_ref(),
+            Tier::Radiant => TIER_RADIANT.as_ref(),
+        }
+    }
+}
+
+impl fmt::Display for Tier {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        f.write_str(self.to_str())
+    }
+}
+
+impl FromStr for Tier {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let tier = UniCase::unicode(s);
+        match tier {
+            t if t == TIER_UNRATED => Ok(Tier::Unrated),
+            t if t == TIER_UNKNOWN1 => Ok(Tier::Unknown1),
+            t if t == TIER_UNKNOWN2 => Ok(Tier::Unknown2),
+            t if t == TIER_IRON1 => Ok(Tier::Iron1),
+            t if t == TIER_IRON2 => Ok(Tier::Iron2),
+            t if t == TIER_IRON3 => Ok(Tier::Iron3),
+            t if t == TIER_BRONZE1 => Ok(Tier::Bronze1),
+            t if t == TIER_BRONZE2 => Ok(Tier::Bronze2),
+            t if t == TIER_BRONZE3 => Ok(Tier::Bronze3),
+            t if t == TIER_SILVER1 => Ok(Tier::Silver1),
+            t if t == TIER_SILVER2 => Ok(Tier::Silver2),
+            t if t == TIER_SILVER3 => Ok(Tier::Silver3),
+            t if t == TIER_GOLD1 => Ok(Tier::Gold1),
+            t if t == TIER_GOLD2 => Ok(Tier::Gold2),
+            t if t == TIER_GOLD3 => Ok(Tier::Gold3),
+            t if t == TIER_PLATINUM1 => Ok(Tier::Platinum1),
+            t if t == TIER_PLATINUM2 => Ok(Tier::Platinum2),
+            t if t == TIER_PLATINUM3 => Ok(Tier::Platinum3),
+            t if t == TIER_DIAMOND1 => Ok(Tier::Diamond1),
+            t if t == TIER_DIAMOND2 => Ok(Tier::Diamond2),
+            t if t == TIER_DIAMOND3 => Ok(Tier::Diamond3),
+            t if t == TIER_ASCENDANT1 => Ok(Tier::Ascendant1),
+            t if t == TIER_ASCENDANT2 => Ok(Tier::Ascendant2),
+            t if t == TIER_ASCENDANT3 => Ok(Tier::Ascendant3),
+            t if t == TIER_IMMORTAL1 => Ok(Tier::Immortal1),
+            t if t == TIER_IMMORTAL2 => Ok(Tier::Immortal2),
+            t if t == TIER_IMMORTAL3 => Ok(Tier::Immortal3),
+            t if t == TIER_RADIANT => Ok(Tier::Radiant),
+            _ => Err(format!("not a tier: {s}"))
+        }
+    }
+}
+
+impl TryFrom<i8> for Tier {
+    type Error = String;
+
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        match value {
+            x if x == Tier::Unrated as i8 => Ok(Tier::Unrated),
+            x if x == Tier::Unknown1 as i8 => Ok(Tier::Unknown1),
+            x if x == Tier::Unknown2 as i8 => Ok(Tier::Unknown2),
+            x if x == Tier::Iron1 as i8 => Ok(Tier::Iron1),
+            x if x == Tier::Iron2 as i8 => Ok(Tier::Iron2),
+            x if x == Tier::Iron3 as i8 => Ok(Tier::Iron3),
+            x if x == Tier::Bronze1 as i8 => Ok(Tier::Bronze1),
+            x if x == Tier::Bronze2 as i8 => Ok(Tier::Bronze2),
+            x if x == Tier::Bronze3 as i8 => Ok(Tier::Bronze3),
+            x if x == Tier::Silver1 as i8 => Ok(Tier::Silver1),
+            x if x == Tier::Silver2 as i8 => Ok(Tier::Silver2),
+            x if x == Tier::Silver3 as i8 => Ok(Tier::Silver3),
+            x if x == Tier::Gold1 as i8 => Ok(Tier::Gold1),
+            x if x == Tier::Gold2 as i8 => Ok(Tier::Gold2),
+            x if x == Tier::Gold3 as i8 => Ok(Tier::Gold3),
+            x if x == Tier::Platinum1 as i8 => Ok(Tier::Platinum1),
+            x if x == Tier::Platinum2 as i8 => Ok(Tier::Platinum2),
+            x if x == Tier::Platinum3 as i8 => Ok(Tier::Platinum3),
+            x if x == Tier::Diamond1 as i8 => Ok(Tier::Diamond1),
+            x if x == Tier::Diamond2 as i8 => Ok(Tier::Diamond2),
+            x if x == Tier::Diamond3 as i8 => Ok(Tier::Diamond3),
+            x if x == Tier::Ascendant1 as i8 => Ok(Tier::Ascendant1),
+            x if x == Tier::Ascendant2 as i8 => Ok(Tier::Ascendant2),
+            x if x == Tier::Ascendant3 as i8 => Ok(Tier::Ascendant3),
+            x if x == Tier::Immortal1 as i8 => Ok(Tier::Immortal1),
+            x if x == Tier::Immortal2 as i8 => Ok(Tier::Immortal2),
+            x if x == Tier::Immortal3 as i8 => Ok(Tier::Immortal3),
+            x if x == Tier::Radiant as i8 => Ok(Tier::Radiant),
+            _ => Err(format!("{value} is not a Tier"))
+        }
+    }
+}
+
+impl TryFrom<u8> for Tier {
+    type Error = String;
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        match value {
+            i if i < i8::MAX as u8 => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<i16> for Tier {
+    type Error = String;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        match value {
+            i if i >= 0 && i < i8::MAX as i16 => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<u16> for Tier {
+    type Error = String;
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        match value {
+            i if i < i8::MAX as u16 => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<i32> for Tier {
+    type Error = String;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        match value {
+            i if i >= 0 && i < i8::MAX as i32 => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<u32> for Tier {
+    type Error = String;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        match value {
+            i if i < i8::MAX as u32 => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<i64> for Tier {
+    type Error = String;
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        match value {
+            i if i >= 0 && i < i8::MAX as i64 => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<u64> for Tier {
+    type Error = String;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        match value {
+            i if i < i8::MAX as u64 => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<i128> for Tier {
+    type Error = String;
+    fn try_from(value: i128) -> Result<Self, Self::Error> {
+        match value {
+            i if i >= 0 && i < i8::MAX as i128 => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<u128> for Tier {
+    type Error = String;
+    fn try_from(value: u128) -> Result<Self, Self::Error> {
+        match value {
+            i if i < i8::MAX as u128 => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<isize> for Tier {
+    type Error = String;
+    fn try_from(value: isize) -> Result<Self, Self::Error> {
+        match value {
+            i if i >= 0 && i < i8::MAX as isize => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
+impl TryFrom<usize> for Tier {
+    type Error = String;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        match value {
+            i if i < i8::MAX as usize => Tier::try_from(value as i8),
+            _ => Err(format!("{value} is not a Tier")),
+        }
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // MODEL STRUCTS
 ////////////////////////////////////////////////////////////////////////////////////////////////////

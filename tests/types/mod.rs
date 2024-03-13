@@ -50,6 +50,7 @@ mod status_update;
 mod team;
 mod team_roaster;
 mod team_roaster_customization;
+mod tier;
 mod v1_account_data;
 mod v1_status_data;
 mod v1_version_data;

@@ -2,7 +2,7 @@ use chrono::Duration;
 use url::Url;
 use uuid::Uuid;
 
-use rust_unofficial_valorant_api::types::{Character, MatchPlayers, Platform, PlatformOs, PlatformType, Player, PlayerAbilityCasts, PlayerAssets, PlayerAssetsAgent, PlayerAssetsCard, PlayerBehavior, PlayerBehaviorFriendlyFire, PlayerEconomy, PlayerEconomyCredits, PlayerStats, PlayerTeam};
+use rust_unofficial_valorant_api::types::{Character, MatchPlayers, Platform, PlatformOs, PlatformType, Player, PlayerAbilityCasts, PlayerAssets, PlayerAssetsAgent, PlayerAssetsCard, PlayerBehavior, PlayerBehaviorFriendlyFire, PlayerEconomy, PlayerEconomyCredits, PlayerStats, PlayerTeam, Tier};
 
 #[test]
 fn serialize() {
@@ -13,8 +13,7 @@ fn serialize() {
         team: PlayerTeam::Red,
         level: 166,
         character: Character::Skye,
-        current_tier: 0,
-        current_tier_patched: String::from("Unrated"),
+        current_tier: Tier::Unrated,
         card_id: Uuid::new_v4(),
         title_id: Uuid::new_v4(),
         party_id: Uuid::new_v4(),
@@ -32,7 +31,7 @@ fn serialize() {
                 kill_feed_url: Url::parse("https://google.com/search?q=killfeed_agent").unwrap(),
             },
         },
-        behaviour: PlayerBehavior {
+        behavior: PlayerBehavior {
             afk_rounds: 0,
             friendly_fire: PlayerBehaviorFriendlyFire {
                 incoming: 0,
@@ -82,8 +81,7 @@ fn serialize() {
         team: PlayerTeam::Blue,
         level: 122,
         character: Character::Raze,
-        current_tier: 0,
-        current_tier_patched: String::from("Unrated"),
+        current_tier: Tier::Unrated,
         card_id: Uuid::new_v4(),
         title_id: Uuid::new_v4(),
         party_id: Uuid::new_v4(),
@@ -101,7 +99,7 @@ fn serialize() {
                 kill_feed_url: Url::parse("https://google.com/search?q=killfeed_agent").unwrap(),
             },
         },
-        behaviour: PlayerBehavior {
+        behavior: PlayerBehavior {
             afk_rounds: 0,
             friendly_fire: PlayerBehaviorFriendlyFire {
                 incoming: 0,
@@ -181,8 +179,7 @@ fn deserialize() {
         team: PlayerTeam::Red,
         level: 166,
         character: Character::Skye,
-        current_tier: 0,
-        current_tier_patched: String::from("Unrated"),
+        current_tier: Tier::Unrated,
         card_id: Uuid::new_v4(),
         title_id: Uuid::new_v4(),
         party_id: Uuid::new_v4(),
@@ -200,7 +197,7 @@ fn deserialize() {
                 kill_feed_url: Url::parse("https://google.com/search?q=killfeed_agent").unwrap(),
             },
         },
-        behaviour: PlayerBehavior {
+        behavior: PlayerBehavior {
             afk_rounds: 0,
             friendly_fire: PlayerBehaviorFriendlyFire {
                 incoming: 0,
@@ -250,8 +247,7 @@ fn deserialize() {
         team: PlayerTeam::Blue,
         level: 122,
         character: Character::Raze,
-        current_tier: 0,
-        current_tier_patched: String::from("Unrated"),
+        current_tier: Tier::Unrated,
         card_id: Uuid::new_v4(),
         title_id: Uuid::new_v4(),
         party_id: Uuid::new_v4(),
@@ -269,7 +265,7 @@ fn deserialize() {
                 kill_feed_url: Url::parse("https://google.com/search?q=killfeed_agent").unwrap(),
             },
         },
-        behaviour: PlayerBehavior {
+        behavior: PlayerBehavior {
             afk_rounds: 0,
             friendly_fire: PlayerBehaviorFriendlyFire {
                 incoming: 0,

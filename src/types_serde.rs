@@ -272,6 +272,36 @@ impl<'de> Deserialize<'de> for RoundEndType {
     }
 }
 
+struct TierVisitor;
+
+impl<'de> Visitor<'de> for TierVisitor {
+    type Value = Tier;
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        formatter.write_str("a valid tier")
+    }
+
+    fn visit_i64<E>(self, v: i64) -> Result<Self::Value, E> where E: Error {
+        Tier::try_from(v).map_err(E::custom)
+    }
+
+    fn visit_u64<E>(self, v: u64) -> Result<Self::Value, E> where E: Error {
+        Tier::try_from(v).map_err(E::custom)
+    }
+}
+
+impl<'de> Deserialize<'de> for Tier {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'de> {
+        deserializer.deserialize_u64(TierVisitor)
+    }
+}
+
+impl Serialize for Tier {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+        serializer.serialize_u8(self.clone() as u8)
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // MODEL STRUCTS
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -330,6 +360,45 @@ impl Serialize for MatchMetadata {
         s.serialize_field("premier_info", &self.premier_info)?;
         s.serialize_field("region", &self.region)?;
         s.serialize_field("cluster", &self.cluster)?;
+        s.end()
+    }
+}
+
+impl Serialize for Player {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+        let mut s = serializer.serialize_struct("Player", 20)?;
+        s.serialize_field("puuid", &self.id)?;
+        s.serialize_field("name", &self.name)?;
+        s.serialize_field("tag", &self.tag)?;
+        s.serialize_field("team", &self.team)?;
+        s.serialize_field("level", &self.level)?;
+        s.serialize_field("character", &self.character)?;
+        s.serialize_field("currenttier", &self.current_tier)?;
+        s.serialize_field("currenttier_patched", &self.current_tier.to_str())?;
+        s.serialize_field("player_card", &self.card_id)?;
+        s.serialize_field("player_title", &self.title_id)?;
+        s.serialize_field("party_id", &self.party_id)?;
+        s.serialize_field("session_playtime", {
+            struct SerializeWith<'l> {
+                value: &'l Duration,
+            }
+            impl<'l> Serialize for SerializeWith<'l> {
+                fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+                    serialize_playtime(self.value, serializer)
+                }
+            }
+            &SerializeWith {
+                value: &self.playtime,
+            }
+        })?;
+        s.serialize_field("assets", &self.assets)?;
+        s.serialize_field("behaviour", &self.behavior)?;
+        s.serialize_field("platform", &self.platform)?;
+        s.serialize_field("ability_casts", &self.ability_casts)?;
+        s.serialize_field("stats", &self.stats)?;
+        s.serialize_field("economy", &self.economy)?;
+        s.serialize_field("damage_made", &self.damage_made)?;
+        s.serialize_field("damage_received", &self.damage_received)?;
         s.end()
     }
 }
